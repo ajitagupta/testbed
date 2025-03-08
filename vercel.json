@@ -1,13 +1,15 @@
 {
     "version": 2,
     "builds": [
-      { "src": "*.html", "use": "@vercel/static" }
+      { "src": "*.html", "use": "@vercel/static" },
+      { "src": "images/**", "use": "@vercel/static" }
     ],
     "routes": [
       { "src": "/", "dest": "/index.html" },
       { "src": "/locations", "dest": "/locations.html" },
       { "src": "/faq", "dest": "/faq.html" },
       { "src": "/contact", "dest": "/contact.html" },
+      { "src": "/images/(.*)", "dest": "/images/$1" },
       { "src": "/(.+)", "dest": "/$1" }
     ]
   }
