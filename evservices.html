@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectriStay - EV Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #fff;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background-color: #000;
+        }
+
+        /* Container for header content */
+        .header-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .navigation {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .navigation a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .navigation a.active {
+            border-bottom: 2px solid #fff;
+            padding-bottom: 5px;
+        }
+        
+        /* Main content styles */
+        .main-content {
+            margin-top: 120px;
+            padding: 0 4%;
+            max-width: 1600px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 5rem;
+        }
+        
+        /* EV Services Hero Section */
+        .ev-hero {
+            position: relative;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/ev-charging-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ev-hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .ev-hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .ev-hero-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        /* Inner Navigation Styles */
+        .inner-nav-container {
+            margin-bottom: 3rem;
+            border-radius: 15px;
+            background-color: #111;
+            overflow: hidden;
+        }
+        
+        .inner-nav {
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #333;
+        }
+        
+        .inner-nav-item {
+            padding: 1.2rem 1.5rem;
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .inner-nav-item:hover {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .inner-nav-item.active {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .inner-nav-item.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #2196F3;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            padding: 2rem;
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+        
+        .section-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+        
+        /* Cards for features */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background-color: #222;
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(33, 150, 243, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-description {
+            color: #aaa;
+            line-height: 1.6;
+        }
+        
+        /* Store Section */
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: #222;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-content {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            color: #2196F3;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .product-description {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .add-to-cart {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #2196F3;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #0b7dda;
+        }
+        
+        /* FAQ Accordion */
+        .faq-item {
+            border-bottom: 1px solid #333;
+            margin-bottom: 1rem;
+        }
+        
+        .faq-question {
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .faq-answer {
+            padding: 0 0 1.5rem;
+            color: #aaa;
+            line-height: 1.6;
+            display: none;
+        }
+        
+        .faq-answer.active {
+            display: block;
+        }
+        
+        /* Footer Section */
+        .footer {
+            background-color: #111;
+            padding: 5rem 4% 2rem;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo-img {
+            height: 30px;
+            width: auto;
+        }
+        
+        .footer-logo span {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-column h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-bottom p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #777;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .feature-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .store-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .inner-nav {
+                flex-direction: column;
+            }
+            
+            .inner-nav-item {
+                border-bottom: 1px solid #333;
+            }
+            
+            .inner-nav-item.active:after {
+                height: 0;
+            }
+            
+            .feature-cards,
+            .store-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ev-hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header>
+            <div class="header-container">
+                <a href="index.html" class="logo">
+                    <div class="logo-container">
+                        <img src="/images/logo_E.png" alt="ElectriStay Logo" class="logo-img">
+                        <span>ELECTRISTAY</span>
+                    </div>
+                </a>
+                <nav class="navigation">
+                    <a href="locations.html">Locations</a>
+                    <a href="#">Amenities</a>
+                    <a href="ev-services.html" class="active">EV Services</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="ev-hero">
+                <div class="ev-hero-content">
+                    <h1>EV Services</h1>
+                    <p>Comprehensive charging solutions and services for electric vehicle owners, designed to make your stay seamless and stress-free.</p>
+                </div>
+            </section>
+            
+            <!-- Inner Navigation -->
+            <div class="inner-nav-container">
+                <nav class="inner-nav">
+                    <a href="#charging" class="inner-nav-item active" data-section="charging">Charging Infrastructure</a>
+                    <a href="#smart-charging" class="inner-nav-item" data-section="smart-charging">Smart Charging</a>
+                    <a href="#app-integration" class="inner-nav-item" data-section="app-integration">Mobile App Integration</a>
+                    <a href="#trip-planning" class="inner-nav-item" data-section="trip-planning">Trip Planning</a>
+                    <a href="#sustainability" class="inner-nav-item" data-section="sustainability">Sustainability</a>
+                    <a href="#faq" class="inner-nav-item" data-section="faq">EV Services FAQ</a>
+                    <a href="#testimonials" class="inner-nav-item" data-section="testimonials">Testimonials</a>
+                    <a href="#store" class="inner-nav-item" data-section="store">EV Store</a>
+                </nav>
+                
+                <!-- Content Sections -->
+                <div id="charging" class="content-section active">
+                    <h2 class="section-title">Charging Infrastructure</h2>
+                    <p class="section-description">ElectriStay offers state-of-the-art charging solutions at all our properties, ensuring your electric vehicle stays powered throughout your journey.</p>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3 class="feature-title">Level 2 AC Charging</h3>
+                            <p class="feature-description">All properties offer 240V Level 2 charging stations with standard J1772 connectors, delivering up to 19.2 kW (80A) depending on your vehicle's capabilities.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🔋</div>
+                            <h3 class="feature-title">DC Fast Charging</h3>
+                            <p class="feature-description">Select premium properties feature DC fast charging stations supporting CCS, CHAdeMO, and Tesla standards, providing up to 150 kW of power for rapid charging.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🚗</div>
+                            <h3 class="feature-title">Tesla Compatibility</h3>
+                            <p class="feature-description">Dedicated Tesla destination chargers at all locations, plus adapters available for other connectors to ensure compatibility with any electric vehicle.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="smart-charging" class="content-section">
+                    <h2 class="section-title">Smart Charging Features</h2>
+                    <p class="section-description">Our AI-powered charging system optimizes your charging experience and helps reduce costs while minimizing environmental impact.</p>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-icon">💡</div>
+                            <h3 class="feature-title">Dynamic Rate Optimization</h3>
+                            <p class="feature-description">Our system automatically schedules charging during off-peak hours to reduce costs and manage grid demand, potentially saving up to 30% on charging costs.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">📊</div>
+                            <h3 class="feature-title">Energy Analytics</h3>
+                            <p class="feature-description">Detailed analytics on power consumption, charging efficiency, and cost savings provide insights into your vehicle's performance.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">📅</div>
+                            <h3 class="feature-title">Scheduled Charging</h3>
+                            <p class="feature-description">Set your departure time and desired charge level, and our system will ensure your vehicle is ready while optimizing for cost and energy efficiency.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="app-integration" class="content-section">
+                    <h2 class="section-title">Mobile App Integration</h2>
+                    <p class="section-description">Control and monitor your vehicle's charging status from anywhere with our intuitive mobile application.</p>
+                    
+                    <!-- Content for Mobile App Integration -->
+                </div>
+                
+                <div id="trip-planning" class="content-section">
+                    <h2 class="section-title">EV Trip Planning Tools</h2>
+                    <p class="section-description">Plan your journey with confidence using our comprehensive route planning tools designed specifically for electric vehicles.</p>
+                    
+                    <!-- Content for Trip Planning -->
+                </div>
+                
+                <div id="sustainability" class="content-section">
+                    <h2 class="section-title">Sustainable Energy Features</h2>
+                    <p class="section-description">ElectriStay is committed to environmental responsibility through renewable energy integration and carbon offset programs.</p>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-icon">☀️</div>
+                            <h3 class="feature-title">Solar-Powered Charging</h3>
+                            <p class="feature-description">Over 60% of our properties are equipped with rooftop solar arrays that directly power EV charging stations, generating over 1.2 million kWh of clean energy annually. Guests can view real-time solar production on our app during charging.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🌿</div>
+                            <h3 class="feature-title">Renewable Energy Partnerships</h3>
+                            <p class="feature-description">All ElectriStay locations use 100% renewable energy through direct generation or certified renewable energy credits. We've partnered with leading utilities to ensure even our grid power comes from wind, solar, or hydroelectric sources.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🌳</div>
+                            <h3 class="feature-title">Carbon Offset Program</h3>
+                            <p class="feature-description">Every charging session automatically includes carbon offsets through our partnerships with verified conservation projects. After each stay, guests receive a digital certificate showing their environmental contribution.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🔋</div>
+                            <h3 class="feature-title">Energy Storage Solutions</h3>
+                            <p class="feature-description">Our premium properties feature battery storage systems that capture excess solar energy during the day for use during evening charging sessions, ensuring renewable energy use even after sunset.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">📊</div>
+                            <h3 class="feature-title">Sustainability Metrics</h3>
+                            <p class="feature-description">Interactive displays at each charging station show real-time and cumulative carbon savings. In 2024 alone, our network helped avoid over 3,500 metric tons of CO₂ emissions—equivalent to planting 58,000 trees.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3 class="feature-title">Microgrid Technology</h3>
+                            <p class="feature-description">Select locations feature advanced microgrid systems that can operate independently during power outages, ensuring charging availability even during emergencies while reducing strain on the local grid during peak hours.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🔄</div>
+                            <h3 class="feature-title">Vehicle-to-Grid Integration</h3>
+                            <p class="feature-description">Our newest properties offer V2G capability, allowing guest vehicles to return excess energy to the grid during high demand. Participating guests receive credits toward their stay while supporting grid stability.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🎓</div>
+                            <h3 class="feature-title">Educational Initiatives</h3>
+                            <p class="feature-description">Each property features educational displays about renewable energy and sustainable transportation. Our ElectriKids program offers fun activities for young travelers to learn about clean energy and EVs.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 3rem; text-align: center;">
+                        <h3 style="margin-bottom: 1.5rem;">Our Environmental Impact</h3>
+                        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem;">
+                            <div style="text-align: center; flex: 1; min-width: 200px;">
+                                <div style="font-size: 3rem; font-weight: 700; color: #2196F3; margin-bottom: 0.5rem;">1.2M</div>
+                                <div style="color: #ccc;">kWh of solar energy generated annually</div>
+                            </div>
+                            <div style="text-align: center; flex: 1; min-width: 200px;">
+                                <div style="font-size: 3rem; font-weight: 700; color: #2196F3; margin-bottom: 0.5rem;">3,500+</div>
+                                <div style="color: #ccc;">metric tons of CO₂ avoided in 2024</div>
+                            </div>
+                            <div style="text-align: center; flex: 1; min-width: 200px;">
+                                <div style="font-size: 3rem; font-weight: 700; color: #2196F3; margin-bottom: 0.5rem;">100%</div>
+                                <div style="color: #ccc;">of properties powered by renewable energy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="faq" class="content-section">
+                    <h2 class="section-title">EV Services FAQ</h2>
+                    <p class="section-description">Find answers to frequently asked questions about our electric vehicle services.</p>
+                    
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>How do I reserve a charging station for my stay?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Charging is automatically included with your reservation. During booking, you'll be asked about your vehicle type and charging preferences. Our system will reserve appropriate charging time slots based on your stay duration and needs.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>What if all charging stations are in use when I need to charge?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Our smart scheduling system prevents this issue by allocating charging time slots based on guest needs. In rare peak situations, our concierge will ensure you get access to charging within your requested timeframe or offer alternative solutions.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Is there an additional cost for charging my vehicle?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Standard Level 2 charging is included at no additional cost up to 50 kWh per day. DC fast charging incurs a nominal fee to cover higher electricity costs. Exact rates are displayed during booking and on our mobile app.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="testimonials" class="content-section">
+                    <h2 class="section-title">Testimonials</h2>
+                    <p class="section-description">Hear from electric vehicle owners who have experienced our comprehensive charging solutions.</p>
+                    
+                    <!-- Content for Testimonials -->
+                </div>
+                
+                <div id="store" class="content-section">
+                    <h2 class="section-title">EV Store</h2>
+                    <p class="section-description">Shop for essential electric vehicle accessories, charging equipment, and ElectriStay branded merchandise.</p>
+                    
+                    <div class="store-grid">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://placehold.co/400x300/222/fff?text=Portable+Charger" alt="Portable EV Charger">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title">ElectriStay Portable Charger</h3>
+                                <div class="product-price">$249.99</div>
+                                <p class="product-description">Compact Level 1 portable charger with multiple adapters, perfect for emergency charging on the go.</p>
+                                <button class="add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://placehold.co/400x300/222/fff?text=Adapter+Set" alt="Charging Adapter Set">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title">Universal Adapter Set</h3>
+                                <div class="product-price">$99.99</div>
+                                <p class="product-description">Complete set of charging adapters to ensure compatibility with any charging station during your travels.</p>
+                                <button class="add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://placehold.co/400x300/222/fff?text=Cable+Organizer" alt="Charging Cable Organizer">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title">Cable Management System</h3>
+                                <div class="product-price">$39.99</div>
+                                <p class="product-description">Premium cable organizer to keep your charging cables tidy and protected during travel.</p>
+                                <button class="add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://placehold.co/400x300/222/fff?text=ElectriStay+Hoodie" alt="ElectriStay Branded Hoodie">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title">ElectriStay EV Enthusiast Hoodie</h3>
+                                <div class="product-price">$59.99</div>
+                                <p class="product-description">Comfortable eco-friendly hoodie made from recycled materials with our signature electric vehicle design.</p>
+                                <button class="add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
+                    <span>ELECTRISTAY</span>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Our Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Properties</h4>
+                        <ul>
+                            <li><a href="#">Urban Hotels</a></li>
+                            <li><a href="#">Beach Resorts</a></li>
+                            <li><a href="#">Mountain Lodges</a></li>
+                            <li><a href="#">Charging Map</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">EV Guides</a></li>
+                            <li><a href="#">Partner Program</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ElectriStay. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inner Navigation
+            const navItems = document.querySelectorAll('.inner-nav-item');
+            const contentSections = document.querySelectorAll('.content-section');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all items
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    contentSections.forEach(section => section.classList.remove('active'));
+                    
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // Show corresponding content section
+                    const sectionId = this.getAttribute('data-section');
+                    document.getElementById(sectionId).classList.add('active');
+                });
+            });
+            
+            // FAQ Accordion
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const toggle = this.querySelector('.faq-toggle');
+                    
+                    // Toggle answer visibility
+                    answer.classList.toggle('active');
+                    
+                    // Change the toggle symbol
+                    toggle.textContent = answer.classList.contains('active') ? '−' : '+';
+                });
+            });
+            
+            // Add to Cart functionality
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productTitle = this.parentElement.querySelector('.product-title').textContent;
+                    alert(`${productTitle} has been added to your cart!`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
