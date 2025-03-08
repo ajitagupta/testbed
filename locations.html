@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectriStay - Locations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #fff;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            z-index: 100;
+            background-color: #000;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .navigation {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .navigation a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .navigation a.active {
+            border-bottom: 2px solid #fff;
+            padding-bottom: 5px;
+        }
+        
+        /* Main content area */
+        .main-content {
+            margin-top: 120px;
+            padding: 0 4%;
+            max-width: 1600px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Search section */
+        .search-section {
+            margin-bottom: 3rem;
+        }
+
+        .search-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-container {
+            background-color: #111;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #555;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border-radius: 50px;
+            border: none;
+            background-color: #fff;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .filter-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .select-container {
+            position: relative;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #fff;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .select-arrow {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .filter-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #333;
+            border-radius: 34px;
+            transition: .4s;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            border-radius: 50%;
+            transition: .4s;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        .reset-btn {
+            padding: 8px 16px;
+            background-color: transparent;
+            color: #fff;
+            border: 1px solid #333;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            margin-left: auto;
+            display: block;
+        }
+
+        .reset-btn:hover {
+            background-color: #333;
+        }
+
+        /* Property listings */
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .property-card {
+            background-color: #111;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .property-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .property-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .property-card:hover .property-image img {
+            transform: scale(1.05);
+        }
+
+        .favorite-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            color: #555;
+        }
+
+        .favorite-btn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .favorite-btn.active {
+            color: #FF6B6B;
+        }
+
+        .favorite-label {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .property-content {
+            padding: 1.5rem;
+        }
+
+        .property-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .property-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .property-location {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .rating-score {
+            font-weight: 600;
+        }
+
+        .rating-star {
+            color: #FFD700;
+        }
+
+        .property-pricing {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            border-top: 1px solid #333;
+            padding-top: 1rem;
+        }
+
+        .price {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .original-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 0.9rem;
+        }
+
+        .current-price {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .per-night {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .view-btn {
+            padding: 8px 20px;
+            background-color: #2196F3;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .view-btn:hover {
+            background-color: #0b7dda;
+        }
+
+        /* EV Charging Badge */
+        .ev-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #2C3E50;
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            gap: 5px;
+        }
+
+        .ev-icon {
+            font-size: 0.9rem;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: #111;
+            padding: 5rem 4% 2rem;
+            margin-top: 2rem;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo-img {
+            height: 30px;
+            width: auto;
+        }
+        
+        .footer-logo span {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-column h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-bottom p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #777;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .property-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navigation {
+                gap: 1rem;
+            }
+            
+            .filter-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-columns {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .property-pricing {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header>
+            <div class="header-container">
+                <a href="index.html" class="logo">
+                    <div class="logo-container">
+                        <img src="./images/logo_E.png" alt="ElectriStay Logo" class="logo-img">
+                        <span>ELECTRISTAY</span>
+                    </div>
+                </a>
+                <nav class="navigation">
+                    <a href="locations.html" class="active">Locations</a>
+                    <a href="#">Amenities</a>
+                    <a href="#">EV Services</a>
+                    <a href="faqs.html">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="search-section">
+                <h1>Find Your Perfect EV-Friendly Stay</h1>
+                
+                <div class="search-container">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="search-input" placeholder="Search by location, property name...">
+                    </div>
+                    
+                    <div class="filter-options">
+                        <div class="filter-group">
+                            <label for="location">Location</label>
+                            <div class="select-container">
+                                <select id="location" class="filter-select">
+                                    <option value="">Select Location</option>
+                                    <option value="london">London</option>
+                                    <option value="paris">Paris</option>
+                                    <option value="newyork">New York</option>
+                                    <option value="sanfrancisco">San Francisco</option>
+                                    <option value="tokyo">Tokyo</option>
+                                    <option value="malibu">Malibu</option>
+                                    <option value="aspen">Aspen</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="property-type">Property Type</label>
+                            <div class="select-container">
+                                <select id="property-type" class="filter-select">
+                                    <option value="">Select Type</option>
+                                    <option value="hotel">Hotel</option>
+                                    <option value="resort">Resort</option>
+                                    <option value="villa">Villa</option>
+                                    <option value="apartment">Apartment</option>
+                                    <option value="lodge">Lodge</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="bedrooms">Bedrooms</label>
+                            <div class="select-container">
+                                <select id="bedrooms" class="filter-select">
+                                    <option value="">Select Bedrooms</option>
+                                    <option value="1">1 Bedroom</option>
+                                    <option value="2">2 Bedrooms</option>
+                                    <option value="3">3 Bedrooms</option>
+                                    <option value="4">4+ Bedrooms</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="price-range">Price Range</label>
+                            <div class="select-container">
+                                <select id="price-range" class="filter-select">
+                                    <option value="">Select Price Range</option>
+                                    <option value="budget">$0 - $100</option>
+                                    <option value="medium">$100 - $300</option>
+                                    <option value="luxury">$300 - $500</option>
+                                    <option value="premium">$500+</option>
+                                </select>
+                                <span class="select-arrow">▼</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-toggle">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span>EV Charging Available</span>
+                        
+                        <button class="reset-btn">Reset Filters</button>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="listings-section">
+                <div class="property-grid">
+                    <!-- Property 1 -->
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://placehold.co/800x500/0d6e9e/ffffff?text=Urban+EV+Hotel" alt="Urban EV Hotel">
+                            <div class="favorite-label">Guest Favorite</div>
+                            <button class="favorite-btn">❤</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-name">Urban EV Hotel</h3>
+                                <div class="rating">
+                                    <span class="rating-score">4.8</span>
+                                    <span class="rating-star">★</span>
+                                </div>
+                            </div>
+                            <div class="property-location">San Francisco, CA</div>
+                            <div class="ev-badge">
+                                <span class="ev-icon">⚡</span>
+                                12 Tesla + 8 Universal Chargers
+                            </div>
+                            <div class="property-pricing">
+                                <div class="price">
+                                    <span class="original-price">$249</span>
+                                    <span class="current-price">$199<span class="per-night">/night</span></span>
+                                </div>
+                                <button class="view-btn">View</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 2 -->
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://placehold.co/800x500/5a3b28/ffffff?text=La+Deux" alt="La Deux">
+                            <div class="favorite-label">Guest Favorite</div>
+                            <button class="favorite-btn">❤</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-name">La Deux</h3>
+                                <div class="rating">
+                                    <span class="rating-score">4.94</span>
+                                    <span class="rating-star">★</span>
+                                </div>
+                            </div>
+                            <div class="property-location">Green Park, London</div>
+                            <div class="ev-badge">
+                                <span class="ev-icon">⚡</span>
+                                4 Tesla + 6 Universal Chargers
+                            </div>
+                            <div class="property-pricing">
+                                <div class="price">
+                                    <span class="original-price">$2000</span>
+                                    <span class="current-price">$1700<span class="per-night">/night</span></span>
+                                </div>
+                                <button class="view-btn">View</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 3 -->
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://placehold.co/800x500/2e5d32/ffffff?text=Beach+Hub" alt="Beach Hub">
+                            <div class="favorite-label">Guest Favorite</div>
+                            <button class="favorite-btn active">❤</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-name">Beach Hub</h3>
+                                <div class="rating">
+                                    <span class="rating-score">4.94</span>
+                                    <span class="rating-star">★</span>
+                                </div>
+                            </div>
+                            <div class="property-location">Malibu, CA</div>
+                            <div class="ev-badge">
+                                <span class="ev-icon">⚡</span>
+                                Solar Powered EV Charging
+                            </div>
+                            <div class="property-pricing">
+                                <div class="price">
+                                    <span class="original-price">$2500</span>
+                                    <span class="current-price">$2300<span class="per-night">/night</span></span>
+                                </div>
+                                <button class="view-btn">View</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 4 -->
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://placehold.co/800x500/4d4d4d/ffffff?text=The+Oasis" alt="The Oasis">
+                            <div class="favorite-label">Guest Favorite</div>
+                            <button class="favorite-btn">❤</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-name">The Oasis</h3>
+                                <div class="rating">
+                                    <span class="rating-score">4.94</span>
+                                    <span class="rating-star">★</span>
+                                </div>
+                            </div>
+                            <div class="property-location">Eight, Long Road</div>
+                            <div class="ev-badge">
+                                <span class="ev-icon">⚡</span>
+                                Fast Charging Available
+                            </div>
+                            <div class="property-pricing">
+                                <div class="price">
+                                    <span class="original-price">$950</span>
+                                    <span class="current-price">$884<span class="per-night">/night</span></span>
+                                </div>
+                                <button class="view-btn">View</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 5 -->
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://placehold.co/800x500/3d3d3d/ffffff?text=Mountain+View+Lodge" alt="Mountain View Lodge">
+                            <button class="favorite-btn">❤</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-name">Mountain View Lodge</h3>
+                                <div class="rating">
+                                    <span class="rating-score">4.7</span>
+                                    <span class="rating-star">★</span>
+                                </div>
+                            </div>
+                            <div class="property-location">Aspen, CO</div>
+                            <div class="ev-badge">
+                                <span class="ev-icon">⚡</span>
+                                24-hour Charging
+                            </div>
+                            <div class="property-pricing">
+                                <div class="price">
+                                    <span class="original-price">$350</span>
+                                    <span class="current-price">$249<span class="per-night">/night</span></span>
+                                </div>
+                                <button class="view-btn">View</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 6 -->
+                    <div class="property-card">
+                        <div class="property-image">
+                            <img src="https://placehold.co/800x500/0a4275/ffffff?text=Ocean+Front+Villa" alt="Ocean Front Villa">
+                            <button class="favorite-btn">❤</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-name">Ocean Front Villa</h3>
+                                <div class="rating">
+                                    <span class="rating-score">4.9</span>
+                                    <span class="rating-star">★</span>
+                                </div>
+                            </div>
+                            <div class="property-location">Malibu, CA</div>
+                            <div class="ev-badge">
+                                <span class="ev-icon">⚡</span>
+                                Solar Powered EV Charging
+                            </div>
+                            <div class="property-pricing">
+                                <div class="price">
+                                    <span class="original-price">$400</span>
+                                    <span class="current-price">$329<span class="per-night">/night</span></span>
+                                </div>
+                                <button class="view-btn">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="./images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
+                    <span>ELECTRISTAY</span>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Our Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Properties</h4>
+                        <ul>
+                            <li><a href="#">Urban Hotels</a></li>
+                            <li><a href="#">Beach Resorts</a></li>
+                            <li><a href="#">Mountain Lodges</a></li>
+                            <li><a href="#">Charging Map</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">EV Guides</a></li>
+                            <li><a href="#">Partner Program</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ElectriStay. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Simple JavaScript for toggles and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Favorite buttons
+            const favoriteButtons = document.querySelectorAll('.favorite-btn');
+            favoriteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+            
+            // Reset filters button
+            const resetButton = document.querySelector('.reset-btn');
+            resetButton.addEventListener('click', function() {
+                // Reset all select inputs
+                const selectInputs = document.querySelectorAll('.filter-select');
+                selectInputs.forEach(select => {
+                    select.selectedIndex = 0;
+                });
+                
+                // Reset search input
+                document.querySelector('.search-input').value = '';
+                
+                // Keep EV toggle checked as default
+                document.querySelector('.toggle-switch input').checked = true;
+            });
+            
+            // Property view buttons
+            const viewButtons = document.querySelectorAll('.view-btn');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // This would redirect to the property detail page
+                    const propertyName = this.closest('.property-card').querySelector('.property-name').textContent;
+                    alert(`Viewing details for ${propertyName}`);
+                    // In a real implementation: window.location.href = `property-details.html?property=${propertyName}`;
+                });
+            });
+
+    </script>

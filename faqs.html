@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectriStay - FAQs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #fff;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background-color: #000;
+        }
+
+        /* Container for header content */
+        .header-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .navigation {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .navigation a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .navigation a.active {
+            border-bottom: 2px solid #fff;
+            padding-bottom: 5px;
+        }
+        
+        /* Main content styles */
+        .main-content {
+            margin-top: 120px;
+            padding: 0 4%;
+            max-width: 1600px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 3rem;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 4rem;
+        }
+        
+        .faq-section h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .faq-intro {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #ccc;
+            max-width: 800px;
+        }
+        
+        /* Two-column layout with category on left, questions on right */
+        .faq-group {
+            margin-bottom: 2.5rem;
+            display: flex;
+        }
+        
+        .category-title {
+            font-size: 1.2rem;
+            flex: 0 0 250px;
+            color: #fff;
+        }
+        
+        .faq-questions {
+            flex: 1;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #333;
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .faq-question .icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active .icon {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: #ccc;
+            line-height: 1.6;
+            padding-right: 2rem;
+        }
+        
+        .faq-answer.active {
+            max-height: 500px;
+            padding-bottom: 1.5rem;
+        }
+        
+        /* About Section */
+        .about-section {
+            margin-top: 5rem;
+            background-color: #f8f8ff;
+            border-radius: 20px;
+            padding: 4rem;
+            overflow: hidden;
+        }
+        
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+        
+        .about-text {
+            flex: 1;
+            color: #333;
+        }
+        
+        .about-text h4 {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: #222;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 2rem;
+        }
+        
+        .stats-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1.5rem;
+        }
+        
+        .stat-item .stat-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            background: none;
+            width: auto;
+            height: auto;
+            display: inline;
+        }
+        
+        .stat-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .about-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: #000;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #333;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: #000;
+            padding: 12px 25px;
+            border: 1px solid #000;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .about-image {
+            flex: 1;
+            max-height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+        
+        /* Footer Section */
+        .footer {
+            background-color: #111;
+            padding: 5rem 4% 2rem;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo-img {
+            height: 30px;
+            width: auto;
+        }
+        
+        .footer-logo span {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-column h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-bottom p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #777;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .about-container {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                width: 100%;
+                height: 400px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                margin-top: 100px;
+            }
+            
+            .faq-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .navigation {
+                gap: 1rem;
+            }
+            
+            .about-section {
+                padding: 3rem 2rem;
+            }
+            
+            .about-text h2 {
+                font-size: 2rem;
+            }
+            
+            .footer-columns {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .faq-section h1 {
+                font-size: 2rem;
+            }
+            
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header>
+            <div class="header-container">
+                <a href="index.html" class="logo">
+                    <div class="logo-container">
+                        <img src="./images/logo_E.png" alt="ElectriStay Logo" class="logo-img">
+                        <span>ELECTRISTAY</span>
+                    </div>
+                </a>
+                <nav class="navigation">
+                    <a href="locations.html">Locations</a>
+                    <a href="#">Amenities</a>
+                    <a href="#">EV Services</a>
+                    <a href="#" class="active">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="faq-section">
+                <h1>FAQ</h1>
+                <p class="faq-intro">Here you can find the answers to most frequently asked questions about our EV-friendly accommodations and charging services.</p>
+                
+                <div class="faq-group">
+                    <h2 class="category-title">Booking</h2>
+                    
+                    <div class="faq-questions">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>How do I book a stay with ElectriStay?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Booking with ElectriStay is easy! Simply browse our available properties on the Locations page, select your desired accommodation, and follow the booking process. You can filter properties by location, price range, and specific EV charging requirements. We recommend booking in advance to ensure both accommodation and charging availability, especially during peak travel seasons.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Is there a minimum stay requirement?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Minimum stay requirements vary by property and season. Most of our urban locations require a minimum of 1-2 nights, while our resort properties may require 2-3 nights, especially during peak seasons. Extended stay discounts are available for bookings of 7+ nights. You can find specific minimum stay information on each property's listing page.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Can I make changes to my booking?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, you can modify your booking up to 48 hours before your scheduled arrival, subject to availability. Changes can be made through your ElectriStay account or by contacting our customer service team. Please note that changes to dates may result in rate adjustments based on seasonal pricing. For changes to EV charging requirements, we recommend notifying us as soon as possible to ensure availability.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-group">
+                    <h2 class="category-title">EV Charging</h2>
+                    
+                    <div class="faq-questions">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>What types of EV charging stations are available?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>All ElectriStay properties feature a mix of charging options. Most locations offer Level 2 (240V) charging stations compatible with all electric vehicles. Select premium properties also feature DC fast charging capabilities. We have dedicated Tesla connectors as well as universal J1772 connectors. Each property listing specifies the exact charging options available, including the number of stations and power output ratings.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>How do I reserve EV charging during my stay?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>EV charging is automatically included with your stay. During the booking process, you'll be prompted to specify your vehicle type and preferred charging schedule. Our AI-powered system optimizes charging time based on electricity rates and grid demand. You can also schedule charging sessions through our mobile app during your stay. For properties with limited charging stations, our smart scheduling system ensures fair access for all guests.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Are there additional fees for using the EV charging stations?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Basic Level 2 charging is included in your stay at no additional cost, with reasonable usage limits (typically up to 50kWh per day). DC fast charging, where available, may incur a nominal fee to cover the higher electricity costs. Our solar-powered properties offer unlimited free charging. All charging costs are transparently displayed during booking and can be added directly to your room bill for convenience.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-group">
+                    <h2 class="category-title">Amenities</h2>
+                    
+                    <div class="faq-questions">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>What amenities are included in ElectriStay accommodations?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>All ElectriStay properties feature high-speed Wi-Fi, premium bedding, and modern appliances. Most properties also include smart home features controllable through our app, workspace areas, and streaming entertainment systems. Premium properties may include additional amenities such as fitness centers, pools, and spa facilities. EV-specific amenities include charging status monitors, trip planning tools, and complementary charging cable adapters if needed.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Are linens and towels provided?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, all ElectriStay accommodations include high-quality linens, towels, and basic toiletries. We use eco-friendly, sustainably sourced products aligned with our commitment to environmental responsibility. For extended stays (7+ nights), a complementary mid-stay cleaning service with fresh linens is provided. Additional housekeeping services can be arranged for an extra fee.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-group">
+                    <h2 class="category-title">Payment</h2>
+                    
+                    <div class="faq-questions">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>What forms of payment do you accept?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>We accept all major credit and debit cards (Visa, Mastercard, American Express, Discover), PayPal, Apple Pay, Google Pay, and select cryptocurrencies. Corporate bookings can be arranged with invoicing options. For international guests, we support currency conversion at market exchange rates with no additional fees.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>When is payment due?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>For standard bookings, a 25% deposit is required at the time of reservation, with the remaining balance due 7 days before arrival. For bookings made within 7 days of arrival, full payment is required at the time of booking. Premium properties and peak season reservations may require 50% deposit. Security deposits, where applicable, are pre-authorized at check-in and released within 48 hours of checkout, assuming no damages.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-group">
+                    <h2 class="category-title">Cancellation policy</h2>
+                    
+                    <div class="faq-questions">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>What is your cancellation policy?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Our standard cancellation policy allows free cancellation up to 7 days before arrival for a full refund. Cancellations made 3-7 days prior to arrival receive a 50% refund of the deposit. Cancellations within 3 days of arrival are non-refundable. Premium properties and peak season bookings may have stricter cancellation terms. We offer cancellation protection plans that provide more flexibility for an additional fee.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>What happens if I need to cancel my reservation?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>If you need to cancel, you can do so through your ElectriStay account or by contacting our customer service team. Refunds are processed using the original payment method within 5-7 business days. For special circumstances (such as illness, severe weather, or vehicle breakdown), we offer case-by-case flexibility with proper documentation. We also encourage rescheduling rather than cancellation when possible.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-group">
+                    <h2 class="category-title">General</h2>
+                    
+                    <div class="faq-questions">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Are pets allowed at ElectriStay properties?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Pet policies vary by property. Many of our properties are pet-friendly and welcome well-behaved dogs (usually up to 2 per booking). A pet fee typically applies, ranging from $25-50 per pet per stay. Service animals are always welcome at no additional charge. Each property listing clearly indicates its pet policy. We recommend notifying us in advance if you're traveling with pets so we can ensure you're placed in a suitable room or unit.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Is smoking allowed in the accommodations?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>All ElectriStay properties are strictly non-smoking indoors, including e-cigarettes and vaping devices. Designated outdoor smoking areas are available at most properties. A cleaning fee of $250 will be charged for violations of our non-smoking policy. This policy helps us maintain air quality for all guests and aligns with our environmental commitments.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Do you offer discounts for longer stays?</span>
+                                <span class="icon">▼</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, we offer tiered discounts for extended stays: 10% off for stays of 7-13 nights, 15% off for 14-29 nights, and 25% off for 30+ nights. These discounts apply automatically during booking. Corporate and long-term relocation packages are also available with additional benefits, including priority charging slots, enhanced cleaning services, and flexible payment options. Contact our business services team for custom quotes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- About Us Section -->
+            <section class="about-section">
+                <div class="about-container">
+                    <div class="about-text">
+                        <h4>About us</h4>
+                        <h2>ElectriStay's Vision</h2>
+                        <p>We have revolutionized travel for electric vehicle owners by creating a seamless network of premium accommodations with integrated charging solutions.</p>
+                        
+                        <div class="stats-container">
+                            <div class="stat-item">
+                                <div class="stat-icon">🔌</div>
+                                <div class="stat-text">50+ charging locations</div>
+                            </div>
+                            
+                            <div class="stat-item">
+                                <div class="stat-icon">👥</div>
+                                <div class="stat-text">10,000+ EV travelers served</div>
+                            </div>
+                            
+                            <div class="stat-item">
+                                <div class="stat-icon">🏆</div>
+                                <div class="stat-text">15+ innovation awards</div>
+                            </div>
+                        </div>
+                        
+                        <div class="about-actions">
+                            <button class="btn-primary">Learn more</button>
+                            <button class="btn-secondary">Contact us</button>
+                        </div>
+                    </div>
+                    
+                    <div class="about-image">
+                        <img src="https://placehold.co/800x600/4d4d4d/ffffff?text=EV+Charging+Station" alt="EV Charging Station">
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="./images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
+                    <span>ELECTRISTAY</span>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Our Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Properties</h4>
+                        <ul>
+                            <li><a href="#">Urban Hotels</a></li>
+                            <li><a href="#">Beach Resorts</a></li>
+                            <li><a href="#">Mountain Lodges</a></li>
+                            <li><a href="#">Charging Map</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">EV Guides</a></li>
+                            <li><a href="#">Partner Program</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ElectriStay. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // FAQ accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    // Toggle active class on question
+                    this.classList.toggle('active');
+                    
+                    // Toggle answer visibility
+                    const answer = this.nextElementSibling;
+                    answer.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

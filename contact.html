@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectriStay - Contact Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #fff;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background-color: #000;
+        }
+
+        /* Container for header content */
+        .header-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .navigation {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .navigation a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .navigation a.active {
+            border-bottom: 2px solid #fff;
+            padding-bottom: 5px;
+        }
+        
+        /* Main content styles */
+        .main-content {
+            margin-top: 120px;
+            padding: 0 4%;
+            max-width: 1600px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 5rem;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            margin-bottom: 4rem;
+        }
+        
+        .contact-section h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-intro {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #ccc;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .info-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .info-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+        
+        .info-content {
+            flex: 1;
+        }
+        
+        .info-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-details {
+            color: #ccc;
+            line-height: 1.5;
+        }
+        
+        .info-link {
+            color: #2196F3;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .info-link:hover {
+            color: #0b7dda;
+        }
+        
+        .contact-form-container {
+            flex: 1;
+            min-width: 300px;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+        
+        .form-title {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-label {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .form-input, .form-textarea {
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #2196F3;
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            padding: 1rem;
+            background-color: #2196F3;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .form-submit:hover {
+            background-color: #0b7dda;
+        }
+        
+        /* Footer Section */
+        .footer {
+            background-color: #111;
+            padding: 5rem 4% 2rem;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo-img {
+            height: 30px;
+            width: auto;
+        }
+        
+        .footer-logo span {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-column h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-bottom p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #777;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+        }
+        
+        /* Map Styles */
+        .map-container {
+            width: 100%;
+            height: 400px;
+            margin-top: 4rem;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .map-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .main-content {
+                margin-top: 100px;
+            }
+            
+            .contact-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .navigation {
+                gap: 1rem;
+            }
+            
+            .footer-columns {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-section h1 {
+                font-size: 2rem;
+            }
+            
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header>
+            <div class="header-container">
+                <a href="index.html" class="logo">
+                    <div class="logo-container">
+                        <img src="./images/logo_E.png" alt="ElectriStay Logo" class="logo-img">
+                        <span>ELECTRISTAY</span>
+                    </div>
+                </a>
+                <nav class="navigation">
+                    <a href="locations.html">Locations</a>
+                    <a href="#">Amenities</a>
+                    <a href="#">EV Services</a>
+                    <a href="faqs.html">FAQ</a>
+                    <a href="contact.html" class="active">Contact</a>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="contact-section">
+                <h1>Contact us</h1>
+                <p class="contact-intro">Reach out to us if you have any further questions.</p>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <div class="info-icon">✉️</div>
+                            <div class="info-content">
+                                <div class="info-title">Email</div>
+                                <div class="info-details">
+                                    info[at]electristay[dot]com
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">📞</div>
+                            <div class="info-content">
+                                <div class="info-title">Phone</div>
+                                <div class="info-details">+1 (555) 123-4567</div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">📍</div>
+                            <div class="info-content">
+                                <div class="info-title">Address</div>
+                                <div class="info-details">
+                                    ElectriStay Headquarters,<br>
+                                    1234 Green Avenue, Suite 500,<br>
+                                    San Francisco, CA 94110, USA
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">🕒</div>
+                            <div class="info-content">
+                                <div class="info-title">Customer Support Hours</div>
+                                <div class="info-details">Monday to Friday, 9:00 AM to 5:00 PM (GMT+1)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">ℹ️</div>
+                            <div class="info-content">
+                                <div class="info-title">Note</div>
+                                <div class="info-details">For urgent inquiries outside of business hours, use the form on the right and we will reply as soon as possible.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container">
+                        <h2 class="form-title">Fill out the form below to reach out</h2>
+                        
+                        <form class="contact-form">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" class="form-input" placeholder="Email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <textarea id="message" name="message" class="form-textarea" placeholder="Message" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="form-submit">Send</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Map Section -->
+                <div class="map-container">
+                    <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100939.98555098464!2d-122.50764017859071!3d37.75781499680142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1623841344132!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="./images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
+                    <span>ELECTRISTAY</span>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Our Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Properties</h4>
+                        <ul>
+                            <li><a href="#">Urban Hotels</a></li>
+                            <li><a href="#">Beach Resorts</a></li>
+                            <li><a href="#">Mountain Lodges</a></li>
+                            <li><a href="#">Charging Map</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">EV Guides</a></li>
+                            <li><a href="#">Partner Program</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ElectriStay. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Form submission handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.querySelector('.contact-form');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                // Simple validation
+                if (!name || !email || !message) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                // In a real implementation, you would send data to a server here
+                // For demo purposes, we'll just show an alert
+                alert(`Thank you for your message, ${name}! We will get back to you soon at ${email}.`);
+                
+                // Reset the form
+                contactForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
