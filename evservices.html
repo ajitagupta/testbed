@@ -584,22 +584,99 @@
                     
                 <div id ="trip-planning" class="content-section">
 
-                    <!-- Map Container inside trip-planning -->
-<div id="simple-map" style="width: 100%; height: 500px; border-radius: 15px; margin-bottom: 3rem;"></div>
+<!-- Trip Planning Content Section -->
+<h2 class="section-title">EV Trip Planning Tools</h2>
+<p class="section-description">Plan your journey with confidence using our comprehensive route planning tools designed specifically for electric vehicles.</p>
 
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
-    <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-                    <script src="tripplanning.js"></script>
+<!-- Search/Journey Planner Section -->
+<section id="search" style="background-color: #111; padding: 3rem 1rem; text-align: center; color: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 15px; margin-bottom: 3rem;">
+    <h2 style="font-size: 2.2rem; margin-bottom: 20px; color: #fff; font-weight: bold; letter-spacing: 1px;">Plan Your Journey with Charging Stations</h2>
+    
+    <form id="journey-form" style="display: flex; justify-content: center; align-items: center; background-color: #222; padding: 1.5rem; border-radius: 15px; max-width: 1200px; margin: 2rem auto; gap: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); flex-wrap: wrap;">
+        <input type="text" id="source" placeholder="Enter starting location" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #333; font-size: 1rem; color: #eee; width: 190px;">
+        
+        <input type="text" id="destination" placeholder="Enter destination" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #333; font-size: 1rem; color: #eee; width: 150px;">
+        
+        <input type="number" id="max-distance" placeholder="Max distance (km)" min="1" value="300" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #333; font-size: 1rem; color: #eee; width: 140px;">
+        
+        <button type="button" onclick="toggleConfiguration()" style="padding: 0.85rem 1.5rem; background-color: #2196F3; color: #fff; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: background-color 0.3s ease, transform 0.2s ease;">⚙️ Configuration</button>
+        
+        <div id="configuration-section" class="configuration-section" style="display: none; padding: 15px; background-color: #333; border-radius: 12px; margin-top: 15px; width: 100%; max-width: 600px; border: 1px solid rgba(33, 150, 243, 0.2);">
+            <input type="number" id="charge_difference" placeholder="Charge Difference (%)" min="1" max="100" value="20" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #444; font-size: 1rem; color: #eee; width: 100%; margin-bottom: 10px;">
+            
+            <select id="car_model" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #444; font-size: 1rem; color: #eee; width: 100%; margin-bottom: 10px;">
+                <option value="">Select Car Model</option>
+                <option value="Tesla Model 3" selected>Tesla Model 3</option>
+                <option value="Renault Megane électrique">Renault Megane électrique</option>
+                <option value="BMW i4">BMW i4</option>
+                <option value="Volkswagen ID.4">Volkswagen ID.4</option>
+                <option value="Hyundai Kona Electric">Hyundai Kona Electric</option>
+                <option value="Nissan Leaf">Nissan Leaf</option>
+                <option value="Porsche Taycan">Porsche Taycan</option>
+                <option value="Mercedes EQC">Mercedes EQC</option>
+                <option value="Audi e-tron">Audi e-tron</option>
+                <option value="Ford Mustang Mach-E">Ford Mustang Mach-E</option>
+                <option value="Kia EV6">Kia EV6</option>
+                <option value="Polestar 2">Polestar 2</option>
+            </select>
+            
+            <input type="number" id="battery_capacity" placeholder="Battery Capacity (kWh)" min="1" value="75" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #444; font-size: 1rem; color: #eee; width: 100%; margin-bottom: 10px;">
+            
+            <input type="number" id="efficiency" placeholder="Efficiency (kWh/100km)" min="0.1" step="0.1" value="16.8" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #444; font-size: 1rem; color: #eee; width: 100%; margin-bottom: 10px;">
+        </div>
 
+        <button type="button" id="find-route-button" onclick="fetchChargingStations()" style="padding: 0.85rem 1.5rem; background-color: #2196F3; color: #fff; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: background-color 0.3s ease, transform 0.2s ease;">Find Route</button>
+    </form>
+</section>
 
+<!-- Map Container with proper width handling -->
+<div id="map-container" style="width: 100%; position: relative; margin-bottom: 3rem; border-radius: 15px; overflow: hidden;">
+    <!-- The map div itself -->
+    <div id="map" style="width: 100%; height: 500px; border: 2px solid #333; border-radius: 15px; position: relative;"></div>
+    
+    <!-- Legend for the map -->
+    <div class="legend" style="position: absolute; bottom: 40px; right: 10px; background: rgba(0, 0, 0, 0.85); padding: 12px; border-radius: 6px; z-index: 1000; border: 1px solid #2196F3; text-align: left; color: white; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);">
+        <h4 style="margin-bottom: 10px; color: #fff; font-size: 16px; font-weight: bold;">Legend</h4>
+        <p style="display: flex; align-items: center; gap: 10px; margin: 5px 0; color: #e0e0e0; font-size: 14px;">
+            <img src="./icons/restaurant.png" alt="Dining Available" style="width: 20px; height: 20px;"> Charging Station with Dining
+        </p>
+        <p style="display: flex; align-items: center; gap: 10px; margin: 5px 0; color: #e0e0e0; font-size: 14px;">
+            <img src="./icons/charging.png" alt="Regular Charging" style="width: 20px; height: 20px;"> Charging Station
+        </p>
+    </div>
+</div>
 
+<!-- Feature Cards Section -->
+<div class="feature-cards">
+    <div class="feature-card">
+        <div class="feature-icon">🗺️</div>
+        <h3 class="feature-title">Interactive Charging Map</h3>
+        <p class="feature-description">Our interactive map displays all ElectriStay properties along with detailed information about charging capabilities, nearby attractions, and real-time availability.</p>
+    </div>
+    
+    <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">Range Calculator</h3>
+        <p class="feature-description">Input your vehicle model, battery capacity, and driving conditions to get accurate range estimates. Our tool accounts for elevation changes, climate control usage, and driving speed.</p>
+    </div>
+    
+    <div class="feature-card">
+        <div class="feature-icon">⏱️</div>
+        <h3 class="feature-title">Charging Time Estimator</h3>
+        <p class="feature-description">Calculate expected charging times based on your vehicle's specifications and the available charging options at each location. Plan meal breaks, overnight stays, or quick top-ups.</p>
+    </div>
+    
+    <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3 class="feature-title">Cost Calculator</h3>
+        <p class="feature-description">Estimate the total cost of your journey, including charging expenses and accommodation. Compare different routes and charging strategies to find the most economical option.</p>
+    </div>
+</div>
 
-
-
-
-
+<!-- Add the required libraries and scripts -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="tripplanning.js"></script>
 
 
 
