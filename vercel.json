@@ -3,6 +3,7 @@
   "builds": [
     { "src": "*.html", "use": "@vercel/static" },
     { "src": "images/**", "use": "@vercel/static" },
+    { "src": "icons/**", "use": "@vercel/static" },
     { "src": "*.js", "use": "@vercel/static" }
   ],
   "routes": [
@@ -11,7 +12,9 @@
     { "src": "/evservices", "dest": "/evservices.html" },
     { "src": "/faq", "dest": "/faqs.html" },
     { "src": "/contact", "dest": "/contact.html" },
+    { "src": "/news", "dest": "/news.html" },
     { "src": "/images/(.*)", "dest": "/images/$1" },
+    { "src": "/icons/(.*)", "dest": "/icons/$1" },
     { "src": "/(.+)", "dest": "/$1" }
   ]
 }
