@@ -103,35 +103,40 @@
             margin-bottom: 5rem;
         }
         
-        /* EV Services Hero Section */
+        /* EV Services Hero Section - Gradient Background */
         .ev-hero {
             position: relative;
             height: 400px;
             border-radius: 20px;
             overflow: hidden;
             margin-bottom: 3rem;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/ev-charging-hero.jpg');
-            background-size: cover;
-            background-position: center;
+            /* Modern gradient background instead of image */
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 60%, #3a506b 100%);
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        
+
+        /* Enhanced hero content */
         .ev-hero-content {
             text-align: center;
             max-width: 800px;
             padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
         }
-        
+
         .ev-hero-content h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
-        
+
         .ev-hero-content p {
             font-size: 1.2rem;
             line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
         
         /* Inner Navigation Styles */
@@ -488,8 +493,8 @@
                 </a>
                 <nav class="navigation">
                     <a href="locations.html">Locations</a>
-                    <a href="#">Amenities</a>
-                    <a href="ev-services.html" class="active">EV Services</a>
+                    <a href="evservices.html" class="active">EV Services</a>
+                    <a href="news.html">News & Updates</a>
                     <a href="faqs.html">FAQ</a>
                     <a href="contact.html">Contact</a>
                 </nav>
@@ -576,12 +581,28 @@
                     
                     <!-- Content for Mobile App Integration -->
                 </div>
-                
-                <div id="trip-planning" class="content-section">
-                    <h2 class="section-title">EV Trip Planning Tools</h2>
-                    <p class="section-description">Plan your journey with confidence using our comprehensive route planning tools designed specifically for electric vehicles.</p>
                     
-                    <!-- Content for Trip Planning -->
+                <div id ="trip-planning" class="content-section">
+
+                    <!-- Map Container inside trip-planning -->
+<div id="simple-map" style="width: 100%; height: 500px; border-radius: 15px; margin-bottom: 3rem;"></div>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+                    <script src="tripplanning.js"></script>
+
+
+
+
+
+
+
+
+
+
+
                 </div>
                 
                 <div id="sustainability" class="content-section">
