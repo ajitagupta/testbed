@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - ElectriStay</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #fff;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background-color: #000;
+        }
+
+        /* Container for header content */
+        .header-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .navigation {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .navigation a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .navigation a.active {
+            border-bottom: 2px solid #fff;
+            padding-bottom: 5px;
+        }
+        
+        /* Main content styles */
+        .main-content {
+            margin-top: 120px;
+            padding: 0 4%;
+            max-width: 1600px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 5rem;
+        }
+        
+        /* About Hero Section */
+        .about-hero {
+            position: relative;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 4rem;
+        }
+        
+        .about-hero video {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+        
+        /* About Title Section */
+        .about-title-section {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+        
+        .about-title-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .about-title-section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            margin-bottom: 5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .mission-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .mission-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+        
+        .mission-left {
+            flex: 1;
+        }
+        
+        .mission-right {
+            flex: 2;
+        }
+        
+        .mission-item {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .mission-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .mission-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .mission-item p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        /* Stats Section - Enhanced with catchy background */
+        .stats-section {
+            position: relative;
+            margin: 0 -4vw;
+            height: 500px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5rem;
+        }
+        
+        .stats-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0e2a47, #000000);
+            z-index: 0;
+        }
+        
+        .stats-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%232196F3' fill-opacity='0.1'/%3E%3C/svg%3E");
+            z-index: 0;
+            opacity: 0.8;
+        }
+        
+        .stats-electric-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(90deg, rgba(33, 150, 243, 0.1) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(33, 150, 243, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: 0;
+        }
+        
+        .stats-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(33, 150, 243, 0.3) 0%, rgba(33, 150, 243, 0) 70%);
+            z-index: 0;
+            animation: pulse 5s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                opacity: 0.4;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            100% {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+        
+        .stats-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+        
+        .stats-container {
+            display: flex;
+            gap: 6rem;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .stat-item {
+            text-align: center;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(33, 150, 243, 0.2);
+            backdrop-filter: blur(10px);
+            transform: rotate(45deg);
+            border: 2px solid rgba(33, 150, 243, 0.5);
+            box-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            background-color: rgba(33, 150, 243, 0.3);
+            box-shadow: 0 0 30px rgba(33, 150, 243, 0.7);
+            transform: rotate(45deg) scale(1.05);
+        }
+        
+        .stat-content {
+            transform: rotate(-45deg);
+        }
+        
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(33, 150, 243, 0.7);
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Values Section - with checkmarks like in reference */
+        .values-section {
+            margin-bottom: 5rem;
+            background-color: #111;
+            border-radius: 20px;
+            padding: 4rem;
+        }
+        
+        .values-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .value-item {
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .value-icon {
+            flex-shrink: 0;
+            color: #2196F3;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            margin-top: 0.3rem;
+        }
+        
+        .value-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .value-content p {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: #111;
+            padding: 5rem 4% 2rem;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo-img {
+            height: 30px;
+            width: auto;
+        }
+        
+        .footer-logo span {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-column h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-bottom p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #777;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .mission-content {
+                flex-direction: column;
+            }
+            
+            .stats-container {
+                gap: 3rem;
+            }
+            
+            .stat-item {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .stat-number {
+                font-size: 3rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .about-title-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .navigation {
+                gap: 1rem;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header>
+            <div class="header-container">
+                <a href="index.html" class="logo">
+                    <div class="logo-container">
+                        <img src="./images/logo_E.png" alt="ElectriStay Logo" class="logo-img">
+                        <span>ELECTRISTAY</span>
+                    </div>
+                </a>
+                <nav class="navigation">
+                    <a href="locations.html">Locations</a>
+                    <a href="evservices.html">EV Services</a>
+                    <a href="news.html">News & Updates</a>
+                    <a href="faqs.html">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- About Hero with Video (similar to reference image 1) -->
+            <section class="about-hero">
+                <video autoplay muted loop>
+                    <source src="https://e9wymyiqdedzejdp.public.blob.vercel-storage.com/aboutus4.mp4" type="video/mp4">
+                    <!-- Fallback text for browsers that don't support video -->
+                    Your browser does not support the video tag.
+                </video>
+            </section>
+            
+            <!-- About Title Section -->
+            <section class="about-title-section">
+                <h1>ElectriStay's Vision</h1>
+                <p>Founded by a team of passionate EV enthusiasts and tech entrepreneurs, our journey began with a shared vision to create a haven where travel and sustainability meet. ElectriStay is more than accommodation—it's a movement towards responsible, electrified travel.</p>
+            </section>
+            
+            <!-- Mission Section (similar to reference image 2) -->
+            <section class="mission-section">
+                <div class="mission-content">
+                    <div class="mission-left">
+                        <h2 class="mission-title">Our Mission</h2>
+                    </div>
+                    
+                    <div class="mission-right">
+                        <div class="mission-item">
+                            <h3>Elevating EV Travel Experiences</h3>
+                            <p>We are dedicated to curating extraordinary experiences that inspire, rejuvenate, and connect our guests with the excitement of sustainable travel. Every property in our network is carefully selected to provide seamless charging solutions while offering exceptional comfort and luxury.</p>
+                        </div>
+                        
+                        <div class="mission-item">
+                            <h3>Exceeding Expectations</h3>
+                            <p>From personalized concierge services to attentive hospitality, we are committed to surpassing every expectation. Our team ensures that every aspect of your stay is flawless, from the moment you plug in your vehicle to the moment you check out refreshed and recharged.</p>
+                        </div>
+                        
+                        <div class="mission-item">
+                            <h3>Creating Unforgettable Memories</h3>
+                            <p>We believe that the journey is as important as the destination. By combining premium accommodations with state-of-the-art EV infrastructure, we create unforgettable travel experiences that demonstrate how luxury and sustainability can go hand in hand.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Stats Section - Enhanced with catchy background -->
+            <section class="stats-section">
+                <div class="stats-background"></div>
+                <div class="stats-pattern"></div>
+                <div class="stats-electric-lines"></div>
+                <div class="stats-glow"></div>
+                <div class="stats-overlay">
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-content">
+                                <div class="stat-number">50+</div>
+                                <div class="stat-label">Locations</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <div class="stat-content">
+                                <div class="stat-number">300+</div>
+                                <div class="stat-label">Charging Stations</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <div class="stat-content">
+                                <div class="stat-number">10k+</div>
+                                <div class="stat-label">Happy Guests</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Values Section with checkmarks (inspired by reference image 2) -->
+            <section class="values-section">
+                <h2>Our Core Values</h2>
+                
+                <div class="values-grid">
+                    <div class="value-item">
+                        <div class="value-icon">✓</div>
+                        <div class="value-content">
+                            <h3>Sustainable Innovation</h3>
+                            <p>We constantly seek new ways to reduce our environmental footprint while enhancing the guest experience.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="value-item">
+                        <div class="value-icon">✓</div>
+                        <div class="value-content">
+                            <h3>Seamless Integration</h3>
+                            <p>Electric vehicle charging should be a natural, worry-free part of your travel experience.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="value-item">
+                        <div class="value-icon">✓</div>
+                        <div class="value-content">
+                            <h3>Exceptional Quality</h3>
+                            <p>We maintain the highest standards in both our hospitality services and our charging infrastructure.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="value-item">
+                        <div class="value-icon">✓</div>
+                        <div class="value-content">
+                            <h3>Community Building</h3>
+                            <p>We're creating a community of forward-thinking travelers who share our vision for clean mobility.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="value-item">
+                        <div class="value-icon">✓</div>
+                        <div class="value-content">
+                            <h3>Transparency</h3>
+                            <p>We believe in clear communication about our services, pricing, and environmental impact.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="value-item">
+                        <div class="value-icon">✓</div>
+                        <div class="value-content">
+                            <h3>Education</h3>
+                            <p>We're committed to helping travelers understand and embrace the benefits of electric mobility.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="./images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
+                    <span>ELECTRISTAY</span>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="aboutus.html">About Us</a></li>
+                            <li><a href="#">Our Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Properties</h4>
+                        <ul>
+                            <li><a href="#">Urban Hotels</a></li>
+                            <li><a href="#">Beach Resorts</a></li>
+                            <li><a href="#">Mountain Lodges</a></li>
+                            <li><a href="#">Charging Map</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">EV Guides</a></li>
+                            <li><a href="#">Partner Program</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ElectriStay. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
