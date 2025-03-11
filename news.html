@@ -33,10 +33,6 @@
             left: 0;
             width: 100%;
             height: 80px;
-            padding: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             z-index: 100;
             background-color: #000;
         }
@@ -50,6 +46,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 100%;
         }
         
         .logo-container {
@@ -91,6 +88,100 @@
         .navigation a.active {
             border-bottom: 2px solid #fff;
             padding-bottom: 5px;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 200;
+        }
+        
+        .hamburger-menu span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger-menu.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-menu.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        /* Mobile Navigation Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: #111;
+            z-index: 150;
+            padding: 100px 2rem 2rem;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .mobile-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            transition: color 0.3s ease;
+        }
+        
+        .mobile-nav a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .mobile-nav a.active {
+            color: #2196F3;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 140;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .overlay.active {
+            display: block;
+            opacity: 1;
         }
         
         /* Main content styles */
@@ -189,12 +280,6 @@
             grid-column: span 2;
             display: flex;
             flex-direction: column;
-        }
-        
-        @media (max-width: 768px) {
-            .featured-news {
-                grid-column: span 1;
-            }
         }
         
         .news-image {
@@ -469,13 +554,62 @@
         }
         
         /* Responsive styles */
+        @media (max-width: 992px) {
+            .featured-news {
+                grid-column: span 1;
+            }
+            
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
         @media (max-width: 768px) {
+            .main-content {
+                margin-top: 100px;
+            }
+            
+            .navigation {
+                display: none;
+            }
+            
+            .hamburger-menu {
+                display: flex;
+            }
+            
+            .news-hero {
+                height: 350px;
+            }
+            
+            .news-hero-content {
+                padding: 1.5rem;
+                width: 90%;
+            }
+            
             .news-hero-content h1 {
                 font-size: 2.5rem;
             }
             
             .news-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .news-filter {
+                overflow-x: auto;
+                padding-bottom: 1rem;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .filter-button {
+                white-space: nowrap;
+                padding: 0.8rem 1.2rem;
             }
             
             .newsletter-form {
@@ -488,6 +622,84 @@
             
             .featured-news .news-title {
                 font-size: 1.5rem;
+            }
+            
+            .footer-columns {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .news-hero {
+                height: 300px;
+                margin-bottom: 2rem;
+            }
+            
+            .news-hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .news-hero-content p {
+                font-size: 1rem;
+            }
+            
+            .news-card {
+                margin-bottom: 1rem;
+            }
+            
+            .newsletter-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .newsletter-container h2 {
+                font-size: 1.5rem;
+            }
+            
+            .newsletter-input, 
+            .newsletter-button {
+                padding: 0.8rem 1rem;
+            }
+            
+            .pagination {
+                gap: 0.3rem;
+            }
+            
+            .page-number {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .news-hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .news-title {
+                font-size: 1.3rem;
+            }
+            
+            .news-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+            
+            .news-image {
+                height: 180px;
+            }
+            
+            .featured-news .news-image {
+                height: 180px;
+            }
+            
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-content {
+                padding: 0 3%;
             }
         }
     </style>
@@ -510,8 +722,29 @@
                     <a href="faqs.html">FAQ</a>
                     <a href="contact.html">Contact</a>
                 </nav>
+                
+                <!-- Hamburger Menu -->
+                <div class="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </header>
+        
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-menu">
+            <nav class="mobile-nav">
+                <a href="locations.html">Locations</a>
+                <a href="evservices.html">EV Services</a>
+                <a href="news.html" class="active">News & Updates</a>
+                <a href="faqs.html">FAQ</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+        
+        <!-- Overlay -->
+        <div class="overlay"></div>
         
         <!-- Main Content -->
         <main class="main-content">
@@ -677,7 +910,7 @@
                     <div class="footer-column">
                         <h4>Company</h4>
                         <ul>
-                            <li><a href="#">About Us</a></li>
+                            <li><a href="aboutus.html">About Us</a></li>
                             <li><a href="ourteam.html">Our Team</a></li>
                             <li><a href="#">Careers</a></li>
                             <li><a href="#">Press</a></li>
@@ -729,6 +962,36 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Hamburger menu toggle
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.overlay');
+            const body = document.body;
+            
+            hamburgerMenu.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                body.style.overflow = body.style.overflow === 'hidden' ? '' : 'hidden';
+            });
+            
+            overlay.addEventListener('click', function() {
+                hamburgerMenu.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                this.classList.remove('active');
+                body.style.overflow = '';
+            });
+            
+            // Close mobile menu on window resize if wider than mobile breakpoint
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
+                    hamburgerMenu.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    body.style.overflow = '';
+                }
+            });
+            
             // Filter buttons
             const filterButtons = document.querySelectorAll('.filter-button');
             
