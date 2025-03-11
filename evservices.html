@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ElectriStay - EV Services</title>
     <link rel="icon" type="image/x-icon" href="./icons/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -71,6 +72,7 @@
             letter-spacing: 1px;
         }
         
+        /* Desktop Navigation */
         .navigation {
             display: flex;
             gap: 2rem;
@@ -91,6 +93,102 @@
         .navigation a.active {
             border-bottom: 2px solid #fff;
             padding-bottom: 5px;
+        }
+        
+        /* Hamburger menu icon */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 200;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background-color: #111;
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            padding: 100px 30px 30px;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .mobile-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            padding: 10px 0;
+            transition: color 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-menu a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .mobile-menu a.active {
+            color: #2196F3;
+        }
+        
+        /* When menu is open */
+        body.menu-open {
+            overflow: hidden;
+        }
+        
+        body.menu-open .mobile-menu {
+            right: 0;
+        }
+        
+        body.menu-open .menu-toggle span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        body.menu-open .menu-toggle span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        body.menu-open .menu-toggle span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        /* Overlay when menu is open */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 98;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        body.menu-open .menu-overlay {
+            opacity: 1;
+            visibility: visible;
         }
         
         /* Main content styles */
@@ -248,79 +346,228 @@
             line-height: 1.6;
         }
         
-        /* Store Section */
-        .store-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .product-card {
-            background-color: #222;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .product-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
-        
-        .product-content {
-            padding: 1.5rem;
-        }
-        
-        .product-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .product-price {
-            color: #2196F3;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .product-description {
-            color: #aaa;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-        
-        .add-to-cart {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background-color: #2196F3;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        .add-to-cart:hover {
-            background-color: #0b7dda;
-        }
-        
+/* Updated CSS for the Store Section */
+.store-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background-color: #222;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+}
+
+.product-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.product-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.product-price {
+    color: #2196F3;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.product-description {
+    color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.add-to-cart {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: #2196F3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.add-to-cart:hover {
+    background-color: #0b7dda;
+}
+
+/* Testimonials Section Styling */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.testimonial-card {
+    background-color: #222;
+    border-radius: 15px;
+    padding: 2rem;
+    position: relative;
+}
+
+.testimonial-quote {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #ccc;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-quote::before {
+    content: '"';
+    font-size: 3rem;
+    color: rgba(33, 150, 243, 0.2);
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-family: Georgia, serif;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+}
+
+.author-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    overflow: hidden;
+}
+
+.author-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.author-details {
+    flex: 1;
+}
+
+.author-name {
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.2rem;
+}
+
+.author-vehicle {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.author-rating {
+    color: #ffc107;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+/* Responsive styles update */
+@media (max-width: 992px) {
+    .store-grid, 
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .store-grid, 
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-card {
+        max-width: 100%;
+    }
+    
+    .testimonial-card {
+        padding: 1.5rem;
+    }
+    
+    .testimonial-quote {
+        font-size: 1rem;
+    }
+    
+    /* Fix for content sections display */
+    .content-section {
+        display: none;
+    }
+    
+    .content-section.active {
+        display: block !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .author-image {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .product-image {
+        height: 180px;
+    }
+    
+    .testimonial-quote::before {
+        font-size: 2.5rem;
+    }
+    
+    .add-to-cart {
+        padding: 0.7rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-content {
+        padding: 1.2rem;
+    }
+    
+    .product-title {
+        font-size: 1.1rem;
+    }
+    
+    .testimonial-card {
+        padding: 1.2rem;
+    }
+}
         /* FAQ Accordion */
         .faq-item {
             border-bottom: 1px solid #333;
@@ -458,16 +705,30 @@
         }
         
         @media (max-width: 768px) {
+            /* Show hamburger menu, hide desktop nav */
+            .navigation {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
             .inner-nav {
                 flex-direction: column;
             }
             
             .inner-nav-item {
                 border-bottom: 1px solid #333;
+                padding: 1rem 1.5rem;
             }
             
             .inner-nav-item.active:after {
                 height: 0;
+            }
+            
+            .inner-nav-item.active {
+                border-left: 4px solid #2196F3;
             }
             
             .feature-cards,
@@ -477,6 +738,142 @@
             
             .ev-hero-content h1 {
                 font-size: 2.5rem;
+            }
+            
+            .ev-hero-content p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-description {
+                font-size: 1rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
+            
+            .ev-hero {
+                height: 350px;
+            }
+            
+            .ev-hero-content {
+                padding: 1.5rem;
+                max-width: 90%;
+            }
+            
+            #journey-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            #journey-form input, 
+            #journey-form button,
+            #journey-form select {
+                width: 100% !important;
+                margin-bottom: 10px;
+            }
+            
+            #map {
+                height: 350px !important;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-columns {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .ev-hero {
+                height: 300px;
+                border-radius: 15px;
+            }
+            
+            .ev-hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .ev-hero-content p {
+                font-size: 0.9rem;
+            }
+            
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            
+            .feature-title {
+                font-size: 1.2rem;
+            }
+            
+            .feature-description {
+                font-size: 0.9rem;
+            }
+            
+            .inner-nav-container {
+                border-radius: 10px;
+            }
+            
+            .faq-question {
+                padding: 1.2rem 0;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+            
+            .ev-hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .main-content {
+                margin-top: 100px;
+                padding: 0 3%;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .add-to-cart {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .ev-hero {
+                height: 280px;
+            }
+            
+            .legend {
+                bottom: 10px !important;
+                right: 10px !important;
+                padding: 8px !important;
+                font-size: 0.8rem !important;
+            }
+            
+            .legend h4 {
+                font-size: 14px !important;
+            }
+            
+            .legend p {
+                font-size: 12px !important;
             }
         }
     </style>
@@ -492,6 +889,7 @@
                         <span>ELECTRISTAY</span>
                     </div>
                 </a>
+                <!-- Desktop Navigation -->
                 <nav class="navigation">
                     <a href="locations.html">Locations</a>
                     <a href="evservices.html" class="active">EV Services</a>
@@ -499,8 +897,27 @@
                     <a href="faqs.html">FAQ</a>
                     <a href="contact.html">Contact</a>
                 </nav>
+                
+                <!-- Hamburger Menu Icon -->
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </header>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <a href="locations.html">Locations</a>
+            <a href="evservices.html" class="active">EV Services</a>
+            <a href="news.html">News & Updates</a>
+            <a href="faqs.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        
+        <!-- Menu Overlay -->
+        <div class="menu-overlay"></div>
         
         <!-- Main Content -->
         <main class="main-content">
@@ -585,104 +1002,102 @@
                     
                 <div id ="trip-planning" class="content-section">
 
-<!-- Trip Planning Content Section -->
-<h2 class="section-title">EV Trip Planning Tools</h2>
-<p class="section-description">Plan your journey with confidence using our comprehensive route planning tools designed specifically for electric vehicles.</p>
+                    <!-- Trip Planning Content Section -->
+                    <h2 class="section-title">EV Trip Planning Tools</h2>
+                    <p class="section-description">Plan your journey with confidence using our comprehensive route planning tools designed specifically for electric vehicles.</p>
 
-<!-- Search/Journey Planner Section -->
-<section id="search" style="background-color: #111; padding: 3rem 1rem; text-align: center; color: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 15px; margin-bottom: 3rem;">
-    <h2 style="font-size: 2.2rem; margin-bottom: 20px; color: #fff; font-weight: bold; letter-spacing: 1px;">Plan Your Journey with Charging Stations</h2>
-    
-    <form id="journey-form" style="display: flex; justify-content: center; align-items: center; background-color: #222; padding: 1.5rem; border-radius: 15px; max-width: 1200px; margin: 2rem auto; gap: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); flex-wrap: wrap;">
-        <input type="text" id="source" placeholder="Enter starting location" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #333; font-size: 1rem; color: #eee; width: 190px;">
-        
-        <input type="text" id="destination" placeholder="Enter destination" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #333; font-size: 1rem; color: #eee; width: 150px;">
-        
-        <input type="number" id="max-distance" placeholder="Max distance (km)" min="1" value="300" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #333; font-size: 1rem; color: #eee; width: 140px;">
-        
-        <button type="button" onclick="toggleConfiguration()" style="padding: 0.85rem 1.5rem; background-color: #2196F3; color: #fff; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: background-color 0.3s ease, transform 0.2s ease;">⚙️ Configuration</button>
-        
-        <div id="configuration-section" class="configuration-section" style="display: none; padding: 15px; background-color: #333; border-radius: 12px; margin-top: 15px; width: 100%; max-width: 600px; border: 1px solid rgba(33, 150, 243, 0.2);">
-            <input type="number" id="charge_difference" placeholder="Charge Difference (%)" min="1" max="100" value="20" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #444; font-size: 1rem; color: #eee; width: 100%; margin-bottom: 10px;">
-            
-            <select id="car_model" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #444; font-size: 1rem; color: #eee; width: 100%; margin-bottom: 10px;">
-                <option value="">Select Car Model</option>
-                <option value="Tesla Model 3" selected>Tesla Model 3</option>
-                <option value="Renault Megane électrique">Renault Megane électrique</option>
-                <option value="BMW i4">BMW i4</option>
-                <option value="Volkswagen ID.4">Volkswagen ID.4</option>
-                <option value="Hyundai Kona Electric">Hyundai Kona Electric</option>
-                <option value="Nissan Leaf">Nissan Leaf</option>
-                <option value="Porsche Taycan">Porsche Taycan</option>
-                <option value="Mercedes EQC">Mercedes EQC</option>
-                <option value="Audi e-tron">Audi e-tron</option>
-                <option value="Ford Mustang Mach-E">Ford Mustang Mach-E</option>
-                <option value="Kia EV6">Kia EV6</option>
-                <option value="Polestar 2">Polestar 2</option>
-            </select>
-            
-            <input type="number" id="battery_capacity" placeholder="Battery Capacity (kWh)" min="1" value="75" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #444; font-size: 1rem; color: #eee; width: 100%; margin-bottom: 10px;">
-            
-            <input type="number" id="efficiency" placeholder="Efficiency (kWh/100km)" min="0.1" step="0.1" value="16.8" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #444; font-size: 1rem; color: #eee; width: 100%; margin-bottom: 10px;">
-        </div>
+                    <!-- Search/Journey Planner Section -->
+                    <section id="search" style="background-color: #111; padding: 3rem 1rem; text-align: center; color: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 15px; margin-bottom: 3rem;">
+                        <h2 style="font-size: 2.2rem; margin-bottom: 20px; color: #fff; font-weight: bold; letter-spacing: 1px;">Plan Your Journey with Charging Stations</h2>
+                        
+                        <form id="journey-form" style="display: flex; justify-content: center; align-items: center; background-color: #222; padding: 1.5rem; border-radius: 15px; max-width: 1200px; margin: 2rem auto; gap: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); flex-wrap: wrap;">
+                            <input type="text" id="source" placeholder="Enter starting location" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #333; font-size: 1rem; color: #eee; width: 190px;">
+                            
+                            <input type="text" id="destination" placeholder="Enter destination" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #333; font-size: 1rem; color: #eee; width: 150px;">
+                            
+                            <input type="number" id="max-distance" placeholder="Max distance (km)" min="1" value="300" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #333; font-size: 1rem; color: #eee; width: 140px;">
+                            
+                            <button type="button" onclick="toggleConfiguration()" style="padding: 0.85rem 1.5rem; background-color: #2196F3; color: #fff; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: background-color 0.3s ease, transform 0.2s ease;">⚙️ Configuration</button>
+                            
+                            <div id="configuration-section" class="configuration-section" style="display: none; padding: 15px; background-color: #333; border-radius: 12px; margin-top: 15px; width: 100%; max-width: 600px; border: 1px solid rgba(33, 150, 243, 0.2);">
+                                <input type="number" id="charge_difference" placeholder="Charge Difference (%)" min="1" max="100" value="20" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #444; font-size: 1rem; color: #eee; width: 100%; margin-bottom: 10px;">
+                                
+                                <select id="car_model" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #444; font-size: 1rem; color: #eee; width: 100%; margin-bottom: 10px;">
+                                    <option value="">Select Car Model</option>
+                                    <option value="Tesla Model 3" selected>Tesla Model 3</option>
+                                    <option value="Renault Megane électrique">Renault Megane électrique</option>
+                                    <option value="BMW i4">BMW i4</option>
+                                    <option value="Volkswagen ID.4">Volkswagen ID.4</option>
+                                    <option value="Hyundai Kona Electric">Hyundai Kona Electric</option>
+                                    <option value="Nissan Leaf">Nissan Leaf</option>
+                                    <option value="Porsche Taycan">Porsche Taycan</option>
+                                    <option value="Mercedes EQC">Mercedes EQC</option>
+                                    <option value="Audi e-tron">Audi e-tron</option>
+                                    <option value="Ford Mustang Mach-E">Ford Mustang Mach-E</option>
+                                    <option value="Kia EV6">Kia EV6</option>
+                                    <option value="Polestar 2">Polestar 2</option>
+                                </select>
+                                
+                                <input type="number" id="battery_capacity" placeholder="Battery Capacity (kWh)" min="1" value="75" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #444; font-size: 1rem; color: #eee; width: 100%; margin-bottom: 10px;">
+                                
+                                <input type="number" id="efficiency" placeholder="Efficiency (kWh/100km)" min="0.1" step="0.1" value="16.8" required style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(33, 150, 243, 0.3); background-color: #444; font-size: 1rem; color: #eee; width: 100%; margin-bottom: 10px;">
+                            </div>
 
-        <button type="button" id="find-route-button" onclick="fetchChargingStations()" style="padding: 0.85rem 1.5rem; background-color: #2196F3; color: #fff; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: background-color 0.3s ease, transform 0.2s ease;">Find Route</button>
-    </form>
-</section>
+                            <button type="button" id="find-route-button" onclick="fetchChargingStations()" style="padding: 0.85rem 1.5rem; background-color: #2196F3; color: #fff; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: background-color 0.3s ease, transform 0.2s ease;">Find Route</button>
+                        </form>
+                    </section>
 
-<!-- Map Container with proper width handling -->
-<div id="map-container" style="width: 100%; position: relative; margin-bottom: 3rem; border-radius: 15px; overflow: hidden;">
-    <!-- The map div itself -->
-    <div id="map" style="width: 100%; height: 500px; border: 2px solid #333; border-radius: 15px; position: relative;"></div>
-    
-    <!-- Legend for the map -->
-    <div class="legend" style="position: absolute; bottom: 40px; right: 10px; background: rgba(0, 0, 0, 0.85); padding: 12px; border-radius: 6px; z-index: 1000; border: 1px solid #2196F3; text-align: left; color: white; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);">
-        <h4 style="margin-bottom: 10px; color: #fff; font-size: 16px; font-weight: bold;">Legend</h4>
-        <p style="display: flex; align-items: center; gap: 10px; margin: 5px 0; color: #e0e0e0; font-size: 14px;">
-            <img src="./icons/restaurant.png" alt="Dining Available" style="width: 20px; height: 20px;"> Charging Station with Dining
-        </p>
-        <p style="display: flex; align-items: center; gap: 10px; margin: 5px 0; color: #e0e0e0; font-size: 14px;">
-            <img src="./icons/charging.png" alt="Regular Charging" style="width: 20px; height: 20px;"> Charging Station
-        </p>
-    </div>
-</div>
+                    <!-- Map Container with proper width handling -->
+                    <div id="map-container" style="width: 100%; position: relative; margin-bottom: 3rem; border-radius: 15px; overflow: hidden;">
+                        <!-- The map div itself -->
+                        <div id="map" style="width: 100%; height: 500px; border: 2px solid #333; border-radius: 15px; position: relative;"></div>
+                        
+                        <!-- Legend for the map -->
+                        <div class="legend" style="position: absolute; bottom: 40px; right: 10px; background: rgba(0, 0, 0, 0.85); padding: 12px; border-radius: 6px; z-index: 1000; border: 1px solid #2196F3; text-align: left; color: white; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);">
+                            <h4 style="margin-bottom: 10px; color: #fff; font-size: 16px; font-weight: bold;">Legend</h4>
+                            <p style="display: flex; align-items: center; gap: 10px; margin: 5px 0; color: #e0e0e0; font-size: 14px;">
+                                <img src="./icons/restaurant.png" alt="Dining Available" style="width: 20px; height: 20px;"> Charging Station with Dining
+                            </p>
+                            <p style="display: flex; align-items: center; gap: 10px; margin: 5px 0; color: #e0e0e0; font-size: 14px;">
+                                <img src="./icons/charging.png" alt="Regular Charging" style="width: 20px; height: 20px;"> Charging Station
+                            </p>
+                        </div>
+                    </div>
 
-<!-- Feature Cards Section -->
-<div class="feature-cards">
-    <div class="feature-card">
-        <div class="feature-icon">🗺️</div>
-        <h3 class="feature-title">Interactive Charging Map</h3>
-        <p class="feature-description">Our interactive map displays all ElectriStay properties along with detailed information about charging capabilities, nearby attractions, and real-time availability.</p>
-    </div>
-    
-    <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3 class="feature-title">Range Calculator</h3>
-        <p class="feature-description">Input your vehicle model, battery capacity, and driving conditions to get accurate range estimates. Our tool accounts for elevation changes, climate control usage, and driving speed.</p>
-    </div>
-    
-    <div class="feature-card">
-        <div class="feature-icon">⏱️</div>
-        <h3 class="feature-title">Charging Time Estimator</h3>
-        <p class="feature-description">Calculate expected charging times based on your vehicle's specifications and the available charging options at each location. Plan meal breaks, overnight stays, or quick top-ups.</p>
-    </div>
-    
-    <div class="feature-card">
-        <div class="feature-icon">💰</div>
-        <h3 class="feature-title">Cost Calculator</h3>
-        <p class="feature-description">Estimate the total cost of your journey, including charging expenses and accommodation. Compare different routes and charging strategies to find the most economical option.</p>
-    </div>
-</div>
+                    <!-- Feature Cards Section -->
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <div class="feature-icon">🗺️</div>
+                            <h3 class="feature-title">Interactive Charging Map</h3>
+                            <p class="feature-description">Our interactive map displays all ElectriStay properties along with detailed information about charging capabilities, nearby attractions, and real-time availability.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3 class="feature-title">Range Calculator</h3>
+                            <p class="feature-description">Input your vehicle model, battery capacity, and driving conditions to get accurate range estimates. Our tool accounts for elevation changes, climate control usage, and driving speed.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">⏱️</div>
+                            <h3 class="feature-title">Charging Time Estimator</h3>
+                            <p class="feature-description">Calculate expected charging times based on your vehicle's specifications and the available charging options at each location. Plan meal breaks, overnight stays, or quick top-ups.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">💰</div>
+                            <h3 class="feature-title">Cost Calculator</h3>
+                            <p class="feature-description">Estimate the total cost of your journey, including charging expenses and accommodation. Compare different routes and charging strategies to find the most economical option.</p>
+                        </div>
+                    </div>
 
-<!-- Add the required libraries and scripts -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
-<script src="tripplanning.js"></script>
-
-
+                    <!-- Add the required libraries and scripts -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+                    <script src="tripplanning.js"></script>
 
                 </div>
-                
+
                 <div id="sustainability" class="content-section">
                     <h2 class="section-title">Sustainable Energy Features</h2>
                     <p class="section-description">ElectriStay is committed to environmental responsibility through renewable energy integration and carbon offset programs.</p>
@@ -755,219 +1170,331 @@
                         </div>
                     </div>
                 </div>
-                
-                <div id="faq" class="content-section">
-                    <h2 class="section-title">EV Services FAQ</h2>
-                    <p class="section-description">Find answers to frequently asked questions about our electric vehicle services.</p>
-                    
-                    <div class="faq-container">
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <span>How do I reserve a charging station for my stay?</span>
-                                <span class="faq-toggle">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>Charging is automatically included with your reservation. During booking, you'll be asked about your vehicle type and charging preferences. Our system will reserve appropriate charging time slots based on your stay duration and needs.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <span>What if all charging stations are in use when I need to charge?</span>
-                                <span class="faq-toggle">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>Our smart scheduling system prevents this issue by allocating charging time slots based on guest needs. In rare peak situations, our concierge will ensure you get access to charging within your requested timeframe or offer alternative solutions.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <span>Is there an additional cost for charging my vehicle?</span>
-                                <span class="faq-toggle">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>Standard Level 2 charging is included at no additional cost up to 50 kWh per day. DC fast charging incurs a nominal fee to cover higher electricity costs. Exact rates are displayed during booking and on our mobile app.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="testimonials" class="content-section">
-                    <h2 class="section-title">Testimonials</h2>
-                    <p class="section-description">Hear from electric vehicle owners who have experienced our comprehensive charging solutions.</p>
-                    
-                    <!-- Content for Testimonials -->
-                </div>
-                
-                <div id="store" class="content-section">
-                    <h2 class="section-title">EV Store</h2>
-                    <p class="section-description">Shop for essential electric vehicle accessories, charging equipment, and ElectriStay branded merchandise.</p>
-                    
-                    <div class="store-grid">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://placehold.co/400x300/222/fff?text=Portable+Charger" alt="Portable EV Charger">
-                            </div>
-                            <div class="product-content">
-                                <h3 class="product-title">ElectriStay Portable Charger</h3>
-                                <div class="product-price">$249.99</div>
-                                <p class="product-description">Compact Level 1 portable charger with multiple adapters, perfect for emergency charging on the go.</p>
-                                <button class="add-to-cart">Add to Cart</button>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://placehold.co/400x300/222/fff?text=Adapter+Set" alt="Charging Adapter Set">
-                            </div>
-                            <div class="product-content">
-                                <h3 class="product-title">Universal Adapter Set</h3>
-                                <div class="product-price">$99.99</div>
-                                <p class="product-description">Complete set of charging adapters to ensure compatibility with any charging station during your travels.</p>
-                                <button class="add-to-cart">Add to Cart</button>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://placehold.co/400x300/222/fff?text=Cable+Organizer" alt="Charging Cable Organizer">
-                            </div>
-                            <div class="product-content">
-                                <h3 class="product-title">Cable Management System</h3>
-                                <div class="product-price">$39.99</div>
-                                <p class="product-description">Premium cable organizer to keep your charging cables tidy and protected during travel.</p>
-                                <button class="add-to-cart">Add to Cart</button>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://placehold.co/400x300/222/fff?text=ElectriStay+Hoodie" alt="ElectriStay Branded Hoodie">
-                            </div>
-                            <div class="product-content">
-                                <h3 class="product-title">ElectriStay EV Enthusiast Hoodie</h3>
-                                <div class="product-price">$59.99</div>
-                                <p class="product-description">Comfortable eco-friendly hoodie made from recycled materials with our signature electric vehicle design.</p>
-                                <button class="add-to-cart">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-        
-        <!-- Footer Section -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="./images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
-                    <span>ELECTRISTAY</span>
-                </div>
-                
-                <div class="footer-columns">
-                    <div class="footer-column">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="aboutus.html">About Us</a></li>
-                            <li><a href="ourteam.html">Our Team</a></li>
-                            <li><a href="#">Careers</a></li>
-                            <li><a href="#">Press</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-column">
-                        <h4>Properties</h4>
-                        <ul>
-                            <li><a href="#">Urban Hotels</a></li>
-                            <li><a href="#">Beach Resorts</a></li>
-                            <li><a href="#">Mountain Lodges</a></li>
-                            <li><a href="#">Charging Map</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-column">
-                        <h4>Resources</h4>
-                        <ul>
-                            <li><a href="#">Help Center</a></li>
-                            <li><a href="#">EV Guides</a></li>
-                            <li><a href="#">Partner Program</a></li>
-                            <li><a href="#">Blog</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-column">
-                        <h4>Connect</h4>
-                        <ul>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Twitter</a></li>
-                            <li><a href="#">Instagram</a></li>
-                            <li><a href="#">LinkedIn</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 ElectriStay. All rights reserved.</p>
-                <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Cookie Policy</a>
-                </div>
-            </div>
-        </footer>
-    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Inner Navigation
-            const navItems = document.querySelectorAll('.inner-nav-item');
-            const contentSections = document.querySelectorAll('.content-section');
+        <div id="faq" class="content-section">
+            <h2 class="section-title">EV Services FAQ</h2>
+            <p class="section-description">Find answers to frequently asked questions about our electric vehicle services.</p>
             
-            navItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Remove active class from all items
-                    navItems.forEach(nav => nav.classList.remove('active'));
-                    contentSections.forEach(section => section.classList.remove('active'));
-                    
-                    // Add active class to clicked item
-                    this.classList.add('active');
-                    
-                    // Show corresponding content section
-                    const sectionId = this.getAttribute('data-section');
-                    document.getElementById(sectionId).classList.add('active');
-                });
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I reserve a charging station for my stay?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Charging is automatically included with your reservation. During booking, you'll be asked about your vehicle type and charging preferences. Our system will reserve appropriate charging time slots based on your stay duration and needs.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What if all charging stations are in use when I need to charge?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our smart scheduling system prevents this issue by allocating charging time slots based on guest needs. In rare peak situations, our concierge will ensure you get access to charging within your requested timeframe or offer alternative solutions.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is there an additional cost for charging my vehicle?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Standard Level 2 charging is included at no additional cost up to 50 kWh per day. DC fast charging incurs a nominal fee to cover higher electricity costs. Exact rates are displayed during booking and on our mobile app.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Updated Testimonials Section HTML -->
+        <div id="testimonials" class="content-section">
+            <h2 class="section-title">Testimonials</h2>
+            <p class="section-description">Hear from electric vehicle owners who have experienced our comprehensive charging solutions.</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">ElectriStay completely changed how I plan road trips with my EV. Their charging infrastructure is top-notch, and the mobile app makes everything so simple. I could monitor charging remotely while enjoying dinner at the hotel restaurant.</p>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placehold.co/100x100/333/fff?text=JD" alt="John D.">
+                        </div>
+                        <div class="author-details">
+                            <div class="author-name">John D.</div>
+                            <div class="author-vehicle">Tesla Model Y Owner</div>
+                            <div class="author-rating">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">I was worried about finding reliable charging during our cross-country trip, but ElectriStay's network was perfectly placed along our route. The trip planning tool was incredibly accurate with range predictions.</p>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placehold.co/100x100/333/fff?text=SM" alt="Sarah M.">
+                        </div>
+                        <div class="author-details">
+                            <div class="author-name">Sarah M.</div>
+                            <div class="author-vehicle">Hyundai Ioniq 5 Owner</div>
+                            <div class="author-rating">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">The solar-powered charging at the Malibu location was a game-changer. I love knowing that my vehicle is being charged with renewable energy, and the real-time sustainability metrics were fascinating to watch.</p>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placehold.co/100x100/333/fff?text=RL" alt="Robert L.">
+                        </div>
+                        <div class="author-details">
+                            <div class="author-name">Robert L.</div>
+                            <div class="author-vehicle">BMW i4 Owner</div>
+                            <div class="author-rating">★★★★☆</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="store" class="content-section">
+            <h2 class="section-title">EV Store</h2>
+            <p class="section-description">Shop for essential electric vehicle accessories, charging equipment, and ElectriStay branded merchandise.</p>
+            
+            <div class="store-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://placehold.co/400x300/222/fff?text=Portable+Charger" alt="Portable EV Charger">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">ElectriStay Portable Charger</h3>
+                        <div class="product-price">$249.99</div>
+                        <p class="product-description">Compact Level 1 portable charger with multiple adapters, perfect for emergency charging on the go.</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://placehold.co/400x300/222/fff?text=Adapter+Set" alt="Charging Adapter Set">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Universal Adapter Set</h3>
+                        <div class="product-price">$99.99</div>
+                        <p class="product-description">Complete set of charging adapters to ensure compatibility with any charging station during your travels.</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://placehold.co/400x300/222/fff?text=Cable+Organizer" alt="Charging Cable Organizer">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Cable Management System</h3>
+                        <div class="product-price">$39.99</div>
+                        <p class="product-description">Premium cable organizer to keep your charging cables tidy and protected during travel.</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://placehold.co/400x300/222/fff?text=ElectriStay+Hoodie" alt="ElectriStay Branded Hoodie">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">ElectriStay EV Enthusiast Hoodie</h3>
+                        <div class="product-price">$59.99</div>
+                        <p class="product-description">Comfortable eco-friendly hoodie made from recycled materials with our signature electric vehicle design.</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer Section -->
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-logo">
+    <img src="./images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
+    <span>ELECTRISTAY</span>
+</div>
+
+<div class="footer-columns">
+    <div class="footer-column">
+        <h4>Company</h4>
+        <ul>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="ourteam.html">Our Team</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+        </ul>
+    </div>
+    
+    <div class="footer-column">
+        <h4>Properties</h4>
+        <ul>
+            <li><a href="#">Urban Hotels</a></li>
+            <li><a href="#">Beach Resorts</a></li>
+            <li><a href="#">Mountain Lodges</a></li>
+            <li><a href="#">Charging Map</a></li>
+        </ul>
+    </div>
+    
+    <div class="footer-column">
+        <h4>Resources</h4>
+        <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">EV Guides</a></li>
+            <li><a href="#">Partner Program</a></li>
+            <li><a href="#">Blog</a></li>
+        </ul>
+    </div>
+    
+    <div class="footer-column">
+        <h4>Connect</h4>
+        <ul>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">LinkedIn</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+<div class="footer-bottom">
+<p>&copy; 2025 ElectriStay. All rights reserved.</p>
+<div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Cookie Policy</a>
+</div>
+</div>
+</footer>
+</div>
+
+<script>
+// Fixed JavaScript for proper section display and mobile responsiveness
+document.addEventListener('DOMContentLoaded', function() {
+    // Inner Navigation
+    const navItems = document.querySelectorAll('.inner-nav-item');
+    const contentSections = document.querySelectorAll('.content-section');
+    
+    // Force all sections to have initial display style
+    contentSections.forEach(section => {
+        if (!section.classList.contains('active')) {
+            section.style.display = 'none';
+        } else {
+            section.style.display = 'block';
+        }
+    });
+    
+    navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all items
+            navItems.forEach(nav => nav.classList.remove('active'));
+            
+            // Hide all content sections with inline style
+            contentSections.forEach(section => {
+                section.classList.remove('active');
+                section.style.display = 'none';
             });
             
-            // FAQ Accordion
-            const faqQuestions = document.querySelectorAll('.faq-question');
+            // Add active class to clicked item
+            this.classList.add('active');
             
-            faqQuestions.forEach(question => {
-                question.addEventListener('click', function() {
-                    const answer = this.nextElementSibling;
-                    const toggle = this.querySelector('.faq-toggle');
-                    
-                    // Toggle answer visibility
-                    answer.classList.toggle('active');
-                    
-                    // Change the toggle symbol
-                    toggle.textContent = answer.classList.contains('active') ? '−' : '+';
-                });
-            });
-            
-            // Add to Cart functionality
-            const addToCartButtons = document.querySelectorAll('.add-to-cart');
-            
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const productTitle = this.parentElement.querySelector('.product-title').textContent;
-                    alert(`${productTitle} has been added to your cart!`);
-                });
-            });
+            // Show corresponding content section with inline style
+            const sectionId = this.getAttribute('data-section');
+            const activeSection = document.getElementById(sectionId);
+            activeSection.classList.add('active');
+            activeSection.style.display = 'block';
         });
-    </script>
+    });
+    
+    // FAQ Accordion
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+            const answer = this.nextElementSibling;
+            const toggle = this.querySelector('.faq-toggle');
+            
+            // Toggle answer visibility
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                answer.classList.remove('active');
+                toggle.textContent = '+';
+            } else {
+                answer.style.display = 'block';
+                answer.classList.add('active');
+                toggle.textContent = '−';
+            }
+        });
+    });
+    
+    // Add to Cart functionality
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productTitle = this.parentElement.querySelector('.product-title').textContent;
+            alert(`${productTitle} has been added to your cart!`);
+        });
+    });
+    
+    // Mobile menu functionality
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    const body = document.body;
+    
+    // Toggle menu open/close
+    menuToggle.addEventListener('click', function() {
+        body.classList.toggle('menu-open');
+    });
+    
+    // Close menu when clicking overlay
+    menuOverlay.addEventListener('click', function() {
+        body.classList.remove('menu-open');
+    });
+    
+    // Close menu when clicking a menu item
+    const menuItems = document.querySelectorAll('.mobile-menu a');
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            body.classList.remove('menu-open');
+        });
+    });
+    
+    // Close menu on window resize (if width becomes larger than mobile breakpoint)
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && body.classList.contains('menu-open')) {
+            body.classList.remove('menu-open');
+        }
+    });
+    
+    // Initialize FAQ answers with display none
+    document.querySelectorAll('.faq-answer').forEach(answer => {
+        answer.style.display = 'none';
+    });
+});
+
+// Function to toggle configuration section
+function toggleConfiguration() {
+    const configSection = document.getElementById('configuration-section');
+    if (configSection.style.display === 'none' || configSection.style.display === '') {
+        configSection.style.display = 'block';
+    } else {
+        configSection.style.display = 'none';
+    }
+}
+
+</script>
 </body>
 </html>
