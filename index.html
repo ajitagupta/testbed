@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ElectriStay - Premium EV-Friendly Accommodations</title>
     <link rel="icon" type="image/x-icon" href="./icons/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -26,32 +27,32 @@
             min-height: 100vh;
         }
         
-/* Header styles */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 80px;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    background-color: #000;
-}
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background-color: #000;
+        }
 
-/* Container for header content */
-.header-container {
-    width: 100%;
-    max-width: 1600px; /* Match the max-width of hero-container */
-    margin: 0 auto;
-    padding: 0 4%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-        
+        /* Container for header content */
+        .header-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+                
         .logo-container {
             display: flex;
             align-items: center;
@@ -71,6 +72,7 @@ header {
             letter-spacing: 1px;
         }
         
+        /* Navigation for desktop */
         .navigation {
             display: flex;
             gap: 2rem;
@@ -87,6 +89,98 @@ header {
         .navigation a:hover {
             color: rgba(255, 255, 255, 0.7);
         }
+
+        /* Hamburger menu icon */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 200;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background-color: #111;
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            padding: 100px 30px 30px;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .mobile-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            padding: 10px 0;
+            transition: color 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-menu a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* When menu is open */
+        body.menu-open {
+            overflow: hidden;
+        }
+        
+        body.menu-open .mobile-menu {
+            right: 0;
+        }
+        
+        body.menu-open .menu-toggle span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        body.menu-open .menu-toggle span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        body.menu-open .menu-toggle span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        /* Overlay when menu is open */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 98;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        body.menu-open .menu-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
   
         /* Main content area with background image - UPDATED HERO SECTION */
         .hero-section {
@@ -98,11 +192,11 @@ header {
         .hero-container {
             position: relative;
             width: 100%;
-            max-width: 1600px; /* Restored to 1600px for boxed look */
+            max-width: 1600px;
             height: calc(100vh - 80px);
             margin: 0 auto;
             overflow: hidden;
-            border-radius: 20px 20px 20px 20px; /* Restored rounded edges */
+            border-radius: 20px 20px 20px 20px;
         }
         
         .hero-background {
@@ -112,7 +206,7 @@ header {
             width: 100%;
             height: 100%;
             background: url('./images/titleimage.png') center/cover no-repeat;
-            background-position: center center; /* Center the image horizontally and vertically */
+            background-position: center center;
         }
 
         /* Media query adjustments for hero section */
@@ -129,8 +223,8 @@ header {
             }
             
             .hero-container {
-                height: 85vh; /* Slightly shorter on very large screens */
-                max-height: 900px; /* Cap the height */
+                height: 85vh;
+                max-height: 900px;
             }
         }
 
@@ -144,7 +238,7 @@ header {
         /* Hero content */
         .hero-content {
             position: absolute;
-            bottom: 8%; /* Moved further down from 15% to 8% */
+            bottom: 8%;
             left: 10%;
             max-width: 600px;
             z-index: 5;
@@ -185,17 +279,6 @@ header {
             transform: translateY(-3px);
         }
         
-        /* Footer */
-        .site-footer {
-            position: absolute;
-            bottom: 5%;
-            left: 8%;
-            z-index: 5;
-            font-weight: 700;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-        }
-        
         /* AI Features Section */
         .ai-features-section {
             width: 100%;
@@ -215,7 +298,7 @@ header {
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
         
@@ -689,7 +772,17 @@ header {
             color: #fff;
         }
         
-        /* Responsive styles */
+        /* Responsive styles - Enhanced for better mobile experience */
+        @media (max-width: 1200px) {
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+            
+            .about-section {
+                padding: 3rem;
+            }
+        }
+        
         @media (max-width: 992px) {
             .property-card {
                 flex-direction: column;
@@ -708,18 +801,31 @@ header {
             }
             
             .blog-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .footer-bottom {
                 flex-direction: column;
                 text-align: center;
             }
+            
+            .hero-content h1 {
+                font-size: 3rem;
+            }
         }
         
         @media (max-width: 768px) {
+            /* Show hamburger, hide desktop navigation */
+            .navigation {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
             .hero-content h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
             
             .hero-content {
@@ -728,8 +834,8 @@ header {
                 max-width: 90%;
             }
             
-            .navigation {
-                gap: 1rem;
+            .hero-content p {
+                font-size: 1rem;
             }
             
             .property-features {
@@ -737,41 +843,165 @@ header {
             }
             
             .about-section {
-                padding: 3rem 2rem;
+                padding: 2rem;
+                margin: 2rem auto;
+            }
+            
+            .about-section h2 {
+                font-size: 2rem;
+            }
+            
+            .property-actions {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                text-align: center;
             }
             
             .footer-columns {
                 grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-features-section {
+                padding: 3rem 2rem;
+                margin: 2rem auto;
+            }
+            
+            .ai-features-section h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-container {
+                border-radius: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content {
+                bottom: 8%;
+                padding: 15px;
+            }
+            
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
+            
+            .about-section h2, 
+            .properties-section h2, 
+            .blog-heading h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            /* Tighter spacing on mobile */
+            .property-details {
+                padding: 1.5rem;
+            }
+            
+            .property-details h3 {
+                font-size: 1.5rem;
+            }
+            
+            .property-description {
+                font-size: 0.9rem;
             }
         }
         
         @media (max-width: 480px) {
-            .footer-columns {
-                grid-template-columns: 1fr;
+            .hero-content h1 {
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 0.9rem;
+                margin-bottom: 0.7rem;
+            }
+            
+            .ai-feature {
+                font-size: 0.8rem;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .about-section {
+                padding: 1.5rem;
+            }
+            
+            .about-section p {
+                font-size: 0.9rem;
+            }
+            
+            .stats-container {
+                gap: 1rem;
+            }
+            
+            .stat-text {
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="page-wrapper">
-<!-- Header -->
-<header>
-    <div class="header-container">
-        <a href="#" class="logo">
-            <div class="logo-container">
-                <img src="./images/logo_E.png" alt="ElectriStay Logo" class="logo-img">
-                <span>ELECTRISTAY</span>
+        <!-- Header -->
+        <header>
+            <div class="header-container">
+                <a href="#" class="logo">
+                    <div class="logo-container">
+                        <img src="./images/logo_E.png" alt="ElectriStay Logo" class="logo-img">
+                        <span>ELECTRISTAY</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="navigation">
+                    <a href="locations.html">Locations</a>
+                    <a href="evservices.html">EV Services</a>
+                    <a href="news.html">News & Updates</a>
+                    <a href="faqs.html">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                
+                <!-- Hamburger Menu Icon -->
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
-        </a>
-        <nav class="navigation">
+        </header>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
             <a href="locations.html">Locations</a>
             <a href="evservices.html">EV Services</a>
             <a href="news.html">News & Updates</a>
             <a href="faqs.html">FAQ</a>
             <a href="contact.html">Contact</a>
-        </nav>
-    </div>
-</header>
+        </div>
+        
+        <!-- Menu Overlay -->
+        <div class="menu-overlay"></div>
         
         <!-- Hero Section -->
         <section class="hero-section">
@@ -786,7 +1016,6 @@ header {
                     <p class="ai-feature">Powered by AI for a smart, full-fledged hotel booking experience.</p>
                     <a href="locations.html" class="btn">Find & Reserve</a>
                 </div>
-
             </div>
         </section>
         
@@ -860,7 +1089,6 @@ header {
                     
                     <div class="property-actions">
                         <button class="btn-primary">Book now</button>
-                        <!-- Updated "Learn more" button with a link to the hotel detail page -->
                         <button class="btn-secondary" onclick="window.location.href='hotel-luise.html'">Learn more</button>
                     </div>
                 </div>
@@ -984,109 +1212,142 @@ header {
             </div>
         </section>
         
-       <!-- Blog Section -->
-       <section class="blog-section">
-        <div class="blog-heading">
-            <h4>Our blog</h4>
-            <h2>Latest stories from ElectriStay</h2>
-        </div>
+        <!-- Blog Section -->
+        <section class="blog-section">
+            <div class="blog-heading">
+                <h4>Our blog</h4>
+                <h2>Latest stories from ElectriStay</h2>
+            </div>
+            
+            <div class="blog-grid">
+                <!-- Blog Post 1 -->
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://placehold.co/600x400/5a3b28/ffffff?text=EV+Winter+Travel" alt="Winter EV Travel">
+                    </div>
+                    <div class="blog-content">
+                        <h3>Top 5 Winter Activities for EV Travelers</h3>
+                        <p class="blog-date">Apr 23, 2024</p>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 2 -->
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://placehold.co/600x400/a86432/ffffff?text=Hotel+Amenities" alt="Hotel Amenities">
+                    </div>
+                    <div class="blog-content">
+                        <h3>"The Art of EV Hospitality: Luxury Charging Experiences"</h3>
+                        <p class="blog-date">Apr 20, 2024</p>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 3 -->
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://placehold.co/600x400/2e5d32/ffffff?text=Summer+Road+Trips" alt="Summer Road Trips">
+                    </div>
+                    <div class="blog-content">
+                        <h3>Exploring Green Destinations: A Guide to EV Summer Road Trips</h3>
+                        <p class="blog-date">Apr 11, 2024</p>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        <div class="blog-grid">
-            <!-- Blog Post 1 -->
-            <div class="blog-card">
-                <div class="blog-image">
-                    <img src="https://placehold.co/600x400/5a3b28/ffffff?text=EV+Winter+Travel" alt="Winter EV Travel">
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="./images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
+                    <span>ELECTRISTAY</span>
                 </div>
-                <div class="blog-content">
-                    <h3>Top 5 Winter Activities for EV Travelers</h3>
-                    <p class="blog-date">Apr 23, 2024</p>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="aboutus.html">About Us</a></li>
+                            <li><a href="ourteam.html">Our Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Properties</h4>
+                        <ul>
+                            <li><a href="#">Urban Hotels</a></li>
+                            <li><a href="#">Beach Resorts</a></li>
+                            <li><a href="#">Mountain Lodges</a></li>
+                            <li><a href="#">Charging Map</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">EV Guides</a></li>
+                            <li><a href="#">Partner Program</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             
-            <!-- Blog Post 2 -->
-            <div class="blog-card">
-                <div class="blog-image">
-                    <img src="https://placehold.co/600x400/a86432/ffffff?text=Hotel+Amenities" alt="Hotel Amenities">
-                </div>
-                <div class="blog-content">
-                    <h3>"The Art of EV Hospitality: Luxury Charging Experiences"</h3>
-                    <p class="blog-date">Apr 20, 2024</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ElectriStay. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
                 </div>
             </div>
-            
-            <!-- Blog Post 3 -->
-            <div class="blog-card">
-                <div class="blog-image">
-                    <img src="https://placehold.co/600x400/2e5d32/ffffff?text=Summer+Road+Trips" alt="Summer Road Trips">
-                </div>
-                <div class="blog-content">
-                    <h3>Exploring Green Destinations: A Guide to EV Summer Road Trips</h3>
-                    <p class="blog-date">Apr 11, 2024</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </footer>
+    </div>
     
-    <!-- Footer Section -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="./images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
-                <span>ELECTRISTAY</span>
-            </div>
+    <!-- JavaScript for mobile menu functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const menuOverlay = document.querySelector('.menu-overlay');
+            const body = document.body;
             
-            <div class="footer-columns">
-                <div class="footer-column">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="aboutus.html">About Us</a></li>
-                        <li><a href="ourteam.html">Our Team</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Press</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4>Properties</h4>
-                    <ul>
-                        <li><a href="#">Urban Hotels</a></li>
-                        <li><a href="#">Beach Resorts</a></li>
-                        <li><a href="#">Mountain Lodges</a></li>
-                        <li><a href="#">Charging Map</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">EV Guides</a></li>
-                        <li><a href="#">Partner Program</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4>Connect</h4>
-                    <ul>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2025 ElectriStay. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Cookie Policy</a>
-            </div>
-        </div>
-    </footer>
-</div>
-</body>
-</html>
+            // Toggle menu open/close
+            menuToggle.addEventListener('click', function() {
+                body.classList.toggle('menu-open');
+            });
+            
+            // Close menu when clicking overlay
+            menuOverlay.addEventListener('click', function() {
+                body.classList.remove('menu-open');
+            });
+            
+            // Close menu when clicking a menu item
+            const menuItems = document.querySelectorAll('.mobile-menu a');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    body.classList.remove('menu-open');
+                });
+            });
+            
+            // Close menu on window resize (if width becomes larger than mobile breakpoint)
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && body.classList.contains('menu-open')) {
+                    body.classList.remove('menu-open');
+                }
+            });
+        });
+    </script>                                    
