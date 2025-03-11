@@ -33,10 +33,6 @@
             left: 0;
             width: 100%;
             height: 80px;
-            padding: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             z-index: 100;
             background-color: #000;
         }
@@ -50,6 +46,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 100%;
         }
         
         .logo-container {
@@ -91,6 +88,100 @@
         .navigation a.active {
             border-bottom: 2px solid #fff;
             padding-bottom: 5px;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 200;
+        }
+        
+        .hamburger-menu span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger-menu.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-menu.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        /* Mobile Navigation Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: #111;
+            z-index: 150;
+            padding: 100px 2rem 2rem;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .mobile-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            transition: color 0.3s ease;
+        }
+        
+        .mobile-nav a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .mobile-nav a.active {
+            color: #2196F3;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 140;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .overlay.active {
+            display: block;
+            opacity: 1;
         }
         
         /* Main content styles */
@@ -196,12 +287,14 @@
         .stats-section {
             position: relative;
             margin: 0 -4vw;
-            height: 500px;
+            height: auto;
+            min-height: 500px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 5rem;
+            padding: 4rem 0;
         }
         
         .stats-background {
@@ -278,12 +371,15 @@
             gap: 6rem;
             z-index: 2;
             position: relative;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2rem;
         }
         
         .stat-item {
             text-align: center;
-            width: 200px;
-            height: 200px;
+            width: 180px;
+            height: 180px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -294,6 +390,7 @@
             border: 2px solid rgba(33, 150, 243, 0.5);
             box-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
             transition: all 0.3s ease;
+            margin: 1rem;
         }
         
         .stat-item:hover {
@@ -304,17 +401,18 @@
         
         .stat-content {
             transform: rotate(-45deg);
+            width: 100%;
         }
         
         .stat-number {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
             text-shadow: 0 0 10px rgba(33, 150, 243, 0.7);
         }
         
         .stat-label {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 500;
         }
 
@@ -467,6 +565,10 @@
                 flex-direction: column;
             }
             
+            .mission-left {
+                margin-bottom: 2rem;
+            }
+            
             .stats-container {
                 gap: 3rem;
             }
@@ -483,6 +585,15 @@
             .values-grid {
                 grid-template-columns: 1fr 1fr;
             }
+            
+            .values-section {
+                padding: 3rem 2rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
         }
         
         @media (max-width: 768px) {
@@ -491,27 +602,140 @@
             }
             
             .navigation {
-                gap: 1rem;
+                display: none;
+            }
+            
+            .hamburger-menu {
+                display: flex;
             }
             
             .stats-container {
-                flex-direction: column;
-                gap: 2rem;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 1.5rem;
+                justify-content: center;
+            }
+            
+            .stat-item {
+                width: 140px;
+                height: 140px;
+                margin: 0.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
             }
             
             .values-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .mission-title {
+                font-size: 1.8rem;
+            }
+            
+            .mission-item h3 {
+                font-size: 1.3rem;
+            }
+            
+            .values-section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .footer-columns {
+                grid-template-columns: 1fr 1fr;
+            }
         }
         
-        @media (max-width: 480px) {
+        @media (max-width: 576px) {
+            .about-title-section h1 {
+                font-size: 2rem;
+            }
+            
+            .about-title-section p {
+                font-size: 1rem;
+            }
+            
+            .main-content {
+                margin-top: 100px;
+            }
+            
+            .stats-section {
+                margin: 0 -3%;
+                padding: 2rem 0;
+            }
+            
             .stats-container {
-                flex-direction: column;
-                gap: 2rem;
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            .stat-item {
+                width: 110px;
+                height: 110px;
+                margin: 0.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .stat-label {
+                font-size: 0.85rem;
+            }
+            
+            .values-section {
+                padding: 2rem 1.5rem;
             }
             
             .footer-columns {
                 grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .about-hero {
+                margin-bottom: 2rem;
+            }
+            
+            .about-title-section {
+                margin-bottom: 2rem;
+            }
+            
+            .mission-section {
+                margin-bottom: 3rem;
+            }
+            
+            .stats-container {
+                gap: 0.5rem;
+                padding: 0.5rem;
+            }
+            
+            .stat-item {
+                width: 100px;
+                height: 100px;
+                margin: 0.25rem;
+            }
+            
+            .stat-number {
+                font-size: 1.8rem;
+            }
+            
+            .stat-label {
+                font-size: 0.75rem;
+            }
+            
+            .values-section h2 {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .header-container {
+                padding: 0 3%;
+            }
+            
+            .main-content {
+                padding: 0 3%;
             }
         }
     </style>
@@ -534,8 +758,30 @@
                     <a href="faqs.html">FAQ</a>
                     <a href="contact.html">Contact</a>
                 </nav>
+                <!-- Hamburger Menu -->
+                <div class="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </header>
+        
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-menu">
+            <nav class="mobile-nav">
+                <a href="locations.html">Locations</a>
+                <a href="evservices.html">EV Services</a>
+                <a href="news.html">News & Updates</a>
+                <a href="faqs.html">FAQ</a>
+                <a href="contact.html">Contact</a>
+                <a href="aboutus.html" class="active">About Us</a>
+                <a href="ourteam.html">Our Team</a>
+            </nav>
+        </div>
+        
+        <!-- Overlay -->
+        <div class="overlay"></div>
         
         <!-- Main Content -->
         <main class="main-content">
@@ -729,5 +975,40 @@
             </div>
         </footer>
     </div>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hamburger menu toggle
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.overlay');
+            const body = document.body;
+            
+            hamburgerMenu.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                body.style.overflow = body.style.overflow === 'hidden' ? '' : 'hidden';
+            });
+            
+            overlay.addEventListener('click', function() {
+                hamburgerMenu.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                this.classList.remove('active');
+                body.style.overflow = '';
+            });
+            
+            // Close mobile menu on window resize if wider than mobile breakpoint
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
+                    hamburgerMenu.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    body.style.overflow = '';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
