@@ -88,6 +88,38 @@
             border-bottom: 2px solid #fff;
             padding-bottom: 5px;
         }
+
+        /* Hamburger Menu */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 200;
+        }
+        
+        .hamburger-menu span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger-menu.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-menu.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
         
         /* Main content area */
         .main-content {
@@ -520,6 +552,68 @@
             color: #fff;
         }
         
+        /* Mobile Navigation Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: #111;
+            z-index: 150;
+            padding: 100px 2rem 2rem;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .mobile-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            transition: color 0.3s ease;
+        }
+        
+        .mobile-nav a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .mobile-nav a.active {
+            color: #2196F3;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 140;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+        
         /* Responsive styles */
         @media (max-width: 992px) {
             .property-grid {
@@ -534,7 +628,11 @@
         
         @media (max-width: 768px) {
             .navigation {
-                gap: 1rem;
+                display: none;
+            }
+            
+            .hamburger-menu {
+                display: flex;
             }
             
             .filter-options {
@@ -548,6 +646,20 @@
             .footer-columns {
                 grid-template-columns: 1fr 1fr;
             }
+
+            .search-section h1 {
+                font-size: 1.8rem;
+            }
+            
+            .filter-toggle {
+                flex-wrap: wrap;
+            }
+            
+            .reset-btn {
+                margin-top: 1rem;
+                margin-left: 0;
+                width: 100%;
+            }
         }
         
         @media (max-width: 480px) {
@@ -559,6 +671,32 @@
             
             .footer-columns {
                 grid-template-columns: 1fr;
+            }
+            
+            .header-container {
+                padding: 0 3%;
+            }
+            
+            .main-content {
+                padding: 0 3%;
+                margin-top: 100px;
+            }
+            
+            .search-container {
+                padding: 1.5rem;
+            }
+            
+            .property-card {
+                min-width: 100%;
+            }
+            
+            .view-btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .search-section h1 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -581,8 +719,30 @@
                     <a href="faqs.html">FAQ</a>
                     <a href="contact.html">Contact</a>
                 </nav>
+                <!-- Hamburger Menu -->
+                <div class="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </header>
+        
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-menu">
+            <nav class="mobile-nav">
+                <a href="locations.html" class="active">Locations</a>
+                <a href="evservices.html">EV Services</a>
+                <a href="news.html">News & Updates</a>
+                <a href="faqs.html">FAQ</a>
+                <a href="contact.html">Contact</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="ourteam.html">Our Team</a>
+            </nav>
+        </div>
+        
+        <!-- Overlay -->
+        <div class="overlay"></div>
         
         <!-- Main Content -->
         <main class="main-content">
@@ -917,6 +1077,36 @@
     <script>
         // Simple JavaScript for toggles and interactions
         document.addEventListener('DOMContentLoaded', function() {
+            // Hamburger menu toggle
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.overlay');
+            const body = document.body;
+            
+            hamburgerMenu.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                body.style.overflow = body.style.overflow === 'hidden' ? '' : 'hidden';
+            });
+            
+            overlay.addEventListener('click', function() {
+                hamburgerMenu.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                this.classList.remove('active');
+                body.style.overflow = '';
+            });
+            
+            // Close mobile menu on window resize if wider than mobile breakpoint
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
+                    hamburgerMenu.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    body.style.overflow = '';
+                }
+            });
+            
             // Favorite buttons
             const favoriteButtons = document.querySelectorAll('.favorite-btn');
             favoriteButtons.forEach(button => {
@@ -951,7 +1141,7 @@
                     // In a real implementation: window.location.href = `property-details.html?property=${propertyName}`;
                 });
             });
-
+        });
     </script>
     <script src="location-filters.js"></script>
     </body>
