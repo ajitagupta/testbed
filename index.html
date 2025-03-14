@@ -392,6 +392,8 @@
             display: flex;
             justify-content: space-between;
             padding: 0 20px;
+            z-index: 10; /* Add this to make sure it's above the images */
+            pointer-events: none; /* This allows clicks to pass through the container but not its children */
         }
         
         .nav-button {
@@ -406,6 +408,8 @@
             cursor: pointer;
             font-size: 1rem;
             transition: all 0.3s ease;
+            pointer-events: auto; /* Make sure buttons can be clicked */
+            z-index: 10; /* Ensure buttons are above images */
         }
         
         .nav-button:hover {
@@ -507,6 +511,31 @@
         .btn-secondary:hover {
             background-color: rgba(0, 0, 0, 0.05);
         }
+
+
+        /* Image slider for Featured Properties */
+
+        .image-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .property-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .property-image.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
         
         /* About Us Section */
         .about-section {
@@ -1057,8 +1086,11 @@
             <!-- Property 1 -->
             <div class="property-card">
                 <div class="property-image-container">
-                    <div class="price-tag">199€ /night</div>
-                    <img src="https://placehold.co/800x500/3d3d3d/ffffff?text=Hotel+Luise" alt="Hotel Luise" class="property-image">
+                    <div class="price-tag">117€ /night</div>
+                    <div class="image-slider">
+                        <img src="./images/hotelluise_small1.jpg" alt="Hotel Luise" class="property-image active">
+                        <img src="./images/hotelluise_small2.jpg" alt="Hotel Luise Charging Station" class="property-image">
+                    </div>
                     <div class="image-nav">
                         <button class="nav-button prev">&#10094;</button>
                         <button class="nav-button next">&#10095;</button>
@@ -1078,7 +1110,7 @@
                         </div>
                     </div>
                     
-                    <p class="property-description">Charming hotel in the heart of Erlangen with 8 Tesla and 6 universal charging stations. Perfect for business travelers with fast-charging capability.</p>
+                    <p class="property-description">Charming hotel in the heart of Erlangen with 2 universal charging stations and separate parking spaces available. Perfect for business travelers with fast-charging capability.</p>
                     
                     <div class="property-features">
                         <div class="feature"><span class="feature-icon">👥</span> 1-2 guests</div>
@@ -1350,4 +1382,49 @@
                 }
             });
         });
+
+        // JavaScript for image slider in Featured Properties
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all property image sliders
+            initPropertyImageSliders();
+        });
+
+        function initPropertyImageSliders() {
+            const propertyCards = document.querySelectorAll('.property-card');
+            
+            propertyCards.forEach(card => {
+                const images = card.querySelectorAll('.property-image');
+                const prevButton = card.querySelector('.nav-button.prev');
+                const nextButton = card.querySelector('.nav-button.next');
+                
+                // Only initialize if there are multiple images
+                if (images.length > 1) {
+                    let currentIndex = 0;
+                    
+                    // Function to show specific image
+                    const showImage = (index) => {
+                        // Hide all images
+                        images.forEach(img => img.classList.remove('active'));
+                        
+                        // Show selected image
+                        images[index].classList.add('active');
+                        currentIndex = index;
+                    };
+                    
+                    // Next button click
+                    nextButton.addEventListener('click', () => {
+                        let nextIndex = (currentIndex + 1) % images.length;
+                        showImage(nextIndex);
+                    });
+                    
+                    // Previous button click
+                    prevButton.addEventListener('click', () => {
+                        let prevIndex = (currentIndex - 1 + images.length) % images.length;
+                        showImage(prevIndex);
+                    });
+                }
+            });
+        }
+
     </script>                                    
