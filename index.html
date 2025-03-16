@@ -536,6 +536,49 @@
             z-index: 1;
         }
 
+
+        /* Corner Ribbon Price Tag */
+
+        .price-tag {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        z-index: 10;
+        background-color: transparent; /* Ensure no background */
+        padding: 0; /* Remove any padding */
+        border-radius: 0; /* Remove any border radius */
+    }
+
+    .price-ribbon {
+        position: absolute;
+        width: 200px;
+        background-color: #000; /* Brand color - black */
+        text-align: center;
+        line-height: 40px;
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: white;
+        top: 30px;
+        left: -50px;
+        transform: rotate(-45deg);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Add a subtle border to make it stand out more */
+    .price-ribbon::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        pointer-events: none;
+    }
+
         
         /* About Us Section */
         .about-section {
@@ -1086,7 +1129,9 @@
             <!-- Property 1 -->
             <div class="property-card">
                 <div class="property-image-container">
-                    <div class="price-tag">117€ /night</div>
+                    <div class="price-tag">
+                        <div class="price-ribbon">117€ /night</div>
+                    </div>                    
                     <div class="image-slider">
                         <img src="./images/hotelluise_small1.jpg" alt="Hotel Luise" class="property-image active">
                         <img src="./images/hotelluise_small2.jpg" alt="Hotel Luise Charging Station" class="property-image">
@@ -1129,7 +1174,9 @@
             <!-- Property 2 -->
             <div class="property-card">
                 <div class="property-image-container">
-                    <div class="price-tag">329€ /night</div>
+                    <div class="price-tag">
+                        <div class="price-ribbon">329€ /night</div>
+                    </div>   
                     <img src="https://placehold.co/800x500/0d6e9e/ffffff?text=Oceanside+EV+Resort" alt="Oceanside EV Resort" class="property-image">
                     <div class="image-nav">
                         <button class="nav-button prev">&#10094;</button>
@@ -1169,7 +1216,9 @@
             <!-- Property 3 -->
             <div class="property-card">
                 <div class="property-image-container">
-                    <div class="price-tag">249€ /night</div>
+                    <div class="price-tag">
+                        <div class="price-ribbon">249€ /night</div>
+                    </div>   
                     <img src="https://placehold.co/800x500/2e5d32/ffffff?text=Mountain+View+Lodge" alt="Mountain View Lodge" class="property-image">
                     <div class="image-nav">
                         <button class="nav-button prev">&#10094;</button>
