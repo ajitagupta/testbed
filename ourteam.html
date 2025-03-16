@@ -674,6 +674,93 @@
             color: #fff;
         }
         
+        /* HAMBURGER MENU STYLES */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 200;
+        }
+        
+        .hamburger-menu span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-navigation {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background-color: #111;
+            z-index: 150;
+            padding: 100px 2rem 2rem;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+        }
+        
+        .mobile-navigation.active {
+            right: 0;
+        }
+        
+        .mobile-navigation a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #333;
+            transition: color 0.3s ease;
+        }
+        
+        .mobile-navigation a:hover {
+            color: #2196F3;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .hamburger-menu.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-menu.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Prevent body scrolling when menu is open */
+        body.no-scroll {
+            overflow: hidden;
+        }
+        
         /* Responsive styles */
         @media (max-width: 992px) {
             .team-grid {
@@ -687,15 +774,28 @@
             .cta-title {
                 font-size: 2rem;
             }
+            
+            .cta-section {
+                padding: 3rem 2rem;
+            }
         }
         
         @media (max-width: 768px) {
+            .navigation {
+                display: none;
+            }
+            
+            .hamburger-menu {
+                display: flex;
+            }
+            
             .team-hero h1 {
                 font-size: 2.5rem;
             }
             
-            .navigation {
-                gap: 1rem;
+            .team-hero p {
+                font-size: 1rem;
+                padding: 0 1rem;
             }
             
             .vision-content, .vision-image {
@@ -707,8 +807,44 @@
             }
             
             .brand-item {
-                min-width: 250px;
-                max-width: 300px;
+                width: 250px;
+                height: 120px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .expertise-subtitle {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+            
+            .cta-section {
+                padding: 2.5rem 1.5rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .cta-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-text {
+                font-size: 1rem;
+            }
+            
+            .cta-btn {
+                padding: 0.8rem 2rem;
+            }
+            
+            .footer-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
             }
         }
         
@@ -721,12 +857,55 @@
                 font-size: 2rem;
             }
             
-            .cta-section {
-                padding: 2rem;
+            .team-hero {
+                padding: 60px 0;
+            }
+            
+            .vision-section {
+                gap: 2rem;
+            }
+            
+            .brands-carousel {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .brand-item {
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .expertise-section .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-title {
+                font-size: 1.6rem;
+            }
+            
+            .cta-text {
+                font-size: 0.9rem;
             }
             
             .footer-columns {
                 grid-template-columns: 1fr;
+            }
+            
+            .social-link {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
+            }
+            
+            .team-title {
+                font-size: 0.8rem;
+            }
+            
+            .team-name {
+                font-size: 1.2rem;
+            }
+            
+            .team-bio {
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -749,8 +928,28 @@
                     <a href="faqs.html">FAQ</a>
                     <a href="contact.html">Contact</a>
                 </nav>
+                
+                <!-- Hamburger Menu Button -->
+                <div class="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </header>
+        
+        <!-- Mobile Navigation -->
+        <div class="mobile-navigation">
+            <a href="index.html">Home</a>
+            <a href="locations.html">Locations</a>
+            <a href="evservices.html">EV Services</a>
+            <a href="news.html">News & Updates</a>
+            <a href="faqs.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        
+        <!-- Overlay -->
+        <div class="overlay"></div>
         
         <!-- Main Content -->
         <main class="main-content">
@@ -765,7 +964,7 @@
                 </div>
                 <h1>Our Team</h1>
                 <p>AI is automation on steroids. It has disrupted the technology industry and has taken the world by storm as a 30 Trillion dollar industry. Its impact is considered to be that of the invention of electricity. For us as top-educated working professionals it only makes sense to ride this wave and leverage this new trend to do something good for the planet.
-                   Not to forget - we love to travel!</p>
+                    By harnessing AI's transformative power, we can accelerate solutions to global challenges while creating sustainable careers that support our passion for exploring the world. We love to travel!</p>
             </section>
             
             <!-- Team Vision and Skills (similar to reference image 1) -->
@@ -838,7 +1037,7 @@
                     <div class="title-underline"></div>
                 </div>
                 <p class="expertise-subtitle">
-                    ElectriStay was founded by two professionals with complementary technical backgrounds, united by a shared vision to transform electric vehicle travel through innovative solutions.
+                    ElectriStay was founded by two professionals with complementary technical backgrounds, united by a shared vision to transform electric vehicle travel through sustainable solutions.
                 </p>
                 
                 <div class="team-grid">
@@ -873,78 +1072,50 @@
                     </div>
                 </div>
             </section>
-            
-            <!-- Call to Action Section -->
-            <section class="cta-section">
-                <div class="cta-background"></div>
-                <div class="cta-content">
-                    <h2 class="cta-title">Join Our Entrepreneurial Team</h2>
-                    <p class="cta-text">Are you a problem-solver with a passion for innovation and electric mobility? We're looking for analytical thinkers and entrepreneurial minds who want to transform how people travel with electric vehicles.</p>
-                    <a href="#" class="cta-btn">View Open Positions</a>
-                </div>
-            </section>
         </main>
-        
-        <!-- Footer Section -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="./images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
-                    <span>ELECTRISTAY</span>
-                </div>
-                
-                <div class="footer-columns">
-                    <div class="footer-column">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="aboutus.html">About Us</a></li>
-                            <li><a href="ourteam.html">Our Team</a></li>
-                            <li><a href="#">Careers</a></li>
-                            <li><a href="#">Press</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-column">
-                        <h4>Properties</h4>
-                        <ul>
-                            <li><a href="#">Urban Hotels</a></li>
-                            <li><a href="#">Beach Resorts</a></li>
-                            <li><a href="#">Mountain Lodges</a></li>
-                            <li><a href="#">Charging Map</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-column">
-                        <h4>Resources</h4>
-                        <ul>
-                            <li><a href="#">Help Center</a></li>
-                            <li><a href="#">EV Guides</a></li>
-                            <li><a href="#">Partner Program</a></li>
-                            <li><a href="#">Blog</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-column">
-                        <h4>Connect</h4>
-                        <ul>
-                            <li><a href="contact.html">Contact Us</a></li>
-                            <li><a href="#">Twitter</a></li>
-                            <li><a href="#">Instagram</a></li>
-                            <li><a href="#">LinkedIn</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 ElectriStay. All rights reserved.</p>
-                <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Cookie Policy</a>
-                </div>
-            </div>
-        </footer>
+
     </div>
+    <script>
+
+        // Get DOM elements
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const mobileNavigation = document.querySelector('.mobile-navigation');
+        const overlay = document.querySelector('.overlay');
+        const body = document.body;
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            hamburgerMenu.classList.toggle('active');
+            mobileNavigation.classList.toggle('active');
+            overlay.classList.toggle('active');
+            body.classList.toggle('no-scroll');
+        }
+
+        // Event listeners
+        hamburgerMenu.addEventListener('click', toggleMobileMenu);
+        overlay.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu on window resize if window width > 768px
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && mobileNavigation.classList.contains('active')) {
+                hamburgerMenu.classList.remove('active');
+                mobileNavigation.classList.remove('active');
+                overlay.classList.remove('active');
+                body.classList.remove('no-scroll');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-navigation a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburgerMenu.classList.remove('active');
+                mobileNavigation.classList.remove('active');
+                overlay.classList.remove('active');
+                body.classList.remove('no-scroll');
+            });
+        });
+    </script>
+
 </body>
 </html>
