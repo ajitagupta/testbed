@@ -49,6 +49,13 @@
             height: 100%;
         }
         
+        /* Navigation container for better alignment */
+        .navigation-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
         .logo-container {
             display: flex;
             align-items: center;
@@ -83,6 +90,40 @@
         
         .navigation a:hover {
             color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Register Button in Navigation */
+        .register-btn {
+            background-color: #d92d2a;
+            color: #fff !important;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+        
+        .register-btn:hover {
+            color: #fff !important;
+            transform: translateY(-3px);
+        }
+        
+        /* Mobile version of the register button */
+        .register-btn-mobile {
+            background-color: #d92d2a;
+            color: #fff !important;
+            text-align: center;
+            font-weight: 600;
+            border-radius: 50px;
+            margin-top: 10px;
+            padding: 12px 0;
+            text-decoration: none;
+        }
+        
+        .register-btn-mobile:hover {
+            color: #fff !important;
         }
         
         /* Hamburger Menu */
@@ -844,7 +885,7 @@
                 font-size: 2.5rem;
             }
             
-            .navigation {
+            .navigation, .register-btn, .navigation-container {
                 display: none;
             }
             
@@ -1010,13 +1051,19 @@
                         <span>ELECTRISTAY</span>
                     </div>
                 </a>
-                <nav class="navigation">
-                    <a href="locations.html">Locations</a>
-                    <a href="evservices.html">EV Services</a>
-                    <a href="news.html">News & Updates</a>
-                    <a href="faqs.html">FAQ</a>
-                    <a href="contact.html">Contact</a>
-                </nav>
+                
+                <!-- Navigation Container with Register Button -->
+                <div class="navigation-container">
+                    <nav class="navigation">
+                        <a href="locations.html">Locations</a>
+                        <a href="evservices.html">EV Services</a>
+                        <a href="news.html">News & Updates</a>
+                        <a href="faqs.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                    </nav>
+                    
+                    <a href="register-accommodation.html" class="register-btn">Register Accommodation</a>
+                </div>
                 
                 <!-- Hamburger Menu -->
                 <div class="hamburger-menu">
@@ -1035,6 +1082,7 @@
                 <a href="news.html">News & Updates</a>
                 <a href="faqs.html">FAQ</a>
                 <a href="contact.html">Contact</a>
+                <a href="register-accommodation.html" class="register-btn-mobile">Register Accommodation</a>
             </nav>
         </div>
         
@@ -1189,35 +1237,10 @@
                 <h2>Electric Vehicle Charging</h2>
                 
                 <div class="charging-options">
-                    <!--
-                    <div class="charging-option">
-                        <div class="charging-icon">⚡</div>
-                        <h3>Tesla Superchargers</h3>
-                        <p>8 dedicated Tesla Supercharger stations available exclusively for hotel guests. Reserve your charging slot when booking your room.</p>
-                        <div class="charging-specs">
-                            <div class="charging-spec">
-                                <span>Power Output</span>
-                                <span>150 kW</span>
-                            </div>
-                            <div class="charging-spec">
-                                <span>Connector Type</span>
-                                <span>Tesla</span>
-                            </div>
-                            <div class="charging-spec">
-                                <span>Charging Fee</span>
-                                <span>Included for guests</span>
-                            </div>
-                            <div class="charging-spec">
-                                <span>Reservation</span>
-                                <span>Required</span>
-                            </div>
-                        </div>
-                    </div>-->
-                    
                     <div class="charging-option">
                         <div class="charging-icon">🔌</div>
                         <h3>Universal Charging Stations</h3>
-                        <p>6 universal charging stations compatible with all major EV brands. Available 24/7 for hotel guests.</p>
+                        <p>2 universal charging stations compatible with all major EV brands. Available 24/7 for hotel guests.</p>
                         <div class="charging-specs">
                             <div class="charging-spec">
                                 <span>Power Output</span>
@@ -1237,31 +1260,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--
-                    <div class="charging-option">
-                        <div class="charging-icon">🔋</div>
-                        <h3>Standard Wall Outlets</h3>
-                        <p>Every parking space is equipped with a standard 230V outlet for slow overnight charging.</p>
-                        <div class="charging-specs">
-                            <div class="charging-spec">
-                                <span>Power Output</span>
-                                <span>3.7 kW</span>
-                            </div>
-                            <div class="charging-spec">
-                                <span>Connector Type</span>
-                                <span>Standard 230V</span>
-                            </div>
-                            <div class="charging-spec">
-                                <span>Charging Fee</span>
-                                <span>Included for guests</span>
-                            </div>
-                            <div class="charging-spec">
-                                <span>Reservation</span>
-                                <span>Not required</span>
-                            </div>
-                        </div>
-                    </div>
-                    -->
                 </div>
                 
                 <p style="text-align: center; margin-top: 2rem; color: #aaa; font-size: 1rem;">
@@ -1271,316 +1269,315 @@
             </section>
 
             <!-- Location Section -->
-<section class="location-section">
-    <h2>Location</h2>
-    
-    <div class="location-map">
-        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=10.9537,49.5775,11.0256,49.6072&amp;layer=mapnik&amp;marker=49.5928,10.9896" width="100%" height="100%" frameborder="0" style="border-radius: 15px;"></iframe>
-    </div>
-    
-    <div class="nearby-attractions">
-        <div class="attraction-card">
-            <div class="attraction-image">
-                <span>Erlangen Palace</span>
-            </div>
-            <div class="attraction-content">
-                <h3>Erlangen Palace</h3>
-                <p class="attraction-distance">0.8 km - 10 min walk</p>
-                <p>Baroque palace now housing parts of the university. Beautiful gardens and architecture.</p>
-            </div>
-        </div>
-        
-        <div class="attraction-card">
-            <div class="attraction-image">
-                <span>Botanical Garden</span>
-            </div>
-            <div class="attraction-content">
-                <h3>Botanical Garden</h3>
-                <p class="attraction-distance">1.2 km - 15 min walk</p>
-                <p>Extensive botanical gardens with greenhouses, rare plants, and beautiful walking paths.</p>
-            </div>
-        </div>
-        
-        <div class="attraction-card">
-            <div class="attraction-image">
-                <span>Markgrafentheater</span>
-            </div>
-            <div class="attraction-content">
-                <h3>Markgrafentheater</h3>
-                <p class="attraction-distance">0.6 km - 8 min walk</p>
-                <p>Germany's oldest operating Baroque theater, hosting regular performances.</p>
-            </div>
-        </div>
-        
-        <div class="attraction-card">
-            <div class="attraction-image">
-                <span>Nuremberg</span>
-            </div>
-            <div class="attraction-content">
-                <h3>Nuremberg Old Town</h3>
-                <p class="attraction-distance">18 km - 25 min drive</p>
-                <p>Historic city center with medieval architecture, castles, and museums.</p>
-            </div>
-        </div>
-    </div>
-</section>
+            <section class="location-section">
+                <h2>Location</h2>
+                
+                <div class="location-map">
+                    <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=10.9537,49.5775,11.0256,49.6072&amp;layer=mapnik&amp;marker=49.5928,10.9896" width="100%" height="100%" frameborder="0" style="border-radius: 15px;"></iframe>
+                </div>
+                
+                <div class="nearby-attractions">
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <span>Erlangen Palace</span>
+                        </div>
+                        <div class="attraction-content">
+                            <h3>Erlangen Palace</h3>
+                            <p class="attraction-distance">0.8 km - 10 min walk</p>
+                            <p>Baroque palace now housing parts of the university. Beautiful gardens and architecture.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <span>Botanical Garden</span>
+                        </div>
+                        <div class="attraction-content">
+                            <h3>Botanical Garden</h3>
+                            <p class="attraction-distance">1.2 km - 15 min walk</p>
+                            <p>Extensive botanical gardens with greenhouses, rare plants, and beautiful walking paths.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <span>Markgrafentheater</span>
+                        </div>
+                        <div class="attraction-content">
+                            <h3>Markgrafentheater</h3>
+                            <p class="attraction-distance">0.6 km - 8 min walk</p>
+                            <p>Germany's oldest operating Baroque theater, hosting regular performances.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <span>Nuremberg</span>
+                        </div>
+                        <div class="attraction-content">
+                            <h3>Nuremberg Old Town</h3>
+                            <p class="attraction-distance">18 km - 25 min drive</p>
+                            <p>Historic city center with medieval architecture, castles, and museums.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-<!-- Reviews Section -->
-<section class="reviews-section">
-    <h2>Guest Reviews</h2>
-    <div class="reviews-summary">
-        <span>256 verified reviews</span>
-        <div class="stars">★★★★★</div>
-        <span>4.8 out of 5</span>
-    </div>
-    
-    <div class="reviews-grid">
-        <div class="review-card">
-            <div class="review-header">
-                <div class="reviewer-avatar">MK</div>
-                <div class="reviewer-info">
-                    <h4>Michael K.</h4>
-                    <div class="review-date">March 2025</div>
+            <!-- Reviews Section -->
+            <section class="reviews-section">
+                <h2>Guest Reviews</h2>
+                <div class="reviews-summary">
+                    <span>256 verified reviews</span>
+                    <div class="stars">★★★★★</div>
+                    <span>4.8 out of 5</span>
                 </div>
-                <div class="review-rating">★★★★★</div>
-            </div>
-            <div class="review-content">
-                <p>Fantastic hotel with excellent EV charging facilities. We arrived with only 10% battery and were fully charged by morning. The staff was incredibly knowledgeable about EVs and helped us plan our route for the next day. The breakfast was amazing with lots of local organic options. Will definitely return!</p>
-            </div>
-        </div>
-        
-        <div class="review-card">
-            <div class="review-header">
-                <div class="reviewer-avatar">SL</div>
-                <div class="reviewer-info">
-                    <h4>Sarah L.</h4>
-                    <div class="review-date">February 2025</div>
+                
+                <div class="reviews-grid">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">MK</div>
+                            <div class="reviewer-info">
+                                <h4>Michael K.</h4>
+                                <div class="review-date">March 2025</div>
+                            </div>
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p>Fantastic hotel with excellent EV charging facilities. We arrived with only 10% battery and were fully charged by morning. The staff was incredibly knowledgeable about EVs and helped us plan our route for the next day. The breakfast was amazing with lots of local organic options. Will definitely return!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">SL</div>
+                            <div class="reviewer-info">
+                                <h4>Sarah L.</h4>
+                                <div class="review-date">February 2025</div>
+                            </div>
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p>Perfect hotel for EV owners. The Tesla Superchargers worked flawlessly, and I loved that I could reserve my charging slot in advance. The rooms are modern, clean, and very comfortable. The location is perfect for exploring Erlangen on foot. Highly recommended!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">JH</div>
+                            <div class="reviewer-info">
+                                <h4>Johannes H.</h4>
+                                <div class="review-date">January 2025</div>
+                            </div>
+                            <div class="review-rating">★★★★☆</div>
+                        </div>
+                        <div class="review-content">
+                            <p>Great hotel with excellent sustainability initiatives. The charging stations worked well for my Audi e-tron, though they were quite busy in the evening. The restaurant serves delicious food with local ingredients. The only minor issue was some noise from the street, but overall a very pleasant stay.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">EM</div>
+                            <div class="reviewer-info">
+                                <h4>Elena M.</h4>
+                                <div class="review-date">December 2024</div>
+                            </div>
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p>Simply outstanding! The hotel has thought of everything an EV traveler might need. The room was spacious and beautifully designed, the charging was hassle-free, and the staff was incredibly helpful. I particularly enjoyed the wellness area after a long day of driving. A perfect example of how hotels should adapt to EV travel.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="review-rating">★★★★★</div>
-            </div>
-            <div class="review-content">
-                <p>Perfect hotel for EV owners. The Tesla Superchargers worked flawlessly, and I loved that I could reserve my charging slot in advance. The rooms are modern, clean, and very comfortable. The location is perfect for exploring Erlangen on foot. Highly recommended!</p>
-            </div>
-        </div>
-        
-        <div class="review-card">
-            <div class="review-header">
-                <div class="reviewer-avatar">JH</div>
-                <div class="reviewer-info">
-                    <h4>Johannes H.</h4>
-                    <div class="review-date">January 2025</div>
-                </div>
-                <div class="review-rating">★★★★☆</div>
-            </div>
-            <div class="review-content">
-                <p>Great hotel with excellent sustainability initiatives. The charging stations worked well for my Audi e-tron, though they were quite busy in the evening. The restaurant serves delicious food with local ingredients. The only minor issue was some noise from the street, but overall a very pleasant stay.</p>
-            </div>
-        </div>
-        
-        <div class="review-card">
-            <div class="review-header">
-                <div class="reviewer-avatar">EM</div>
-                <div class="reviewer-info">
-                    <h4>Elena M.</h4>
-                    <div class="review-date">December 2024</div>
-                </div>
-                <div class="review-rating">★★★★★</div>
-            </div>
-            <div class="review-content">
-                <p>Simply outstanding! The hotel has thought of everything an EV traveler might need. The room was spacious and beautifully designed, the charging was hassle-free, and the staff was incredibly helpful. I particularly enjoyed the wellness area after a long day of driving. A perfect example of how hotels should adapt to EV travel.</p>
-            </div>
-        </div>
-    </div>
-</section>
+            </section>
 
-<!-- Similar Hotels Section -->
-<section class="similar-hotels-section">
-    <h2>Similar Properties You May Like</h2>
-    
-    <div class="similar-hotels-grid">
-        <div class="similar-hotel-card">
-            <div class="similar-hotel-image">
-                <span>Green City Hotel</span>
-            </div>
-            <div class="similar-hotel-content">
-                <h3>Green City Hotel</h3>
-                <div class="similar-hotel-location">
-                    <span class="location-dot">📍</span> Munich, Germany
+            <!-- Similar Hotels Section -->
+            <section class="similar-hotels-section">
+                <h2>Similar Properties You May Like</h2>
+                
+                <div class="similar-hotels-grid">
+                    <div class="similar-hotel-card">
+                        <div class="similar-hotel-image">
+                            <span>Green City Hotel</span>
+                        </div>
+                        <div class="similar-hotel-content">
+                            <h3>Green City Hotel</h3>
+                            <div class="similar-hotel-location">
+                                <span class="location-dot">📍</span> Munich, Germany
+                            </div>
+                            <div class="similar-hotel-price">
+                                225€ <span>/ night</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="similar-hotel-card">
+                        <div class="similar-hotel-image">
+                            <span>Electric Lodge</span>
+                        </div>
+                        <div class="similar-hotel-content">
+                            <h3>Electric Lodge</h3>
+                            <div class="similar-hotel-location">
+                                <span class="location-dot">📍</span> Stuttgart, Germany
+                            </div>
+                            <div class="similar-hotel-price">
+                                189€ <span>/ night</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="similar-hotel-card">
+                        <div class="similar-hotel-image">
+                            <span>Villa Stromhaus</span>
+                        </div>
+                        <div class="similar-hotel-content">
+                            <h3>Villa Stromhaus</h3>
+                            <div class="similar-hotel-location">
+                                <span class="location-dot">📍</span> Heidelberg, Germany
+                            </div>
+                            <div class="similar-hotel-price">
+                                210€ <span>/ night</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="similar-hotel-price">
-                    225€ <span>/ night</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="similar-hotel-card">
-            <div class="similar-hotel-image">
-                <span>Electric Lodge</span>
-            </div>
-            <div class="similar-hotel-content">
-                <h3>Electric Lodge</h3>
-                <div class="similar-hotel-location">
-                    <span class="location-dot">📍</span> Stuttgart, Germany
-                </div>
-                <div class="similar-hotel-price">
-                    189€ <span>/ night</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="similar-hotel-card">
-            <div class="similar-hotel-image">
-                <span>Villa Stromhaus</span>
-            </div>
-            <div class="similar-hotel-content">
-                <h3>Villa Stromhaus</h3>
-                <div class="similar-hotel-location">
-                    <span class="location-dot">📍</span> Heidelberg, Germany
-                </div>
-                <div class="similar-hotel-price">
-                    210€ <span>/ night</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-</main>
+            </section>
+        </main>
 
-<!-- Footer Section -->
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-logo">
-            <img src="./images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
-            <span>ELECTRISTAY</span>
-        </div>
-        
-        <div class="footer-columns">
-            <div class="footer-column">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="aboutus.html">About Us</a></li>
-                    <li><a href="ourteam.html">Our Team</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Press</a></li>
-                </ul>
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="./images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
+                    <span>ELECTRISTAY</span>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="aboutus.html">About Us</a></li>
+                            <li><a href="ourteam.html">Our Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Properties</h4>
+                        <ul>
+                            <li><a href="#">Urban Hotels</a></li>
+                            <li><a href="#">Beach Resorts</a></li>
+                            <li><a href="#">Mountain Lodges</a></li>
+                            <li><a href="#">Charging Map</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">EV Guides</a></li>
+                            <li><a href="#">Partner Program</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             
-            <div class="footer-column">
-                <h4>Properties</h4>
-                <ul>
-                    <li><a href="#">Urban Hotels</a></li>
-                    <li><a href="#">Beach Resorts</a></li>
-                    <li><a href="#">Mountain Lodges</a></li>
-                    <li><a href="#">Charging Map</a></li>
-                </ul>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ElectriStay. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
             </div>
-            
-            <div class="footer-column">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">EV Guides</a></li>
-                    <li><a href="#">Partner Program</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h4>Connect</h4>
-                <ul>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">LinkedIn</a></li>
-                </ul>
-            </div>
-        </div>
+        </footer>
     </div>
     
-    <div class="footer-bottom">
-        <p>&copy; 2025 ElectriStay. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookie Policy</a>
-        </div>
-    </div>
-</footer>
-</div>
-    
-<script>
-    // Simple date validation for booking form
-    document.addEventListener('DOMContentLoaded', function() {
-        const checkInInput = document.getElementById('check-in');
-        const checkOutInput = document.getElementById('check-out');
-        const bookButton = document.querySelector('.book-now-btn');
-        
-        // Set minimum date to today
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const dd = String(today.getDate()).padStart(2, '0');
-        const todayString = `${yyyy}-${mm}-${dd}`;
-        
-        checkInInput.min = todayString;
-        
-        // Update checkout min date when checkin changes
-        checkInInput.addEventListener('change', function() {
-            checkOutInput.min = checkInInput.value;
+    <script>
+        // Simple date validation for booking form
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkInInput = document.getElementById('check-in');
+            const checkOutInput = document.getElementById('check-out');
+            const bookButton = document.querySelector('.book-now-btn');
             
-            // If checkout is earlier than checkin, reset it
-            if (checkOutInput.value && checkOutInput.value < checkInInput.value) {
-                checkOutInput.value = '';
-            }
+            // Set minimum date to today
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const todayString = `${yyyy}-${mm}-${dd}`;
+            
+            checkInInput.min = todayString;
+            
+            // Update checkout min date when checkin changes
+            checkInInput.addEventListener('change', function() {
+                checkOutInput.min = checkInInput.value;
+                
+                // If checkout is earlier than checkin, reset it
+                if (checkOutInput.value && checkOutInput.value < checkInInput.value) {
+                    checkOutInput.value = '';
+                }
+            });
+            
+            // Book now button
+            bookButton.addEventListener('click', function() {
+                if (!checkInInput.value || !checkOutInput.value) {
+                    alert('Please select check-in and check-out dates');
+                    return;
+                }
+                
+                alert('Thank you for booking! Your reservation at Hotel Luise has been confirmed.');
+            });
         });
-        
-        // Book now button
-        bookButton.addEventListener('click', function() {
-            if (!checkInInput.value || !checkOutInput.value) {
-                alert('Please select check-in and check-out dates');
-                return;
-            }
+
+
+        // Hamburger menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.overlay');
             
-            alert('Thank you for booking! Your reservation at Hotel Luise has been confirmed.');
-        });
-    });
-
-
- // Add this to your existing script section at the bottom of the HTML
-document.addEventListener('DOMContentLoaded', function() {
-    // Hamburger menu functionality
-    const hamburgerMenu = document.querySelector('.hamburger-menu');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const overlay = document.querySelector('.overlay');
-    
-    // Toggle menu when hamburger is clicked
-    hamburgerMenu.addEventListener('click', function() {
-        hamburgerMenu.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        overlay.classList.toggle('active');
-        // Prevent scrolling when menu is open
-        document.body.style.overflow = hamburgerMenu.classList.contains('active') ? 'hidden' : '';
-    });
-    
-    // Close menu when overlay is clicked
-    overlay.addEventListener('click', function() {
-        hamburgerMenu.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-    
-    // Close menu when a mobile nav link is clicked
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            hamburgerMenu.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-    });
-});   
-</script>
+            // Toggle menu when hamburger is clicked
+            hamburgerMenu.addEventListener('click', function() {
+                hamburgerMenu.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                // Prevent scrolling when menu is open
+                document.body.style.overflow = hamburgerMenu.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            // Close menu when overlay is clicked
+            overlay.addEventListener('click', function() {
+                hamburgerMenu.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // Close menu when a mobile nav link is clicked
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburgerMenu.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        });   
+    </script>
 </body>
 </html>

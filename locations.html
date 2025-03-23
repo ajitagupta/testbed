@@ -48,6 +48,13 @@
             height: 100%;
         }
         
+        /* Navigation container for better alignment */
+        .navigation-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
         .logo-container {
             display: flex;
             align-items: center;
@@ -87,6 +94,40 @@
         .navigation a.active {
             border-bottom: 2px solid #fff;
             padding-bottom: 5px;
+        }
+        
+        /* Register Button in Navigation */
+        .register-btn {
+            background-color: #d92d2a;
+            color: #fff !important;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+        
+        .register-btn:hover {
+            color: #fff !important;
+            transform: translateY(-3px);
+        }
+        
+        /* Mobile version of the register button */
+        .register-btn-mobile {
+            background-color: #d92d2a;
+            color: #fff !important;
+            text-align: center;
+            font-weight: 600;
+            border-radius: 50px;
+            margin-top: 10px;
+            padding: 12px 0;
+            text-decoration: none;
+        }
+        
+        .register-btn-mobile:hover {
+            color: #fff !important;
         }
 
         /* Hamburger Menu */
@@ -627,7 +668,7 @@
         }
         
         @media (max-width: 768px) {
-            .navigation {
+            .navigation, .register-btn, .navigation-container {
                 display: none;
             }
             
@@ -712,13 +753,20 @@
                         <span>ELECTRISTAY</span>
                     </div>
                 </a>
-                <nav class="navigation">
-                    <a href="locations.html" class="active">Locations</a>
-                    <a href="evservices.html">EV Services</a>
-                    <a href="news.html">News & Updates</a>
-                    <a href="faqs.html">FAQ</a>
-                    <a href="contact.html">Contact</a>
-                </nav>
+                
+                <!-- Navigation Container with Register Button -->
+                <div class="navigation-container">
+                    <nav class="navigation">
+                        <a href="locations.html" class="active">Locations</a>
+                        <a href="evservices.html">EV Services</a>
+                        <a href="news.html">News & Updates</a>
+                        <a href="faqs.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                    </nav>
+                    
+                    <a href="register-accommodation.html" class="register-btn">Register Accommodation</a>
+                </div>
+                
                 <!-- Hamburger Menu -->
                 <div class="hamburger-menu">
                     <span></span>
@@ -736,6 +784,7 @@
                 <a href="news.html">News & Updates</a>
                 <a href="faqs.html">FAQ</a>
                 <a href="contact.html">Contact</a>
+                <a href="register-accommodation.html" class="register-btn-mobile">Register Accommodation</a>
             </nav>
         </div>
         
@@ -1142,5 +1191,5 @@
         });
     </script>
     <script src="location-filters.js"></script>
-    </body>
+</body>
 </html>
