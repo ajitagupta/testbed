@@ -237,37 +237,29 @@
         }
 
         .registration-hero {
-            position: relative;
-            height: 500px; /* Increased height to show more of the image */
-            border-radius: 0; /* Remove border radius for full-width display */
-            overflow: hidden;
-            margin-bottom: 3rem;
-            /* Replace the gradient with the background image */
-            background-image: url('./images/registeraccommodation.jpeg');
-            background-size: cover;
-            background-position: center;
-            /* Remove margin constraints */
-            margin-left: -4%;
-            margin-right: -4%;
-            width: calc(100% + 8%); /* Compensate for the negative margins */
-            max-width: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
+        position: relative;
+        height: 500px;
+        border-radius: 0;
+        overflow: hidden;
+        margin-bottom: 3rem;
+        /* Change from direct background-image to background with linear gradient overlay */
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('./images/registeraccommodation.jpeg');
+        background-size: cover;
+        background-position: center;
+        margin-left: -4%;
+        margin-right: -4%;
+        width: calc(100% + 8%);
+        max-width: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
 
-        /* Add a dark overlay to ensure text readability */
-        .registration-hero:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
-            z-index: 1;
-        }
+    /* Remove the separate overlay since it's now in the background property */
+    .registration-hero:before {
+        content: none;
+    }
 
         .registration-hero-content {
             max-width: 800px;
