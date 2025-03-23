@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Your Accommodation - ElectriStay</title>
+    <link rel="icon" type="image/x-icon" href="./icons/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #fff;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background-color: #000;
+        }
+
+        /* Container for header content */
+        .header-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Navigation container for better alignment */
+        .navigation-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        /* Navigation for desktop */
+        .navigation {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .navigation a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Register Button in Navigation */
+        .register-btn {
+            background-color: #d92d2a; /* Orange-red color from the Tesla car */
+            color: #fff !important;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+        
+        .register-btn:hover {
+            /*background-color: #E04B2B;*/
+            color: #fff !important;
+            transform: translateY(-3px);
+        }
+
+        /* Hamburger menu icon */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 200;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background-color: #111;
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            padding: 100px 30px 30px;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .mobile-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            padding: 10px 0;
+            transition: color 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-menu a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Mobile version of the register button */
+        .register-btn-mobile {
+            background-color: #d92d2a; /* Orange-red color from the Tesla car */
+            color: #fff !important;
+            text-align: center;
+            font-weight: 600;
+            border-radius: 50px;
+            margin-top: 10px;
+            padding: 12px 0;
+            text-decoration: none;
+        }
+        
+        .register-btn-mobile:hover {
+           /* background-color: #E04B2B;*/
+            color: #fff !important;
+        }
+        
+        /* When menu is open */
+        body.menu-open {
+            overflow: hidden;
+        }
+        
+        body.menu-open .mobile-menu {
+            right: 0;
+        }
+        
+        body.menu-open .menu-toggle span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        body.menu-open .menu-toggle span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        body.menu-open .menu-toggle span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        /* Overlay when menu is open */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 98;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        body.menu-open .menu-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main content area */
+        .main-content {
+            margin-top: 120px; 
+            padding: 0 4%;
+            max-width: 1600px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 5rem;
+        }
+
+        .registration-hero {
+            position: relative;
+            height: 450px; /* Increased height to show more of the image */
+            border-radius: 0; /* Remove border radius for full-width display */
+            overflow: hidden;
+            margin-bottom: 3rem;
+            /* Replace the gradient with the background image */
+            background-image: url('./images/registeraccommodation.jpeg');
+            background-size: cover;
+            background-position: center;
+            /* Remove margin constraints */
+            margin-left: -4%;
+            margin-right: -4%;
+            width: calc(100% + 8%); /* Compensate for the negative margins */
+            max-width: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Add a dark overlay to ensure text readability */
+        .registration-hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+            z-index: 1;
+        }
+
+        .registration-hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.6); /* Slightly darker background for better contrast */
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2; /* Place content above the overlay */
+        }
+
+        .registration-hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .registration-hero-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Responsive adjustments for the hero section */
+        @media (max-width: 768px) {
+            .registration-hero {
+                height: 400px; /* Keep good height on mobile */
+                margin-left: 0;
+                margin-right: 0;
+                width: 100%;
+            }
+
+            .registration-hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .registration-hero-content p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Registration Form */
+        .registration-form-container {
+            background-color: #111;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        .required-asterisk {
+            color: #FF5A36;
+            margin-left: 4px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #fff;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #FF5A36;
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group .hint {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Checkbox styles */
+        .checkbox-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 10px;
+            margin-top: 3px;
+            width: auto;
+        }
+
+        .checkbox-label {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* Charging options section */
+        .charging-options-container {
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .charging-options-container h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        /* Form action buttons */
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #fff;
+            padding: 1rem 2rem;
+            border: 1px solid #fff;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #d92d2a;
+            color: #fff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #b73235;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            margin-bottom: 4rem;
+        }
+
+        .benefits-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background-color: #111;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #FF5A36;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .benefit-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 4rem;
+        }
+
+        .faq-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-question {
+            background-color: #111;
+            padding: 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background-color: #1a1a1a;
+        }
+
+        .faq-question .icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: #1a1a1a;
+            border-radius: 0 0 10px 10px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            padding: 1.5rem;
+            margin-top: -10px;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: #111;
+            padding: 5rem 4% 2rem;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo-img {
+            height: 30px;
+            width: auto;
+        }
+        
+        .footer-logo span {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-column h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-bottom p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #777;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .navigation-container {
+                gap: 20px;
+            }
+            
+            .register-btn {
+                padding: 10px 20px;
+            }
+
+            .registration-hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .navigation-container {
+                gap: 15px;
+            }
+            
+            .register-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .registration-form-container {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Hide desktop register button on mobile */
+            .register-btn, .navigation-container {
+                display: none;
+            }
+            
+            /* Show navigation links in original form for mobile */
+            .navigation {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .registration-hero {
+                height: 250px;
+            }
+
+            .registration-hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .registration-hero-content p {
+                font-size: 1rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .registration-form-container {
+                padding: 1.5rem;
+            }
+
+            .form-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header>
+            <div class="header-container">
+                <a href="index.html" class="logo">
+                    <div class="logo-container">
+                        <img src="./images/logo_E.png" alt="ElectriStay Logo" class="logo-img">
+                        <span>ELECTRISTAY</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation with Centered Content -->
+                <div class="navigation-container">
+                    <nav class="navigation">
+                        <a href="locations.html">Locations</a>
+                        <a href="evservices.html">EV Services</a>
+                        <a href="news.html">News & Updates</a>
+                        <a href="faqs.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                    </nav>
+                    
+                    <a href="register-accommodation.html" class="register-btn">Register Accommodation</a>
+                </div>
+                
+                <!-- Hamburger Menu Icon -->
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <a href="locations.html">Locations</a>
+            <a href="evservices.html">EV Services</a>
+            <a href="news.html">News & Updates</a>
+            <a href="faqs.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+            <a href="register-accommodation.html" class="register-btn-mobile">Register Accommodation</a>
+        </div>
+        
+        <!-- Menu Overlay -->
+        <div class="menu-overlay"></div>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Registration Hero Section -->
+            <section class="registration-hero">
+                <div class="registration-hero-content">
+                    <h1>Join ElectriStay Network</h1>
+                    <p>Register your property and become part of the premium EV-friendly accommodation network, connecting you with a growing community of electric vehicle travelers.</p>
+                </div>
+            </section>
+            
+            <!-- Registration Form -->
+            <section class="registration-form-container">
+                <form id="accommodation-registration-form">
+                    <!-- Property Information Section -->
+                    <div class="form-section">
+                        <h2>Property Information</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="property-name">Property Name <span class="required-asterisk">*</span></label>
+                                <input type="text" id="property-name" name="property-name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="property-type">Property Type <span class="required-asterisk">*</span></label>
+                                <select id="property-type" name="property-type" required>
+                                    <option value="">Select Property Type</option>
+                                    <option value="hotel">Hotel</option>
+                                    <option value="resort">Resort</option>
+                                    <option value="boutique-hotel">Boutique Hotel</option>
+                                    <option value="apartment">Apartment</option>
+                                    <option value="vacation-rental">Vacation Rental</option>
+                                    <option value="lodge">Lodge</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="street-address">Street Address <span class="required-asterisk">*</span></label>
+                                <input type="text" id="street-address" name="street-address" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City <span class="required-asterisk">*</span></label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="postal-code">Postal Code <span class="required-asterisk">*</span></label>
+                                <input type="text" id="postal-code" name="postal-code" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="country">Country <span class="required-asterisk">*</span></label>
+                                <select id="country" name="country" required>
+                                    <option value="">Select Country</option>
+                                    <option value="germany">Germany</option>
+                                    <option value="france">France</option>
+                                    <option value="italy">Italy</option>
+                                    <option value="spain">Spain</option>
+                                    <option value="united-kingdom">United Kingdom</option>
+                                    <option value="united-states">United States</option>
+                                    <option value="canada">Canada</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="website">Website</label>
+                                <input type="url" id="website" name="website" placeholder="https://www.example.com">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="property-description">Property Description <span class="required-asterisk">*</span></label>
+                                <textarea id="property-description" name="property-description" rows="5" required></textarea>
+                                <span class="hint">Describe your property, unique features, and why EV travelers would enjoy staying with you.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="room-count">Number of Rooms <span class="required-asterisk">*</span></label>
+                                <input type="number" id="room-count" name="room-count" min="1" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="average-price">Average Price per Night (€) <span class="required-asterisk">*</span></label>
+                                <input type="number" id="average-price" name="average-price" min="1" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- EV Charging Information Section -->
+                    <div class="form-section">
+                        <h2>EV Charging Information</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="charging-status">Current Charging Status <span class="required-asterisk">*</span></label>
+                                <select id="charging-status" name="charging-status" required>
+                                    <option value="">Select Current Status</option>
+                                    <option value="operational">Operational Charging Stations</option>
+                                    <option value="in-progress">Installation In Progress</option>
+                                    <option value="planning">Planning to Install</option>
+                                    <option value="interested">Interested, Need Information</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="charging-options-container">
+                            <h3>Current or Planned Charging Options</h3>
+                            
+                            <div class="checkbox-group">
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="standard-outlet" name="charging-options" value="standard-outlet">
+                                    <label for="standard-outlet" class="checkbox-label">Standard Wall Outlets (230V)</label>
+                                </div>
+                                
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="type2-charger" name="charging-options" value="type2-charger">
+                                    <label for="type2-charger" class="checkbox-label">Type 2 AC Charging (11-22 kW)</label>
+                                </div>
+                                
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="ccs-charger" name="charging-options" value="ccs-charger">
+                                    <label for="ccs-charger" class="checkbox-label">CCS Fast Charging (50+ kW)</label>
+                                </div>
+                                
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="tesla-charger" name="charging-options" value="tesla-charger">
+                                    <label for="tesla-charger" class="checkbox-label">Tesla Destination Chargers</label>
+                                </div>
+                                
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="chademo-charger" name="charging-options" value="chademo-charger">
+                                    <label for="chademo-charger" class="checkbox-label">CHAdeMO Charging</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="charging-count">How many charging points do you have or plan to install?</label>
+                                <input type="number" id="charging-count" name="charging-count" min="0" value="0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="charging-fee">Do you charge a fee for charging?</label>
+                                <select id="charging-fee" name="charging-fee">
+                                    <option value="no-fee">No, it's complimentary for guests</option>
+                                    <option value="per-kwh">Yes, per kWh</option>
+                                    <option value="flat-fee">Yes, flat fee</option>
+                                    <option value="session-fee">Yes, per charging session</option>
+                                    <option value="undecided">Not decided yet</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sustainable-features">Other Sustainable Features</label>
+                                <textarea id="sustainable-features" name="sustainable-features" rows="3"></textarea>
+                                <span class="hint">Describe any other sustainability initiatives your property has implemented (e.g., renewable energy, waste reduction, etc.)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Information Section -->
+                    <div class="form-section">
+                        <h2>Contact Information</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact-name">Contact Name <span class="required-asterisk">*</span></label>
+                                <input type="text" id="contact-name" name="contact-name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-position">Position <span class="required-asterisk">*</span></label>
+                                <input type="text" id="contact-position" name="contact-position" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact-email">Email <span class="required-asterisk">*</span></label>
+                                <input type="email" id="contact-email" name="contact-email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-phone">Phone Number <span class="required-asterisk">*</span></label>
+                                <input type="tel" id="contact-phone" name="contact-phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="alternative-contact">Alternative Contact Person</label>
+                                <input type="text" id="alternative-contact" name="alternative-contact">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="alternative-email">Alternative Email</label>
+                                <input type="email" id="alternative-email" name="alternative-email">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="hear-about">How did you hear about ElectriStay?</label>
+                                <select id="hear-about" name="hear-about">
+                                    <option value="">Select an option</option>
+                                    <option value="search">Search Engine</option>
+                                    <option value="social">Social Media</option>
+                                    <option value="recommendation">Recommendation</option>
+                                    <option value="ev-community">EV Community</option>
+                                    <option value="event">Industry Event</option>
+                                    <option value="press">Press or Media</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Information & Terms -->
+                    <div class="form-section">
+                        <h2>Additional Information</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="additional-info">Additional Comments or Questions</label>
+                                <textarea id="additional-info" name="additional-info" rows="3"></textarea>
+                                <span class="hint">Share any additional information or specific questions you have about joining ElectriStay</span>
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="terms-conditions" name="terms-conditions" required>
+                                <label for="terms-conditions" class="checkbox-label">I agree to the Terms and Conditions <span class="required-asterisk">*</span></label>
+                            </div>
+                            
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="privacy-policy" name="privacy-policy" required>
+                                <label for="privacy-policy" class="checkbox-label">I have read and accept the Privacy Policy <span class="required-asterisk">*</span></label>
+                            </div>
+                            
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="marketing-emails" name="marketing-emails">
+                                <label for="marketing-emails" class="checkbox-label">I would like to receive updates and marketing communications from ElectriStay</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary">Save as Draft</button>
+                            <button type="submit" class="btn-primary">Submit Application</button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </main>
+
+    </body>
+</html>

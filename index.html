@@ -844,6 +844,97 @@
             color: #fff;
         }
         
+
+     /* Navigation container for better alignment */
+     .navigation-container {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+    }
+    
+    /* Register Button in Navigation */
+    .register-btn {
+        /*background-color: #b73235; /* Orange-red color from the Tesla car */
+        background-color: #d92d2a; /* Orange-red color from the Tesla car */
+        color: #fff !important;
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-align: center;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        text-decoration: none;
+    }
+    
+    .register-btn:hover {
+       /* background-color: #E04B2B;*/
+        color: #fff !important;
+        transform: translateY(-3px);
+    }
+    
+    /* Mobile version of the register button */
+    .register-btn-mobile {
+       /* background-color: #b73235; /* Orange-red color from the Tesla car */
+        background-color: #d92d2a; /* Orange-red color from the Tesla car */
+       color: #fff !important;
+        text-align: center;
+        font-weight: 600;
+        border-radius: 50px;
+        margin-top: 10px;
+        padding: 12px 0;
+        text-decoration: none;
+    }
+    
+    .register-btn-mobile:hover {
+       /* background-color: #E04B2B;*/
+        color: #fff !important;
+    }
+    
+    /* Update header container */
+    .header-container {
+        width: 100%;
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 4%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    /* Adjustments for different screen sizes */
+    @media (max-width: 1200px) {
+        .navigation-container {
+            gap: 20px;
+        }
+        
+        .register-btn {
+            padding: 10px 20px;
+        }
+    }
+    
+    @media (max-width: 992px) {
+        .navigation-container {
+            gap: 15px;
+        }
+        
+        .register-btn {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        /* Hide desktop register button on mobile */
+        .register-btn, .navigation-container {
+            display: none;
+        }
+        
+        /* Show navigation links in original form for mobile */
+        .navigation {
+            display: none;
+        }
+    }
+        
         /* Responsive styles - Enhanced for better mobile experience */
         @media (max-width: 1200px) {
             .hero-content h1 {
@@ -1046,13 +1137,17 @@
                 </a>
                 
                 <!-- Desktop Navigation -->
-                <nav class="navigation">
-                    <a href="locations.html">Locations</a>
-                    <a href="evservices.html">EV Services</a>
-                    <a href="news.html">News & Updates</a>
-                    <a href="faqs.html">FAQ</a>
-                    <a href="contact.html">Contact</a>
-                </nav>
+                <div class="navigation-container">
+                    <nav class="navigation">
+                        <a href="locations.html">Locations</a>
+                        <a href="evservices.html">EV Services</a>
+                        <a href="news.html">News & Updates</a>
+                        <a href="faqs.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                    </nav>
+                    
+                    <a href="register-accommodation.html" class="register-btn">Register Accommodation</a>
+                </div>
                 
                 <!-- Hamburger Menu Icon -->
                 <div class="menu-toggle">
@@ -1070,6 +1165,7 @@
             <a href="news.html">News & Updates</a>
             <a href="faqs.html">FAQ</a>
             <a href="contact.html">Contact</a>
+            <a href="register-accommodation.html" class="register-btn-mobile">Register Accommodation</a>
         </div>
         
         <!-- Menu Overlay -->
