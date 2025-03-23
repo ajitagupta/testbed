@@ -236,57 +236,75 @@
             margin-bottom: 5rem;
         }
 
+        /* Update the Registration hero section with a brighter, more illuminated look */
         .registration-hero {
-        position: relative;
-        height: 500px;
-        border-radius: 0;
-        overflow: hidden;
-        margin-bottom: 3rem;
-        /* Change from direct background-image to background with linear gradient overlay */
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('./images/registeraccommodation.jpeg');
-        background-size: cover;
-        background-position: center;
-        margin-left: -4%;
-        margin-right: -4%;
-        width: calc(100% + 8%);
-        max-width: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
+            position: relative;
+            height: 600px;
+            border-radius: 0;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            /* Brighter overlay with less darkness and more ambient light effect */
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), 
+                        radial-gradient(circle at top right, rgba(255, 255, 255, 0.2), transparent 70%),
+                        url('./images/registeraccommodation.jpeg');
+            background-size: cover;
+            background-position: center;
+            margin-left: -4%;
+            margin-right: -4%;
+            width: calc(100% + 8%);
+            max-width: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
 
-    /* Remove the separate overlay since it's now in the background property */
-    .registration-hero:before {
-        content: none;
-    }
+        /* Add subtle light rays effect */
+        .registration-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.15), transparent 60%);
+            pointer-events: none;
+        }
 
+        /* Enhanced content box with improved contrast */
         .registration-hero-content {
             max-width: 800px;
             padding: 2rem;
-            background-color: rgba(0, 0, 0, 0.6); /* Slightly darker background for better contrast */
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             border-radius: 10px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3),
+                        0 0 15px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
-            z-index: 2; /* Place content above the overlay */
+            z-index: 2;
         }
 
+        /* Brighter, more vibrant text */
         .registration-hero-content h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
         }
 
         .registration-hero-content p {
             font-size: 1.2rem;
             line-height: 1.6;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            color: #f0f0f0;
         }
 
         /* Responsive adjustments for the hero section */
         @media (max-width: 768px) {
             .registration-hero {
-                height: 400px; /* Keep good height on mobile */
+                height: 400px;
                 margin-left: 0;
                 margin-right: 0;
                 width: 100%;
@@ -298,6 +316,12 @@
 
             .registration-hero-content p {
                 font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .registration-hero {
+                height: 350px;
             }
         }
 
