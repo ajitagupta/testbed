@@ -1097,4 +1097,39 @@
         </main>
 
     </body>
+    <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get elements
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    const body = document.body;
+    
+    // Toggle menu function
+    function toggleMenu() {
+        body.classList.toggle('menu-open');
+    }
+    
+    // Event listeners
+    menuToggle.addEventListener('click', toggleMenu);
+    menuOverlay.addEventListener('click', toggleMenu);
+    
+    // Close menu when clicking on a mobile menu link
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            body.classList.remove('menu-open');
+        });
+    });
+    
+    // Close menu when pressing escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && body.classList.contains('menu-open')) {
+            body.classList.remove('menu-open');
+        }
+    });
+});
+
+    </script>
 </html>
