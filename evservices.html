@@ -121,9 +121,8 @@
             padding-bottom: 5px;
         }
         
-
-        /* Hamburger menu icon */
-        .menu-toggle {
+        /* Hamburger Menu */
+        .hamburger-menu {
             display: none;
             flex-direction: column;
             justify-content: space-between;
@@ -133,7 +132,7 @@
             z-index: 200;
         }
         
-        .menu-toggle span {
+        .hamburger-menu span {
             display: block;
             height: 3px;
             width: 100%;
@@ -142,44 +141,83 @@
             transition: all 0.3s ease;
         }
         
-        /* Mobile menu */
+        .hamburger-menu.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-menu.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        /* Mobile Navigation Menu */
         .mobile-menu {
             position: fixed;
             top: 0;
             right: -100%;
-            width: 80%;
-            max-width: 320px;
+            width: 70%;
+            max-width: 300px;
             height: 100vh;
             background-color: #111;
-            z-index: 99;
-            display: flex;
-            flex-direction: column;
-            padding: 100px 30px 30px;
+            z-index: 150;
+            padding: 100px 2rem 2rem;
             transition: right 0.3s ease;
             box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
         }
         
-        .mobile-menu a {
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .mobile-nav a {
             color: #fff;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 500;
-            margin-bottom: 20px;
             padding: 10px 0;
+            border-bottom: 1px solid #333;
             transition: color 0.3s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .mobile-menu a:hover {
+        .mobile-nav a:hover {
             color: rgba(255, 255, 255, 0.7);
         }
         
-        .mobile-menu a.active {
+        .mobile-nav a.active {
             color: #2196F3;
         }
+        
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 140;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
 
-         /* Mobile version of the register button */
-         .register-btn-mobile {
+        /* Mobile version of the register button */
+        .register-btn-mobile {
             background-color: #d92d2a; /* Orange-red color from the Tesla car */
             color: #fff !important;
             text-align: center;
@@ -194,46 +232,6 @@
            /* background-color: #E04B2B;*/
             color: #fff !important;
         }       
-        
-        /* When menu is open */
-        body.menu-open {
-            overflow: hidden;
-        }
-        
-        body.menu-open .mobile-menu {
-            right: 0;
-        }
-        
-        body.menu-open .menu-toggle span:nth-child(1) {
-            transform: translateY(9px) rotate(45deg);
-        }
-        
-        body.menu-open .menu-toggle span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        body.menu-open .menu-toggle span:nth-child(3) {
-            transform: translateY(-9px) rotate(-45deg);
-        }
-        
-        /* Overlay when menu is open */
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 98;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        body.menu-open .menu-overlay {
-            opacity: 1;
-            visibility: visible;
-        }
         
         /* Main content styles */
         .main-content {
@@ -603,6 +601,14 @@
 }
 
 @media (max-width: 768px) {
+    .navigation, .register-btn, .navigation-container {
+        display: none;
+    }
+    
+    .hamburger-menu {
+        display: flex;
+    }
+    
     .store-grid, 
     .testimonials-grid {
         grid-template-columns: 1fr;
@@ -628,6 +634,77 @@
     .content-section.active {
         display: block !important;
     }
+    
+    .inner-nav {
+        flex-direction: column;
+    }
+    
+    .inner-nav-item {
+        border-bottom: 1px solid #333;
+        padding: 1rem 1.5rem;
+    }
+    
+    .inner-nav-item.active:after {
+        height: 0;
+    }
+    
+    .inner-nav-item.active {
+        border-left: 4px solid #2196F3;
+    }
+    
+    .feature-cards,
+    .store-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .ev-hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .ev-hero-content p {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-description {
+        font-size: 1rem;
+    }
+    
+    .content-section {
+        padding: 1.5rem;
+    }
+    
+    .feature-card {
+        padding: 1.5rem;
+    }
+    
+    .ev-hero {
+        height: 350px;
+    }
+    
+    .ev-hero-content {
+        padding: 1.5rem;
+        max-width: 90%;
+    }
+    
+    #journey-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    #journey-form input, 
+    #journey-form button,
+    #journey-form select {
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+    
+    #map {
+        height: 350px !important;
+    }
 }
 
 @media (max-width: 576px) {
@@ -647,6 +724,52 @@
     .add-to-cart {
         padding: 0.7rem 1rem;
     }
+    
+    .footer-columns {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .ev-hero {
+        height: 300px;
+        border-radius: 15px;
+    }
+    
+    .ev-hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .ev-hero-content p {
+        font-size: 0.9rem;
+    }
+    
+    .feature-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .feature-title {
+        font-size: 1.2rem;
+    }
+    
+    .feature-description {
+        font-size: 0.9rem;
+    }
+    
+    .inner-nav-container {
+        border-radius: 10px;
+    }
+    
+    .faq-question {
+        padding: 1.2rem 0;
+        font-size: 0.95rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -660,6 +783,47 @@
     
     .testimonial-card {
         padding: 1.2rem;
+    }
+    
+    .footer-columns {
+        grid-template-columns: 1fr;
+    }
+    
+    .ev-hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .main-content {
+        margin-top: 100px;
+        padding: 0 3%;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .add-to-cart {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .ev-hero {
+        height: 280px;
+    }
+    
+    .legend {
+        bottom: 10px !important;
+        right: 10px !important;
+        padding: 8px !important;
+        font-size: 0.8rem !important;
+    }
+    
+    .legend h4 {
+        font-size: 14px !important;
+    }
+    
+    .legend p {
+        font-size: 12px !important;
     }
 }
         /* FAQ Accordion */
@@ -786,190 +950,6 @@
         .footer-links a:hover {
             color: #fff;
         }
-        
-        /* Responsive styles */
-        @media (max-width: 992px) {
-            .feature-cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .store-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            /* Show hamburger menu, hide desktop nav */
-            .navigation {
-                display: none;
-            }
-            
-            .menu-toggle {
-                display: flex;
-            }
-            
-            .inner-nav {
-                flex-direction: column;
-            }
-            
-            .inner-nav-item {
-                border-bottom: 1px solid #333;
-                padding: 1rem 1.5rem;
-            }
-            
-            .inner-nav-item.active:after {
-                height: 0;
-            }
-            
-            .inner-nav-item.active {
-                border-left: 4px solid #2196F3;
-            }
-            
-            .feature-cards,
-            .store-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .ev-hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .ev-hero-content p {
-                font-size: 1rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .section-description {
-                font-size: 1rem;
-            }
-            
-            .content-section {
-                padding: 1.5rem;
-            }
-            
-            .feature-card {
-                padding: 1.5rem;
-            }
-            
-            .ev-hero {
-                height: 350px;
-            }
-            
-            .ev-hero-content {
-                padding: 1.5rem;
-                max-width: 90%;
-            }
-            
-            #journey-form {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            #journey-form input, 
-            #journey-form button,
-            #journey-form select {
-                width: 100% !important;
-                margin-bottom: 10px;
-            }
-            
-            #map {
-                height: 350px !important;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .footer-columns {
-                grid-template-columns: 1fr 1fr;
-                gap: 2rem;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .ev-hero {
-                height: 300px;
-                border-radius: 15px;
-            }
-            
-            .ev-hero-content h1 {
-                font-size: 2rem;
-            }
-            
-            .ev-hero-content p {
-                font-size: 0.9rem;
-            }
-            
-            .feature-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.3rem;
-            }
-            
-            .feature-title {
-                font-size: 1.2rem;
-            }
-            
-            .feature-description {
-                font-size: 0.9rem;
-            }
-            
-            .inner-nav-container {
-                border-radius: 10px;
-            }
-            
-            .faq-question {
-                padding: 1.2rem 0;
-                font-size: 0.95rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .footer-columns {
-                grid-template-columns: 1fr;
-            }
-            
-            .ev-hero-content h1 {
-                font-size: 1.8rem;
-            }
-            
-            .main-content {
-                margin-top: 100px;
-                padding: 0 3%;
-            }
-            
-            .section-title {
-                font-size: 1.6rem;
-            }
-            
-            .add-to-cart {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .ev-hero {
-                height: 280px;
-            }
-            
-            .legend {
-                bottom: 10px !important;
-                right: 10px !important;
-                padding: 8px !important;
-                font-size: 0.8rem !important;
-            }
-            
-            .legend h4 {
-                font-size: 14px !important;
-            }
-            
-            .legend p {
-                font-size: 12px !important;
-            }
-        }
     </style>
 </head>
 <body>
@@ -998,7 +978,7 @@
                 </div>
                 
                 <!-- Hamburger Menu Icon -->
-                <div class="menu-toggle">
+                <div class="hamburger-menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -1008,16 +988,18 @@
         
         <!-- Mobile Menu -->
         <div class="mobile-menu">
-            <a href="locations.html">Locations</a>
-            <a href="evservices.html" class="active">EV Services</a>
-            <a href="news.html">News & Updates</a>
-            <a href="faqs.html">FAQ</a>
-            <a href="contact.html">Contact</a>
-            <a href="register-accommodation.html" class="register-btn-mobile">Register Accommodation</a>
+            <nav class="mobile-nav">
+                <a href="locations.html">Locations</a>
+                <a href="evservices.html" class="active">EV Services</a>
+                <a href="news.html">News & Updates</a>
+                <a href="faqs.html">FAQ</a>
+                <a href="contact.html">Contact</a>
+                <a href="register-accommodation.html" class="register-btn-mobile">Register Accommodation</a>
+            </nav>
         </div>
         
-        <!-- Menu Overlay -->
-        <div class="menu-overlay"></div>
+        <!-- Overlay -->
+        <div class="overlay"></div>
         
         <!-- Main Content -->
         <main class="main-content">
@@ -1477,8 +1459,47 @@
 </footer>
 </div>
 
+<!-- JavaScript for mobile menu functionality -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const overlay = document.querySelector('.overlay');
+    const body = document.body;
+    
+    // Toggle menu open/close
+    hamburgerMenu.addEventListener('click', function() {
+        hamburgerMenu.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+    });
+    
+    // Close menu when clicking overlay
+    overlay.addEventListener('click', function() {
+        hamburgerMenu.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+    
+    // Close menu when clicking a menu item
+    const menuItems = document.querySelectorAll('.mobile-nav a');
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            hamburgerMenu.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    });
+    
+    // Close menu on window resize (if width becomes larger than mobile breakpoint)
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            hamburgerMenu.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+    });
+    
     // Inner Navigation
     const navItems = document.querySelectorAll('.inner-nav-item');
     const contentSections = document.querySelectorAll('.content-section');
@@ -1509,7 +1530,8 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
             
             // Show corresponding content section with inline style
-            const sectionId = this.getAttribute('data-section');
+// Show corresponding content section with inline style
+const sectionId = this.getAttribute('data-section');
             const activeSection = document.getElementById(sectionId);
             activeSection.classList.add('active');
             activeSection.style.display = 'block';
@@ -1547,73 +1569,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Mobile menu functionality - FIXED VERSION
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const menuOverlay = document.querySelector('.menu-overlay');
-    const body = document.body;
-    
-    if (menuToggle) {
-        // Toggle menu open/close
-        menuToggle.addEventListener('click', function() {
-            body.classList.toggle('menu-open');
-            
-            // Ensure the menu toggle appears correctly when active
-            if (body.classList.contains('menu-open')) {
-                menuToggle.querySelector('span:nth-child(1)').style.transform = 'translateY(9px) rotate(45deg)';
-                menuToggle.querySelector('span:nth-child(2)').style.opacity = '0';
-                menuToggle.querySelector('span:nth-child(3)').style.transform = 'translateY(-9px) rotate(-45deg)';
-            } else {
-                menuToggle.querySelector('span:nth-child(1)').style.transform = 'none';
-                menuToggle.querySelector('span:nth-child(2)').style.opacity = '1';
-                menuToggle.querySelector('span:nth-child(3)').style.transform = 'none';
-            }
-        });
-    }
-    
-    if (menuOverlay) {
-        // Close menu when clicking overlay
-        menuOverlay.addEventListener('click', function() {
-            body.classList.remove('menu-open');
-            
-            // Reset hamburger icon
-            if (menuToggle) {
-                menuToggle.querySelector('span:nth-child(1)').style.transform = 'none';
-                menuToggle.querySelector('span:nth-child(2)').style.opacity = '1';
-                menuToggle.querySelector('span:nth-child(3)').style.transform = 'none';
-            }
-        });
-    }
-    
-    // Close menu when clicking a menu item
-    const menuItems = document.querySelectorAll('.mobile-menu a');
-    menuItems.forEach(item => {
-        item.addEventListener('click', function() {
-            body.classList.remove('menu-open');
-            
-            // Reset hamburger icon
-            if (menuToggle) {
-                menuToggle.querySelector('span:nth-child(1)').style.transform = 'none';
-                menuToggle.querySelector('span:nth-child(2)').style.opacity = '1';
-                menuToggle.querySelector('span:nth-child(3)').style.transform = 'none';
-            }
-        });
-    });
-    
-    // Close menu on window resize (if width becomes larger than mobile breakpoint)
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768 && body.classList.contains('menu-open')) {
-            body.classList.remove('menu-open');
-            
-            // Reset hamburger icon
-            if (menuToggle) {
-                menuToggle.querySelector('span:nth-child(1)').style.transform = 'none';
-                menuToggle.querySelector('span:nth-child(2)').style.opacity = '1';
-                menuToggle.querySelector('span:nth-child(3)').style.transform = 'none';
-            }
-        }
-    });
-    
     // Initialize FAQ answers with display none
     document.querySelectorAll('.faq-answer').forEach(answer => {
         answer.style.display = 'none';
@@ -1628,8 +1583,7 @@ function toggleConfiguration() {
     } else {
         configSection.style.display = 'none';
     }
-}
-
+}                 
 </script>
 </body>
-</html>
+</html>   
