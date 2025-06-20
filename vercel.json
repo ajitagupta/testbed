@@ -13,6 +13,7 @@
     { "src": "/faq", "dest": "/faqs.html" },
     { "src": "/contact", "dest": "/contact.html" },
     { "src": "/news", "dest": "/news.html" },
+    { "src": "/news/start-summit-2025", "dest": "/news/start-summit-2025.html" },
     { "src": "/images/(.*)", "dest": "/images/$1" },
     { "src": "/icons/(.*)", "dest": "/icons/$1" },
     { "src": "/(.+)", "dest": "/$1" }
