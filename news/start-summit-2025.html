@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectriStay - START Summit 2025</title>
+    <link rel="icon" type="image/x-icon" href="../icons/favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #fff;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            z-index: 100;
+            background-color: #000;
+        }
+
+        /* Container for header content */
+        .header-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+        
+        /* Navigation container for better alignment */
+        .navigation-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            white-space: nowrap;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .navigation {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .navigation a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .navigation a.active {
+            border-bottom: 2px solid #fff;
+            padding-bottom: 5px;
+        }
+        
+        /* Register Button in Navigation */
+        .register-btn {
+            background-color: #d92d2a;
+            color: #fff !important;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            min-width: max-content;
+        }
+        
+        .register-btn:hover {
+            color: #fff !important;
+            transform: translateY(-3px);
+        }
+        
+        /* Mobile version of the register button */
+        .register-btn-mobile {
+            background-color: #d92d2a;
+            color: #fff !important;
+            text-align: center;
+            font-weight: 600;
+            border-radius: 50px;
+            margin-top: 10px;
+            padding: 12px 0;
+            text-decoration: none;
+        }
+        
+        .register-btn-mobile:hover {
+            color: #fff !important;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 200;
+        }
+        
+        .hamburger-menu span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger-menu.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-menu.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        /* Mobile Navigation Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: #111;
+            z-index: 150;
+            padding: 100px 2rem 2rem;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .mobile-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            transition: color 0.3s ease;
+        }
+        
+        .mobile-nav a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .mobile-nav a.active {
+            color: #2196F3;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 140;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        /* Main content styles */
+        .main-content {
+            margin-top: 120px;
+            padding: 0 4%;
+            max-width: 1200px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 5rem;
+            padding-top: 2rem;
+        }
+        
+        /* Article Styles */
+        .article-header {
+            margin-bottom: 3rem;
+            padding-top: 1rem;
+        }
+        
+        .article-category {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background-color: #FF9800;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            color: #aaa;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+        
+        .article-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .article-image-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        .article-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .article-content {
+            line-height: 1.8;
+            color: #eee;
+            margin-bottom: 3rem;
+        }
+        
+        .article-content h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            color: #fff;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-content strong {
+            color: #fff;
+        }
+        
+        .article-content a {
+            color: #2196F3;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .article-content a:hover {
+            color: #0b7dda;
+            text-decoration: underline;
+        }
+        
+        .article-content hr {
+            margin: 2rem 0;
+            border: none;
+            height: 1px;
+            background-color: #333;
+        }
+        
+        /* Related Articles */
+        .related-articles {
+            margin-top: 4rem;
+            margin-bottom: 3rem;
+        }
+        
+        .related-articles h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .related-card {
+            background-color: #111;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .related-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .related-image {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .related-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .related-card:hover .related-image img {
+            transform: scale(1.05);
+        }
+        
+        .related-content {
+            padding: 1.5rem;
+        }
+        
+        .related-category {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background-color: #2196F3;
+            color: #fff;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+        
+        .category-network {
+            background-color: #4CAF50;
+        }
+        
+        .category-technology {
+            background-color: #9C27B0;
+        }
+        
+        .category-events {
+            background-color: #FF9800;
+        }
+        
+        .related-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+        
+        .related-meta {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Newsletter Section */
+        .newsletter-section {
+            background-color: #111;
+            padding: 3rem;
+            border-radius: 15px;
+            margin-top: 4rem;
+        }
+        
+        .newsletter-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .newsletter-container h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter-container p {
+            color: #ccc;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            background-color: #222;
+            color: #fff;
+        }
+        
+        .newsletter-button {
+            padding: 1rem 1.5rem;
+            background-color: #2196F3;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .newsletter-button:hover {
+            background-color: #0b7dda;
+        }
+        
+        /* Share Section */
+        .share-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            padding: 1.5rem;
+            background-color: #111;
+            border-radius: 10px;
+        }
+        
+        .share-text {
+            font-weight: 600;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .share-button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #222;
+            border-radius: 50%;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .twitter-button:hover {
+            background-color: #1DA1F2;
+        }
+        
+        .facebook-button:hover {
+            background-color: #4267B2;
+        }
+        
+        .linkedin-button:hover {
+            background-color: #0077B5;
+        }
+        
+        .email-button:hover {
+            background-color: #EA4335;
+        }
+        
+        /* Footer Section */
+        .footer {
+            background-color: #111;
+            padding: 5rem 4% 2rem;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo-img {
+            height: 30px;
+            width: auto;
+        }
+        
+        .footer-logo span {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-column h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-bottom p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #777;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .article-image-container {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                margin-top: 100px;
+            }
+            
+            .navigation, .register-btn, .navigation-container {
+                display: none;
+            }
+            
+            .hamburger-menu {
+                display: flex;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .article-image-container {
+                height: 300px;
+            }
+            
+            .footer-columns {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .article-title {
+                font-size: 1.8rem;
+            }
+            
+            .article-image-container {
+                height: 250px;
+            }
+            
+            .newsletter-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .newsletter-container h2 {
+                font-size: 1.5rem;
+            }
+            
+            .newsletter-input, 
+            .newsletter-button {
+                padding: 0.8rem 1rem;
+            }
+            
+            .share-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .article-title {
+                font-size: 1.5rem;
+            }
+            
+            .article-image-container {
+                height: 200px;
+            }
+            
+            .main-content {
+                padding: 0 3%;
+            }
+            
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header>
+            <div class="header-container">
+                <a href="../index.html" class="logo">
+                    <div class="logo-container">
+                        <img src="../images/logo_E.png" alt="ElectriStay Logo" class="logo-img">
+                        <span>ELECTRISTAY</span>
+                    </div>
+                </a>
+                
+                <!-- Navigation Container with Register Button -->
+                <div class="navigation-container">
+                    <nav class="navigation">
+                        <a href="../locations.html">Locations</a>
+                        <a href="../evservices.html">EV Services</a>
+                        <a href="../news.html" class="active">News & Updates</a>
+                        <a href="../faqs.html">FAQ</a>
+                        <a href="../contact.html">Contact</a>
+                    </nav>
+                    
+                    <a href="../register-accommodation.html" class="register-btn">Register Accommodation</a>
+                </div>
+                
+                <!-- Hamburger Menu -->
+                <div class="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-menu">
+            <nav class="mobile-nav">
+                <a href="../locations.html">Locations</a>
+                <a href="../evservices.html">EV Services</a>
+                <a href="../news.html" class="active">News & Updates</a>
+                <a href="../faqs.html">FAQ</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../register-accommodation.html" class="register-btn-mobile">Register Accommodation</a>
+            </nav>
+        </div>
+        
+        <!-- Overlay -->
+        <div class="overlay"></div>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <article>
+                <!-- Article Header -->
+                <header class="article-header">
+                    <span class="article-category category-events">Events & Partnerships</span>
+                    <h1 class="article-title">ElectriStay Showcases EV Charging Solutions at START Summit 2025</h1>
+                    <div class="article-meta">
+                        <div class="article-date">March 22, 2025</div>
+                        <div class="article-location">St. Gallen, Switzerland</div>
+                    </div>
+                </header>
+                
+                <!-- Article Featured Image -->
+                <div class="article-image-container">
+                    <img src="../images/news/start-summit-2025.jpg" alt="START Summit 2025 Event" class="article-image">
+                </div>
+                
+                <!-- Article Content -->
+                <div class="article-content">
+                    <p>ElectriStay representatives attended the prestigious START Summit in St. Gallen on March 20-21, connecting with leading software companies, investors, and industry innovators in the electric mobility space.</p>
+                    
+                    <h2>Event Highlights</h2>
+                    <p>The START Summit, one of Europe's premier entrepreneurship conferences, provided an exceptional platform for ElectriStay to showcase our latest advancements in EV charging technology and hospitality integration. The spacious venue hosted numerous booths from fancy AI companies and eager investors looking for the next big opportunity in sustainable transportation.</p>
+                    
+                    <p>"Meeting Thomas Dübendorfer from SICTIC (Swiss ICT Investor Club) was particularly valuable," said our founders. "His insights on the current investment landscape for EV infrastructure startups aligned perfectly with our expansion roadmap for Central Europe."</p>
+                    
+                    <h2>Networking Opportunities</h2>
+                    <p>The well-organized event facilitated meaningful conversations with established investor firms actively seeking promising ventures in the sustainable mobility sector. These connections will help us expand our network in the areas of startups, mobility, and sustainability.</p>
+                                     
+                    <h2>Looking Ahead</h2>
+                    <p>The summit has reinforced our commitment to integrating cutting-edge charging solutions with premium hospitality experiences. The energy and innovation on display have inspired new directions for our upcoming technology releases and property developments.</p>
+                    
+                    <p>ElectriStay continues to position itself at the intersection of luxury accommodation and advanced EV infrastructure, with several partnership announcements expected in the coming months as a direct result of connections made at the START Summit.</p>
+                    
+                </div>
+                
+                <!-- Share Section -->
+                <div class="share-section">
+                    <span class="share-text">Share this article:</span>
+                    <div class="share-buttons">
+                        <a href="#" class="share-button twitter-button">T</a>
+                        <a href="#" class="share-button facebook-button">F</a>
+                        <a href="#" class="share-button linkedin-button">L</a>
+                        <a href="#" class="share-button email-button">E</a>
+                    </div>
+                </div>
+                
+                <!-- Related Articles -->
+                <section class="related-articles">
+                    <h3>Related Articles</h3>
+                    <div class="related-grid">
+                        <!-- Related Article 1 -->
+                        <div class="related-card">
+                            <div class="related-image">
+                                <img src="https://placehold.co/400x300/222/fff?text=AI+Charging+Update" alt="AI Charging System Update">
+                            </div>
+                            <div class="related-content">
+                                <span class="related-category category-technology">Technology Update</span>
+                                <h4 class="related-title">Smart Charging System Gets Major AI Upgrade</h4>
+                                <div class="related-meta">February 18, 2025</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Related Article 2 -->
+                        <div class="related-card">
+                            <div class="related-image">
+                                <img src="https://placehold.co/400x300/222/fff?text=Partnership+Announcement" alt="New Partnership">
+                            </div>
+                            <div class="related-content">
+                                <span class="related-category category-events">Partnership</span>
+                                <h4 class="related-title">ElectriStay Partners with Leading EV Manufacturer</h4>
+                                <div class="related-meta">February 5, 2025</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Related Article 3 -->
+                        <div class="related-card">
+                            <div class="related-image">
+                                <img src="https://placehold.co/400x300/222/fff?text=Sustainability+Milestone" alt="Sustainability Milestone">
+                            </div>
+                            <div class="related-content">
+                                <span class="related-category">Sustainability</span>
+                                <h4 class="related-title">ElectriStay Achieves Carbon-Neutral Charging Network Status</h4>
+                                <div class="related-meta">January 15, 2025</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Newsletter Section -->
+                <section class="newsletter-section">
+                    <div class="newsletter-container">
+                        <h2>Stay Connected</h2>
+                        <p>Subscribe to our newsletter to receive the latest updates about new locations, technology improvements, and exclusive offers.</p>
+                        <form class="newsletter-form">
+                            <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                            <button type="submit" class="newsletter-button">Subscribe</button>
+                        </form>
+                    </div>
+                </section>
+            </article>
+        </main>
+        
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
+                    <span>ELECTRISTAY</span>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="../aboutus.html">About Us</a></li>
+                            <li><a href="../ourteam.html">Our Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Properties</h4>
+                        <ul>
+                            <li><a href="#">Urban Hotels</a></li>
+                            <li><a href="#">Beach Resorts</a></li>
+                            <li><a href="#">Mountain Lodges</a></li>
+                            <li><a href="#">Charging Map</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">EV Guides</a></li>
+                            <li><a href="#">Partner Program</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="../contact.html">Contact Us</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="https://www.linkedin.com/company/electristay" target="_blank">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ElectriStay. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript for mobile menu functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.overlay');
+            const body = document.body;
+            
+            // Toggle menu open/close
+            hamburgerMenu.addEventListener('click', function() {
+                hamburgerMenu.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                // Prevent scrolling when menu is open
+                body.style.overflow = hamburgerMenu.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            // Close menu when clicking overlay
+            overlay.addEventListener('click', function() {
+                hamburgerMenu.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                body.style.overflow = '';
+            });
+            
+            // Close menu when clicking a menu item
+            const menuItems = document.querySelectorAll('.mobile-nav a');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    hamburgerMenu.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    body.style.overflow = '';
+                });
+            });
+            
+            // Close menu on window resize (if width becomes larger than mobile breakpoint)
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    hamburgerMenu.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    body.style.overflow = '';
+                }
+            });
+            
+            // Newsletter form
+            const newsletterForm = document.querySelector('.newsletter-form');
+            
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('.newsletter-input').value;
+                
+                // In a real implementation, this would submit to a backend
+                alert(`Thank you for subscribing with ${email}! You'll receive our next newsletter.`);
+                this.reset();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -49,6 +49,15 @@
             height: 100%;
         }
         
+        /* Navigation container for better alignment */
+        .navigation-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            white-space: nowrap;            
+
+        }
+        
         .logo-container {
             display: flex;
             align-items: center;
@@ -79,6 +88,7 @@
             font-size: 0.9rem;
             font-weight: 500;
             transition: color 0.3s ease;
+            position: relative;
         }
         
         .navigation a:hover {
@@ -88,6 +98,41 @@
         .navigation a.active {
             border-bottom: 2px solid #fff;
             padding-bottom: 5px;
+        }
+        
+        /* Register Button in Navigation */
+        .register-btn {
+            background-color: #d92d2a;
+            color: #fff !important;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;            
+            min-width: max-content; /* This ensures the button takes enough width for its content */
+        }
+        
+        .register-btn:hover {
+            color: #fff !important;
+            transform: translateY(-3px);
+        }
+        
+        /* Mobile version of the register button */
+        .register-btn-mobile {
+            background-color: #d92d2a;
+            color: #fff !important;
+            text-align: center;
+            font-weight: 600;
+            border-radius: 50px;
+            margin-top: 10px;
+            padding: 12px 0;
+            text-decoration: none;
+        }
+        
+        .register-btn-mobile:hover {
+            color: #fff !important;
         }
         
         /* Hamburger Menu */
@@ -195,42 +240,95 @@
             margin-bottom: 5rem;
         }
         
-        /* News & Updates Hero Section - Gradient Background */
+        /* Update the News hero section with a brighter, more illuminated look */
         .news-hero {
             position: relative;
             height: 400px;
             border-radius: 20px;
             overflow: hidden;
             margin-bottom: 3rem;
-            /* Modern gradient background instead of image */
-            background: linear-gradient(135deg, #1a1a1a 0%, #2c4c63 60%, #5e3a6b 100%);
+            /* Brighter overlay with less darkness and more ambient light effect */
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), 
+                        radial-gradient(circle at top right, rgba(255, 255, 255, 0.2), transparent 70%),
+                        url('./images/news.jpeg');
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Enhanced hero content */
-        .news-hero-content {
-            text-align: center;
-            max-width: 800px;
-            padding: 2rem;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        /* Add subtle light rays effect */
+        .news-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.15), transparent 60%);
+            pointer-events: none;
         }
 
-        .news-hero-content h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
+    /* Enhanced content box with improved contrast */
+    .news-hero-content {
+        text-align: center;
+        max-width: 800px;
+        padding: 2rem;
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border-radius: 10px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3),
+                    0 0 15px rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 2;
+    }
 
-        .news-hero-content p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    /* Brighter, more vibrant text */
+    .news-hero-content h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        color: #ffffff;
+    }
+
+    .news-hero-content p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        color: #f0f0f0;
+    }
+
+    @media (max-width: 768px) {
+        .news-hero {
+            height: 350px;
+            background-position: center center;
         }
         
+        .news-hero-content h1 {
+            font-size: 2.5rem;
+        }
+        
+        .news-hero-content p {
+            font-size: 1.1rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .news-hero {
+            height: 300px;
+        }
+        
+        .news-hero-content h1 {
+            font-size: 2.2rem;
+        }
+        
+        .news-hero-content p {
+            font-size: 1rem;
+        }
+    }
+
         /* News Filtering */
         .news-filter {
             display: flex;
@@ -574,7 +672,7 @@
                 margin-top: 100px;
             }
             
-            .navigation {
+            .navigation, .register-btn, .navigation-container {
                 display: none;
             }
             
@@ -715,13 +813,19 @@
                         <span>ELECTRISTAY</span>
                     </div>
                 </a>
-                <nav class="navigation">
-                    <a href="locations.html">Locations</a>
-                    <a href="evservices.html">EV Services</a>
-                    <a href="news.html" class="active">News & Updates</a>
-                    <a href="faqs.html">FAQ</a>
-                    <a href="contact.html">Contact</a>
-                </nav>
+                
+                <!-- Navigation Container with Register Button -->
+                <div class="navigation-container">
+                    <nav class="navigation">
+                        <a href="locations.html">Locations</a>
+                        <a href="evservices.html">EV Services</a>
+                        <a href="news.html" class="active">News & Updates</a>
+                        <a href="faqs.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                    </nav>
+                    
+                    <a href="register-accommodation.html" class="register-btn">Register Accommodation</a>
+                </div>
                 
                 <!-- Hamburger Menu -->
                 <div class="hamburger-menu">
@@ -740,6 +844,7 @@
                 <a href="news.html" class="active">News & Updates</a>
                 <a href="faqs.html">FAQ</a>
                 <a href="contact.html">Contact</a>
+                <a href="register-accommodation.html" class="register-btn-mobile">Register Accommodation</a>
             </nav>
         </div>
         
@@ -770,17 +875,17 @@
                 <!-- Featured News -->
                 <div class="news-card featured-news">
                     <div class="news-image">
-                        <img src="https://placehold.co/800x400/222/fff?text=New+West+Coast+Corridor" alt="West Coast Charging Corridor">
+                        <img src="./images/news/start-summit-2025.jpg" alt="START Summit 2025 Event">
                     </div>
                     <div class="news-content">
-                        <span class="news-category category-network">Network Expansion</span>
-                        <h3 class="news-title">ElectriStay Completes West Coast Charging Corridor With 15 New Locations</h3>
-                        <p class="news-excerpt">We're excited to announce the completion of our West Coast charging corridor, connecting Seattle to San Diego with 15 new ElectriStay locations. This expansion ensures that EV travelers will never be more than 100 miles from a premium charging experience.</p>
+                        <span class="news-category category-events">Events & Partnerships</span>
+                        <h3 class="news-title">ElectriStay Showcases EV Charging Solutions at START Summit 2025</h3>
+                        <p class="news-excerpt">Our team recently attended the prestigious START Summit in St. Gallen, connecting with leading AI companies and investors to accelerate our European expansion plans and showcase our newborn idea in charging technology innovations.</p>
                         <div class="news-meta">
                             <div class="news-date">
-                                <span>March 1, 2025</span>
+                                <span>March 22, 2025</span>
                             </div>
-                            <a href="#" class="read-more">Read full article →</a>
+                            <a href="news/start-summit-2025.html" class="read-more">Read more →</a>
                         </div>
                     </div>
                 </div>
@@ -940,10 +1045,10 @@
                     <div class="footer-column">
                         <h4>Connect</h4>
                         <ul>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
                             <li><a href="#">Twitter</a></li>
                             <li><a href="#">Instagram</a></li>
-                            <li><a href="#">LinkedIn</a></li>
+                            <li><a href="https://www.linkedin.com/company/electristay" target="_blank">LinkedIn</a></li>
                         </ul>
                     </div>
                 </div>
@@ -959,68 +1064,90 @@
             </div>
         </footer>
     </div>
-
+    
+    <!-- JavaScript for mobile menu functionality -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Hamburger menu toggle
-            const hamburgerMenu = document.querySelector('.hamburger-menu');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const overlay = document.querySelector('.overlay');
-            const body = document.body;
-            
-            hamburgerMenu.addEventListener('click', function() {
-                this.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-                overlay.classList.toggle('active');
-                body.style.overflow = body.style.overflow === 'hidden' ? '' : 'hidden';
-            });
-            
-            overlay.addEventListener('click', function() {
-                hamburgerMenu.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                this.classList.remove('active');
-                body.style.overflow = '';
-            });
-            
-            // Close mobile menu on window resize if wider than mobile breakpoint
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
-                    hamburgerMenu.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                    overlay.classList.remove('active');
-                    body.style.overflow = '';
-                }
-            });
-            
-            // Filter buttons
-            const filterButtons = document.querySelectorAll('.filter-button');
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remove active class from all buttons
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Add active class to clicked button
-                    this.classList.add('active');
-                    
-                    // In a real implementation, this would filter the news items
-                    // For this demo, we'll just show an alert
-                    alert(`Filtered by: ${this.textContent}`);
-                });
-            });
-            
-            // Newsletter form
-            const newsletterForm = document.querySelector('.newsletter-form');
-            
-            newsletterForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = this.querySelector('.newsletter-input').value;
-                
-                // In a real implementation, this would submit to a backend
-                alert(`Thank you for subscribing with ${email}! You'll receive our next newsletter.`);
-                this.reset();
-            });
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const overlay = document.querySelector('.overlay');
+    const body = document.body;
+    
+    // Toggle menu open/close
+    hamburgerMenu.addEventListener('click', function() {
+        hamburgerMenu.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+    });
+    
+    // Close menu when clicking overlay
+    overlay.addEventListener('click', function() {
+        hamburgerMenu.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+    
+    // Close menu when clicking a menu item
+    const menuItems = document.querySelectorAll('.mobile-nav a');
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            hamburgerMenu.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
         });
-    </script>
-</body>
-</html>
+    });
+    
+    // Close menu on window resize (if width becomes larger than mobile breakpoint)
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            hamburgerMenu.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+    });
+});
+
+// JavaScript for image slider in Featured Properties
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all property image sliders
+    initPropertyImageSliders();
+});
+
+function initPropertyImageSliders() {
+    const propertyCards = document.querySelectorAll('.property-card');
+    
+    propertyCards.forEach(card => {
+        const images = card.querySelectorAll('.property-image');
+        const prevButton = card.querySelector('.nav-button.prev');
+        const nextButton = card.querySelector('.nav-button.next');
+        
+        // Only initialize if there are multiple images
+        if (images.length > 1) {
+            let currentIndex = 0;
+            
+            // Function to show specific image
+            const showImage = (index) => {
+                // Hide all images
+                images.forEach(img => img.classList.remove('active'));
+                
+                // Show selected image
+                images[index].classList.add('active');
+                currentIndex = index;
+            };
+            
+            // Next button click
+            nextButton.addEventListener('click', () => {
+                let nextIndex = (currentIndex + 1) % images.length;
+                showImage(nextIndex);
+            });
+            
+            // Previous button click
+            prevButton.addEventListener('click', () => {
+                let prevIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(prevIndex);
+            });
+        }
+    });
+}
+
+    </script>                               
