@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - Integration & Analytics | ElectriStay</title>
+    <link rel="icon" type="image/x-icon" href="./icons/favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #fff;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background-color: #000;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navigation-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .logo-container span {
+            color: #fff;
+        }
+        
+        .navigation {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .navigation a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .navigation a.active {
+            color: #fff;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 5px;
+        }
+        
+        .navigation a.active:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .register-btn {
+            background-color: #d92d2a;
+            color: #fff !important;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+        
+        .register-btn:hover {
+            color: #fff !important;
+            transform: translateY(-3px);
+        }
+
+        /* Hamburger Menu */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 25px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .hamburger-menu span {
+            width: 100%;
+            height: 3px;
+            background-color: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 80px;
+            right: -100%;
+            width: 100%;
+            background-color: #000;
+            padding: 2rem;
+            transition: right 0.3s ease;
+            z-index: 99;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .mobile-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: color 0.3s ease;
+        }
+
+        .register-btn-mobile {
+            background-color: #d92d2a;
+            color: #fff !important;
+            text-align: center;
+            font-weight: 600;
+            border-radius: 50px;
+            margin-top: 10px;
+            padding: 12px 0;
+            text-decoration: none;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 98;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Main content styles */
+        .main-content {
+            margin-top: 80px;
+            padding: 0 4%;
+            max-width: 1600px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            flex: 1;
+        }
+
+        /* Hero Section */
+        .demo-hero {
+            position: relative;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            /* Brighter overlay with less darkness and more ambient light effect */
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), 
+                        radial-gradient(circle at top right, rgba(255, 255, 255, 0.2), transparent 70%),
+                        url('./images/demo.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Add subtle light rays effect */
+        .demo-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.15), transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Enhanced content box with improved contrast */
+        .demo-hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3),
+                        0 0 15px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 2;
+        }
+
+        /* Brighter, more vibrant text */
+        .demo-hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+        }
+
+        .demo-hero-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            color: #f0f0f0;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 1rem;
+            width: 100%;
+        }
+
+        .tab-nav button {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab-nav button.active {
+            color: #2196F3;
+        }
+
+        .tab-nav button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -17px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #2196F3;
+        }
+
+        .tab-content {
+            display: none;
+            width: 100%;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Integration Section */
+        .integration-section {
+            margin-bottom: 4rem;
+            width: 100%;
+        }
+        
+        .analytics-section {
+            width: 100%;
+        }
+        
+        .api-section {
+            width: 100%;
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .integration-card {
+            background-color: #111;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #222;
+            transition: all 0.3s ease;
+        }
+
+        .integration-card:hover {
+            transform: translateY(-5px);
+            border-color: #2196F3;
+            box-shadow: 0 10px 30px rgba(33, 150, 243, 0.2);
+        }
+
+        .integration-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 1.5rem;
+        }
+
+        .integration-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .integration-card p {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .integration-features {
+            list-style: none;
+        }
+
+        .integration-features li {
+            color: #999;
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .integration-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+        }
+
+        /* Code Snippet Section */
+        .code-section {
+            background-color: #111;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .code-header h3 {
+            font-size: 1.3rem;
+        }
+
+        .copy-btn {
+            background-color: #2196F3;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: #1976D2;
+        }
+
+        .code-block {
+            background-color: #0a0a0a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        /* Analytics Dashboard */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .metric-card {
+            background-color: #111;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #222;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .metric-title {
+            font-size: 1.1rem;
+            color: #999;
+        }
+
+        .metric-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .metric-icon.green {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+
+        .metric-icon.blue {
+            background-color: rgba(33, 150, 243, 0.2);
+            color: #2196F3;
+        }
+
+        .metric-icon.orange {
+            background-color: rgba(255, 152, 0, 0.2);
+            color: #FF9800;
+        }
+
+        .metric-icon.purple {
+            background-color: rgba(156, 39, 176, 0.2);
+            color: #9C27B0;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .metric-change.positive {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+
+        .metric-change.negative {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: #F44336;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background-color: #111;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #222;
+            margin-bottom: 3rem;
+            height: 400px;
+            position: relative;
+        }
+
+        .chart-header {
+            margin-bottom: 2rem;
+        }
+
+        .chart-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-header p {
+            color: #999;
+        }
+
+        #energyChart {
+            width: 100% !important;
+            height: 300px !important;
+        }
+
+        /* Real-time Status */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .status-card {
+            background-color: #111;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #222;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .status-indicator {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .status-indicator.available {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+
+        .status-indicator.occupied {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: #F44336;
+        }
+
+        .status-indicator.charging {
+            background-color: rgba(255, 152, 0, 0.2);
+            color: #FF9800;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .status-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .status-info p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #111;
+            padding: 5rem 4% 2rem;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        /* Booking Demo Styles */
+        .booking-demo-section {
+            width: 100%;
+        }
+
+        .demo-booking-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 30px;
+            background-color: #111;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .demo-booking-form {
+            background: #0a0a0a;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #222;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #333;
+            background-color: #1a1a1a;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2196F3;
+        }
+
+        /* ElectriStay Plugin Section */
+        .electristay-section {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(76, 175, 80, 0.1) 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border: 1px solid rgba(33, 150, 243, 0.2);
+        }
+
+        .plugin-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ev-toggle {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #333;
+            transition: .4s;
+            border-radius: 26px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Charging Timeline */
+        .charging-timeline {
+            margin-top: 2rem;
+        }
+
+        .timeline-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-header {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .timeline-slot {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background-color 0.3s;
+        }
+
+        .timeline-slot:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .timeline-slot.recommended {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 3px solid #4CAF50;
+        }
+
+        .timeline-slot .time {
+            font-weight: 500;
+        }
+
+        .timeline-slot .price {
+            font-weight: 600;
+            color: #2196F3;
+        }
+
+        .charging-recommendation {
+            background: rgba(33, 150, 243, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px solid rgba(33, 150, 243, 0.2);
+        }
+
+        /* Booking Summary */
+        .demo-booking-summary {
+            background: #0a0a0a;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #222;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-section {
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #222;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .summary-item span:first-child {
+            color: #999;
+        }
+
+        .summary-item span:last-child {
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .ev-charging-summary {
+            background: rgba(76, 175, 80, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .summary-total {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #333;
+        }
+
+        .demo-book-btn {
+            background: #2196F3;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .demo-book-btn:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        }
+
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo-img {
+            height: 30px;
+            width: auto;
+        }
+        
+        .footer-logo span {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-column h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-bottom p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #777;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .demo-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .tab-nav {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .integration-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .demo-booking-container {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-booking-summary {
+                position: static;
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navigation-container {
+                display: none;
+            }
+
+            .hamburger-menu {
+                display: flex;
+            }
+
+            .demo-hero {
+                height: 350px;
+            }
+            
+            .demo-hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .demo-hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .demo-hero-content {
+                padding: 1.5rem;
+                width: 90%;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metric-value {
+                font-size: 2rem;
+            }
+
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-columns {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .demo-hero {
+                height: 300px;
+            }
+            
+            .demo-hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .demo-hero-content p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 0 3%;
+            }
+
+            .demo-hero {
+                padding: 2rem 1rem;
+            }
+
+            .tab-nav button {
+                font-size: 1rem;
+                padding: 0.3rem 0.8rem;
+            }
+
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header>
+            <div class="header-container">
+                <a href="index.html" class="logo">
+                    <div class="logo-container">
+                        <img src="./images/logo_E.png" alt="ElectriStay Logo" class="logo-img">
+                        <span>ELECTRISTAY</span>
+                    </div>
+                </a>
+                
+                <div class="navigation-container">
+                    <nav class="navigation">
+                        <a href="locations.html">Locations</a>
+                        <a href="evservices.html">EV Services</a>
+                        <a href="news.html">News & Updates</a>
+                        <a href="faqs.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                        <a href="demo.html" class="active">Demo</a>
+                    </nav>
+                    
+                    <a href="register-accommodation.html" class="register-btn">Register Accommodation</a>
+                </div>
+                
+                <div class="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <nav class="mobile-nav">
+                <a href="locations.html">Locations</a>
+                <a href="evservices.html">EV Services</a>
+                <a href="news.html">News & Updates</a>
+                <a href="faqs.html">FAQ</a>
+                <a href="contact.html">Contact</a>
+                <a href="demo.html" class="active">Demo</a>
+                <a href="register-accommodation.html" class="register-btn-mobile">Register Accommodation</a>
+            </nav>
+        </div>
+        
+        <div class="overlay"></div>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="demo-hero">
+                <div class="demo-hero-content">
+                    <h1>Integration & Analytics Demo</h1>
+                    <p>Experience the power of ElectriStay's smart integration platform and real-time analytics dashboard designed for hoteliers</p>
+                </div>
+            </section>
+
+            <!-- Tab Navigation -->
+            <div class="tab-nav">
+                <button class="active" onclick="showTab('integration')">Integration Platform</button>
+                <button onclick="showTab('analytics')">Analytics Dashboard</button>
+                <button onclick="showTab('api')">API Documentation</button>
+                <button onclick="showTab('booking-demo')">Booking Demo</button>
+            </div>
+
+            <!-- Integration Tab -->
+            <div id="integration" class="tab-content active">
+                <section class="integration-section">
+                    <h2 style="font-size: 2rem; margin-bottom: 2rem;">Seamless Hotel System Integration</h2>
+                    
+                    <div class="integration-grid">
+                        <div class="integration-card">
+                            <div class="integration-icon">🏨</div>
+                            <h3>Property Management Systems</h3>
+                            <p>Direct integration with leading hotel PMS platforms for automated guest verification and billing</p>
+                            <ul class="integration-features">
+                                <li>Oracle OPERA Cloud</li>
+                                <li>Mews Systems</li>
+                                <li>Cloudbeds</li>
+                                <li>Custom API Support</li>
+                            </ul>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">⚡</div>
+                            <h3>Charging Infrastructure</h3>
+                            <p>Compatible with all major EV charging hardware using industry-standard protocols</p>
+                            <ul class="integration-features">
+                                <li>OCPP 1.6+ Protocol</li>
+                                <li>Real-time Status Updates</li>
+                                <li>Remote Start/Stop Control</li>
+                                <li>Smart Load Balancing</li>
+                            </ul>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">💳</div>
+                            <h3>Payment Processing</h3>
+                            <p>Secure payment integration with automatic room charging for hotel guests</p>
+                            <ul class="integration-features">
+                                <li>PCI DSS Compliant</li>
+                                <li>Room Charge Integration</li>
+                                <li>Multiple Currency Support</li>
+                                <li>Automated Invoicing</li>
+                            </ul>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">🔌</div>
+                            <h3>Energy Management</h3>
+                            <p>Smart grid integration for optimal energy usage and cost management</p>
+                            <ul class="integration-features">
+                                <li>Dynamic Load Management</li>
+                                <li>Peak Demand Reduction</li>
+                                <li>Renewable Energy Priority</li>
+                                <li>Real-time Grid Data</li>
+                            </ul>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">📱</div>
+                            <h3>Mobile Applications</h3>
+                            <p>Native mobile apps for guests and hotel staff with full feature access</p>
+                            <ul class="integration-features">
+                                <li>iOS & Android Apps</li>
+                                <li>Push Notifications</li>
+                                <li>QR Code Activation</li>
+                                <li>Multi-language Support</li>
+                            </ul>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">🤖</div>
+                            <h3>AI & Machine Learning</h3>
+                            <p>Advanced algorithms for pricing optimization and demand forecasting</p>
+                            <ul class="integration-features">
+                                <li>Dynamic Pricing Engine</li>
+                                <li>Demand Prediction</li>
+                                <li>Usage Pattern Analysis</li>
+                                <li>Automated Scheduling</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Code Snippet Example -->
+                    <div class="code-section">
+                        <div class="code-header">
+                            <h3>Quick Integration Example</h3>
+                            <button class="copy-btn" onclick="copyCode()">Copy Code</button>
+                        </div>
+                        <pre class="code-block"><code>// Initialize ElectriStay API
+const electriStay = new ElectriStayAPI({
+    apiKey: 'your-api-key',
+    hotelId: 'your-hotel-id',
+    environment: 'production'
+});
+
+// Create a charging session for a guest
+const session = await electriStay.createSession({
+    guestId: 'guest-123',
+    roomNumber: '405',
+    vehicleType: 'Tesla Model 3',
+    chargingStationId: 'station-2',
+    targetChargeLevel: 80,
+    departureTime: '2025-06-22T09:00:00Z'
+});
+
+// Monitor charging progress
+electriStay.on('chargingUpdate', (data) => {
+    console.log(`Charging progress: ${data.currentLevel}%`);
+});</code></pre>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Booking Demo Tab -->
+            <div id="booking-demo" class="tab-content">
+                <section class="booking-demo-section">
+                    <h2 style="font-size: 2rem; margin-bottom: 2rem;">Live Booking Timeline Demo</h2>
+                    <p style="font-size: 1.1rem; color: #ccc; margin-bottom: 3rem;">Experience how the ElectriStay plugin seamlessly integrates with hotel booking systems to provide smart EV charging scheduling</p>
+                    
+                    <!-- Demo Booking Container -->
+                    <div class="demo-booking-container">
+                        <div class="demo-booking-form">
+                            <div class="form-section">
+                                <h3 class="section-title">Your Stay Details</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="demo-checkin">Check-in Date</label>
+                                        <input type="date" id="demo-checkin" min="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="demo-checkout">Check-out Date</label>
+                                        <input type="date" id="demo-checkout" min="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="demo-guests">Number of Guests</label>
+                                        <select id="demo-guests">
+                                            <option>1 Guest</option>
+                                            <option selected>2 Guests</option>
+                                            <option>3 Guests</option>
+                                            <option>4 Guests</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="demo-room">Room Type</label>
+                                        <select id="demo-room">
+                                            <option>Standard Room</option>
+                                            <option selected>Deluxe Room</option>
+                                            <option>Suite</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ElectriStay Plugin Section -->
+                            <div class="electristay-section">
+                                <div class="plugin-header">
+                                    <img src="./images/logo_E.png" alt="ElectriStay" style="height: 30px; width: auto;">
+                                    <span style="font-weight: 600; margin-left: 10px;">EV Charging Integration</span>
+                                </div>
+                                
+                                <div class="ev-options">
+                                    <h4 style="font-size: 1.1rem; margin-bottom: 1rem;">Will you be arriving with an electric vehicle?</h4>
+                                    
+                                    <div class="ev-toggle">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="ev-toggle" onchange="toggleEVOptions()">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                        <span style="margin-left: 10px;">Yes, I need EV charging</span>
+                                    </div>
+                                    
+                                    <div id="ev-details" style="display: none;">
+                                        <div class="form-grid" style="margin-top: 1.5rem;">
+                                            <div class="form-group">
+                                                <label for="demo-vehicle">Vehicle Model</label>
+                                                <select id="demo-vehicle">
+                                                    <option>Tesla Model 3</option>
+                                                    <option>Tesla Model Y</option>
+                                                    <option>BMW iX</option>
+                                                    <option>Mercedes EQS</option>
+                                                    <option>Audi e-tron</option>
+                                                    <option>Other</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="demo-connector">Connector Type</label>
+                                                <select id="demo-connector">
+                                                    <option>Type 2</option>
+                                                    <option>CCS</option>
+                                                    <option>CHAdeMO</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="demo-arrival">Arrival Battery %</label>
+                                                <input type="number" id="demo-arrival" value="30" min="0" max="100">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="demo-target">Target Battery %</label>
+                                                <input type="number" id="demo-target" value="80" min="0" max="100">
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Charging Timeline -->
+                                        <div class="charging-timeline">
+                                            <h4 style="margin: 2rem 0 1rem;">Smart Charging Schedule</h4>
+                                            <div class="timeline-container">
+                                                <div class="timeline-header">
+                                                    <span>Time</span>
+                                                    <span>Status</span>
+                                                    <span>Price/kWh</span>
+                                                </div>
+                                                <div class="timeline-slot available">
+                                                    <span class="time">18:00 - 22:00</span>
+                                                    <span class="status">🔴 Peak Hours</span>
+                                                    <span class="price">€0.45</span>
+                                                </div>
+                                                <div class="timeline-slot recommended">
+                                                    <span class="time">22:00 - 06:00</span>
+                                                    <span class="status">🟢 Off-Peak (Recommended)</span>
+                                                    <span class="price">€0.28</span>
+                                                </div>
+                                                <div class="timeline-slot">
+                                                    <span class="time">06:00 - 09:00</span>
+                                                    <span class="status">🟡 Standard</span>
+                                                    <span class="price">€0.35</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="charging-recommendation">
+                                                <div style="display: flex; align-items: center; gap: 10px;">
+                                                    <span style="font-size: 24px;">💡</span>
+                                                    <div>
+                                                        <strong>Smart Recommendation</strong>
+                                                        <p style="margin: 5px 0; color: #999;">Schedule charging from 22:00 to 03:00 for optimal pricing. You'll save 38% compared to peak hours!</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Booking Summary -->
+                        <div class="demo-booking-summary">
+                            <h3 style="font-size: 1.4rem; margin-bottom: 1.5rem;">Booking Summary</h3>
+                            
+                            <div class="summary-section">
+                                <div class="summary-item">
+                                    <span>Check-in</span>
+                                    <span id="summary-checkin">Select date</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Check-out</span>
+                                    <span id="summary-checkout">Select date</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Nights</span>
+                                    <span id="summary-nights">0</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Room Type</span>
+                                    <span id="summary-room">Deluxe Room</span>
+                                </div>
+                            </div>
+                            
+                            <div class="summary-section" style="margin-top: 2rem;">
+                                <div class="summary-item">
+                                    <span>Room Rate</span>
+                                    <span id="summary-room-rate">€150/night</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Room Total</span>
+                                    <span id="summary-room-total">€0</span>
+                                </div>
+                            </div>
+                            
+                            <div class="ev-charging-summary" id="ev-summary" style="display: none;">
+                                <h4 style="margin-bottom: 1rem; font-size: 1.1rem;">EV Charging</h4>
+                                <div class="summary-item">
+                                    <span>Estimated kWh</span>
+                                    <span id="summary-kwh">50 kWh</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Charging Cost</span>
+                                    <span id="summary-charging">€14.00</span>
+                                </div>
+                                <div class="summary-item" style="color: #4CAF50;">
+                                    <span>Off-Peak Savings</span>
+                                    <span id="summary-savings">-€8.50</span>
+                                </div>
+                            </div>
+                            
+                            <div class="summary-total">
+                                <div class="summary-item" style="font-size: 1.3rem; font-weight: 600;">
+                                    <span>Total</span>
+                                    <span id="summary-total" style="color: #2196F3;">€0</span>
+                                </div>
+                            </div>
+                            
+                            <button class="demo-book-btn">Complete Booking</button>
+                            
+                            <div class="security-note">
+                                <span style="color: #4CAF50;">🔒</span>
+                                <span style="font-size: 0.9rem; color: #999;">Secure booking with SSL encryption</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div id="analytics" class="tab-content">
+                <section class="analytics-section">
+                    <h2 style="font-size: 2rem; margin-bottom: 2rem;">Energy Analytics Dashboard</h2>
+                    
+                    <!-- Key Metrics -->
+                    <div class="dashboard-grid">
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Total Energy Delivered</span>
+                                <div class="metric-icon green">⚡</div>
+                            </div>
+                            <div class="metric-value">2,847 kWh</div>
+                            <span class="metric-change positive">↑ 12.5% from last week</span>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Active Charging Sessions</span>
+                                <div class="metric-icon blue">🔌</div>
+                            </div>
+                            <div class="metric-value">8</div>
+                            <span class="metric-change positive">↑ 2 from yesterday</span>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Revenue Generated</span>
+                                <div class="metric-icon orange">💰</div>
+                            </div>
+                            <div class="metric-value">CHF 1,234</div>
+                            <span class="metric-change positive">↑ 18.3% from last week</span>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Station Utilization</span>
+                                <div class="metric-icon purple">📊</div>
+                            </div>
+                            <div class="metric-value">67%</div>
+                            <span class="metric-change positive">↑ 5% from last month</span>
+                        </div>
+                    </div>
+
+                    <!-- Energy Usage Chart -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Weekly Energy Consumption Pattern</h3>
+                            <p>Energy usage trends across your charging stations</p>
+                        </div>
+                        <canvas id="energyChart"></canvas>
+                    </div>
+
+                    <!-- Real-time Station Status -->
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Real-time Station Status</h3>
+                    <div class="status-grid">
+                        <div class="status-card">
+                            <div class="status-indicator available">✓</div>
+                            <div class="status-info">
+                                <h4>Station 1 - Available</h4>
+                                <p>Type 2 • 22kW • Ready</p>
+                            </div>
+                        </div>
+
+                        <div class="status-card">
+                            <div class="status-indicator charging">⚡</div>
+                            <div class="status-info">
+                                <h4>Station 2 - Charging</h4>
+                                <p>CCS • 50kW • 65% Complete</p>
+                            </div>
+                        </div>
+
+                        <div class="status-card">
+                            <div class="status-indicator charging">⚡</div>
+                            <div class="status-info">
+                                <h4>Station 3 - Charging</h4>
+                                <p>Type 2 • 11kW • 23% Complete</p>
+                            </div>
+                        </div>
+
+                        <div class="status-card">
+                            <div class="status-indicator occupied">🚗</div>
+                            <div class="status-info">
+                                <h4>Station 4 - Occupied</h4>
+                                <p>CHAdeMO • 50kW • Scheduled</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Insights -->
+                    <div class="integration-grid" style="margin-top: 3rem;">
+                        <div class="integration-card">
+                            <h3>Peak Usage Hours</h3>
+                            <p style="font-size: 2rem; font-weight: 700; margin: 1rem 0;">18:00 - 22:00</p>
+                            <p>Most charging sessions occur during evening hours when guests arrive</p>
+                        </div>
+
+                        <div class="integration-card">
+                            <h3>Average Session Duration</h3>
+                            <p style="font-size: 2rem; font-weight: 700; margin: 1rem 0;">3.5 hours</p>
+                            <p>Typical charging time for overnight guests with Level 2 charging</p>
+                        </div>
+
+                        <div class="integration-card">
+                            <h3>Carbon Offset</h3>
+                            <p style="font-size: 2rem; font-weight: 700; margin: 1rem 0;">847 kg CO₂</p>
+                            <p>Equivalent emissions saved through renewable energy usage this month</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- API Documentation Tab -->
+            <div id="api" class="tab-content">
+                <section class="api-section">
+                    <h2 style="font-size: 2rem; margin-bottom: 2rem;">API Documentation</h2>
+                    
+                    <div class="code-section">
+                        <div class="code-header">
+                            <h3>Authentication</h3>
+                        </div>
+                        <pre class="code-block"><code>// API Authentication
+POST https://api.electristay.com/v1/auth/token
+
+Headers:
+{
+    "Content-Type": "application/json"
+}
+
+Body:
+{
+    "client_id": "your-client-id",
+    "client_secret": "your-client-secret",
+    "grant_type": "client_credentials"
+}
+
+Response:
+{
+    "access_token": "eyJhbGciOiJIUzI1NiIs...",
+    "token_type": "Bearer",
+    "expires_in": 3600
+}</code></pre>
+                    </div>
+
+                    <div class="code-section">
+                        <div class="code-header">
+                            <h3>Create Charging Session</h3>
+                        </div>
+                        <pre class="code-block"><code>// Create a new charging session
+POST https://api.electristay.com/v1/sessions
+
+Headers:
+{
+    "Authorization": "Bearer {access_token}",
+    "Content-Type": "application/json"
+}
+
+Body:
+{
+    "guest_id": "guest-123",
+    "station_id": "station-2",
+    "room_number": "405",
+    "target_soc": 80,
+    "departure_time": "2025-06-22T09:00:00Z",
+    "pricing_tier": "standard"
+}
+
+Response:
+{
+    "session_id": "sess_abc123",
+    "status": "scheduled",
+    "estimated_cost": 12.50,
+    "estimated_duration": 210,
+    "start_time": "2025-06-21T22:00:00Z"
+}</code></pre>
+                    </div>
+
+                    <div class="code-section">
+                        <div class="code-header">
+                            <h3>Get Station Status</h3>
+                        </div>
+                        <pre class="code-block"><code>// Get real-time station status
+GET https://api.electristay.com/v1/stations/{station_id}/status
+
+Headers:
+{
+    "Authorization": "Bearer {access_token}"
+}
+
+Response:
+{
+    "station_id": "station-2",
+    "status": "available",
+    "connector_type": "Type2",
+    "max_power": 22000,
+    "current_power": 0,
+    "last_session": {
+        "end_time": "2025-06-21T18:30:00Z",
+        "energy_delivered": 35.2
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="integration-grid" style="margin-top: 3rem;">
+                        <div class="integration-card">
+                            <h3>RESTful API</h3>
+                            <p>Modern REST architecture with JSON responses and comprehensive error handling</p>
+                        </div>
+
+                        <div class="integration-card">
+                            <h3>Webhook Support</h3>
+                            <p>Real-time event notifications for charging status updates and system alerts</p>
+                        </div>
+
+                        <div class="integration-card">
+                            <h3>SDK Libraries</h3>
+                            <p>Native SDKs available for Python, Node.js, Java, and .NET platforms</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="./images/logo_E.png" alt="ElectriStay Logo" class="footer-logo-img">
+                    <span>ELECTRISTAY</span>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="aboutus.html">About Us</a></li>
+                            <li><a href="ourteam.html">Our Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Properties</h4>
+                        <ul>
+                            <li><a href="#">Urban Hotels</a></li>
+                            <li><a href="#">Beach Resorts</a></li>
+                            <li><a href="#">Mountain Lodges</a></li>
+                            <li><a href="#">Charging Map</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">EV Guides</a></li>
+                            <li><a href="#">Partner Program</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="https://www.linkedin.com/company/electristay" target="_blank">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ElectriStay. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Mobile menu toggle
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.overlay');
+        
+        hamburgerMenu.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+        
+        overlay.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Tab switching functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-nav button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Initialize chart when analytics tab is shown
+            if (tabName === 'analytics') {
+                initChart();
+            }
+        }
+
+        // Copy code functionality
+        function copyCode() {
+            const codeText = document.querySelector('.code-block code').textContent;
+            navigator.clipboard.writeText(codeText).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Initialize Chart
+        function initChart() {
+            const ctx = document.getElementById('energyChart');
+            if (ctx && !ctx.chart) {
+                ctx.chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                        datasets: [{
+                            label: 'Energy Consumption (kWh)',
+                            data: [320, 380, 350, 420, 480, 520, 440],
+                            borderColor: '#2196F3',
+                            backgroundColor: 'rgba(33, 150, 243, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            fill: true
+                        }, {
+                            label: 'Solar Generation (kWh)',
+                            data: [150, 180, 160, 200, 220, 280, 240],
+                            borderColor: '#4CAF50',
+                            backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: '#fff',
+                                    padding: 20,
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: '#999'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: '#999'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Simulate real-time updates
+        setInterval(() => {
+            // Update random metric
+            const metrics = document.querySelectorAll('.metric-value');
+            const randomMetric = metrics[Math.floor(Math.random() * metrics.length)];
+            const currentValue = parseFloat(randomMetric.textContent.replace(/[^0-9.]/g, ''));
+            const change = (Math.random() - 0.5) * 10;
+            const newValue = Math.max(0, currentValue + change);
+            
+            if (randomMetric.textContent.includes('kWh')) {
+                randomMetric.textContent = Math.round(newValue) + ' kWh';
+            } else if (randomMetric.textContent.includes('CHF')) {
+                randomMetric.textContent = 'CHF ' + Math.round(newValue);
+            } else if (randomMetric.textContent.includes('%')) {
+                randomMetric.textContent = Math.round(newValue) + '%';
+            } else {
+                randomMetric.textContent = Math.round(newValue);
+            }
+        }, 5000);
+
+        // Booking Demo Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set minimum dates
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const todayString = `${yyyy}-${mm}-${dd}`;
+            
+            const checkInInput = document.getElementById('demo-checkin');
+            const checkOutInput = document.getElementById('demo-checkout');
+            
+            if (checkInInput) {
+                checkInInput.min = todayString;
+                checkInInput.value = todayString;
+            }
+            
+            if (checkOutInput) {
+                const tomorrow = new Date(today);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                const tomorrowString = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(tomorrow.getDate()).padStart(2, '0')}`;
+                checkOutInput.min = tomorrowString;
+                checkOutInput.value = tomorrowString;
+            }
+            
+            // Update checkout min date when checkin changes
+            if (checkInInput) {
+                checkInInput.addEventListener('change', function() {
+                    const checkInDate = new Date(checkInInput.value);
+                    checkInDate.setDate(checkInDate.getDate() + 1);
+                    const minCheckOut = `${checkInDate.getFullYear()}-${String(checkInDate.getMonth() + 1).padStart(2, '0')}-${String(checkInDate.getDate()).padStart(2, '0')}`;
+                    checkOutInput.min = minCheckOut;
+                    
+                    if (checkOutInput.value && checkOutInput.value <= checkInInput.value) {
+                        checkOutInput.value = minCheckOut;
+                    }
+                    
+                    updateBookingSummary();
+                });
+            }
+            
+            // Add event listeners for form changes
+            const formInputs = document.querySelectorAll('#booking-demo input, #booking-demo select');
+            formInputs.forEach(input => {
+                input.addEventListener('change', updateBookingSummary);
+            });
+            
+            // Initial update
+            updateBookingSummary();
+        });
+
+        // Toggle EV Options
+        function toggleEVOptions() {
+            const evToggle = document.getElementById('ev-toggle');
+            const evDetails = document.getElementById('ev-details');
+            const evSummary = document.getElementById('ev-summary');
+            
+            if (evToggle.checked) {
+                evDetails.style.display = 'block';
+                evSummary.style.display = 'block';
+            } else {
+                evDetails.style.display = 'none';
+                evSummary.style.display = 'none';
+            }
+            
+            updateBookingSummary();
+        }
+
+        // Update Booking Summary
+        function updateBookingSummary() {
+            const checkIn = document.getElementById('demo-checkin')?.value;
+            const checkOut = document.getElementById('demo-checkout')?.value;
+            const room = document.getElementById('demo-room')?.value || 'Deluxe Room';
+            const evEnabled = document.getElementById('ev-toggle')?.checked;
+            
+            // Update summary display
+            document.getElementById('summary-checkin').textContent = checkIn ? new Date(checkIn).toLocaleDateString() : 'Select date';
+            document.getElementById('summary-checkout').textContent = checkOut ? new Date(checkOut).toLocaleDateString() : 'Select date';
+            document.getElementById('summary-room').textContent = room;
+            
+            // Calculate nights
+            let nights = 0;
+            if (checkIn && checkOut) {
+                const checkInDate = new Date(checkIn);
+                const checkOutDate = new Date(checkOut);
+                nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+            }
+            document.getElementById('summary-nights').textContent = nights;
+            
+            // Calculate room total
+            const roomRate = room === 'Suite' ? 250 : room === 'Deluxe Room' ? 150 : 100;
+            const roomTotal = nights * roomRate;
+            document.getElementById('summary-room-rate').textContent = `€${roomRate}/night`;
+            document.getElementById('summary-room-total').textContent = `€${roomTotal}`;
+            
+            // Calculate charging cost if EV is enabled
+            let chargingCost = 0;
+            if (evEnabled) {
+                const arrivalBattery = parseInt(document.getElementById('demo-arrival')?.value || 30);
+                const targetBattery = parseInt(document.getElementById('demo-target')?.value || 80);
+                const batteryDiff = targetBattery - arrivalBattery;
+                const estimatedKwh = batteryDiff; // Simplified calculation
+                
+                document.getElementById('summary-kwh').textContent = `${estimatedKwh} kWh`;
+                
+                // Off-peak rate calculation
+                chargingCost = estimatedKwh * 0.28;
+                const peakCost = estimatedKwh * 0.45;
+                const savings = peakCost - chargingCost;
+                
+                document.getElementById('summary-charging').textContent = `€${chargingCost.toFixed(2)}`;
+                document.getElementById('summary-savings').textContent = `-€${savings.toFixed(2)}`;
+            }
+            
+            // Update total
+            const total = roomTotal + chargingCost;
+            document.getElementById('summary-total').textContent = `€${total.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
