@@ -631,25 +631,33 @@
             width: 100%;
         }
 
-        /* Booking Demo Styles */
+        /* Booking Demo Styles - Matching hotel-luise.html modal */
         .booking-demo-section {
             width: 100%;
         }
 
-        .demo-booking-container {
+        .booking-modal-content {
+            background-color: #fff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+            border-radius: 12px;
+            position: relative;
+            color: #333;
+        }
+
+        /* ElectriStay Plugin Styles within Modal */
+        .modal-booking-container {
             display: grid;
             grid-template-columns: 1fr 380px;
             gap: 30px;
-            background-color: #111;
             padding: 30px;
-            border-radius: 15px;
         }
 
-        .demo-booking-form {
-            background: #0a0a0a;
+        .modal-booking-form {
+            background: white;
             padding: 30px;
             border-radius: 12px;
-            border: 1px solid #222;
         }
 
         .form-section {
@@ -657,10 +665,10 @@
         }
 
         .section-title {
-            font-size: 1.3rem;
+            font-size: 20px;
             font-weight: 600;
-            margin-bottom: 20px;
-            color: #fff;
+            margin-bottom: 15px;
+            color: #1a1a1a;
         }
 
         .form-grid {
@@ -673,60 +681,114 @@
             margin-bottom: 15px;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #999;
-            font-size: 0.9rem;
+        .form-group.full-width {
+            grid-column: 1 / -1;
         }
 
-        .form-group input,
-        .form-group select {
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .form-group input, .form-group select {
             width: 100%;
             padding: 10px 14px;
-            border: 1px solid #333;
-            background-color: #1a1a1a;
-            color: #fff;
+            border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 15px;
             transition: border-color 0.3s;
+            background-color: #fff;
+            color: #333;
         }
 
-        .form-group input:focus,
-        .form-group select:focus {
+        .form-group input:focus, .form-group select:focus {
             outline: none;
-            border-color: #2196F3;
+            border-color: #4CAF50;
         }
 
         /* ElectriStay Plugin Section */
         .electristay-section {
-            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(76, 175, 80, 0.1) 100%);
-            padding: 25px;
+            background: #e8f7e8;
+            padding: 0;
             border-radius: 12px;
             margin-top: 30px;
-            border: 1px solid rgba(33, 150, 243, 0.2);
+            border: 2px solid #4CAF50;
+            overflow: hidden;
         }
 
         .plugin-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            justify-content: space-between;
+            padding: 20px 25px;
+            background: #e8f7e8;
         }
 
-        .ev-toggle {
+        .plugin-title-wrapper {
             display: flex;
             align-items: center;
-            margin: 15px 0;
+            gap: 10px;
         }
 
+        .plugin-icon {
+            color: #4CAF50;
+            font-size: 24px;
+        }
+
+        .plugin-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #4CAF50;
+        }
+
+        .powered-by {
+            background: #4CAF50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .ev-question-section {
+            background: white;
+            padding: 20px 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .ev-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .ev-question span {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .ev-subtitle {
+            color: #666;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .ev-details {
+            padding: 25px;
+            background: #e8f7e8;
+        }
+
+        /* Toggle Switch */
         .toggle-switch {
             position: relative;
             display: inline-block;
             width: 50px;
-            height: 26px;
+            height: 28px;
         }
 
         .toggle-switch input {
@@ -742,16 +804,16 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #333;
+            background-color: #ccc;
             transition: .4s;
-            border-radius: 26px;
+            border-radius: 28px;
         }
 
         .toggle-slider:before {
             position: absolute;
             content: "";
-            height: 20px;
-            width: 20px;
+            height: 22px;
+            width: 22px;
             left: 3px;
             bottom: 3px;
             background-color: white;
@@ -760,118 +822,272 @@
         }
 
         input:checked + .toggle-slider {
-            background-color: #2196F3;
+            background-color: #4CAF50;
         }
 
         input:checked + .toggle-slider:before {
-            transform: translateX(24px);
+            transform: translateX(22px);
         }
 
-        /* Charging Timeline */
-        .charging-timeline {
-            margin-top: 2rem;
-        }
-
-        .timeline-container {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
-
-        .timeline-header {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr 1fr;
-            padding: 12px 20px;
-            background: rgba(0, 0, 0, 0.5);
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #999;
-        }
-
-        .timeline-slot {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr 1fr;
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: background-color 0.3s;
-        }
-
-        .timeline-slot:hover {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .timeline-slot.recommended {
+        /* Success Message */
+        .success-message {
             background: rgba(76, 175, 80, 0.1);
-            border-left: 3px solid #4CAF50;
-        }
-
-        .timeline-slot .time {
-            font-weight: 500;
-        }
-
-        .timeline-slot .price {
-            font-weight: 600;
-            color: #2196F3;
-        }
-
-        .charging-recommendation {
-            background: rgba(33, 150, 243, 0.1);
-            padding: 15px;
+            border: 1px solid #4CAF50;
             border-radius: 8px;
-            margin-top: 1rem;
-            border: 1px solid rgba(33, 150, 243, 0.2);
+            padding: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 25px;
         }
 
-        /* Booking Summary */
-        .demo-booking-summary {
-            background: #0a0a0a;
+        .success-icon {
+            background: #4CAF50;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .success-message strong {
+            display: block;
+            color: #2e7d32;
+            margin-bottom: 5px;
+        }
+
+        .success-message p {
+            color: #555;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* Charging Options */
+        .charging-time-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .charging-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .charging-option {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .charging-option.recommended {
+            border-color: #4CAF50;
+            border-style: dashed;
+        }
+
+        .charging-option input[type="radio"] {
+            display: none;
+        }
+
+        .charging-option label {
+            display: block;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        .charging-option input[type="radio"]:checked + label {
+            background: #f5f5f5;
+        }
+
+        .option-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .time-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .option-header strong {
+            display: block;
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .option-header p {
+            color: #666;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .option-details {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-left: 39px;
+        }
+
+        .charging-info {
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .charging-info.green {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .option-price {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            padding-left: 39px;
+        }
+
+        .price-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .price-details {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .savings-badge {
+            background: #4CAF50;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .best-value-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Smart Tip */
+        .smart-tip {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .tip-icon {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .smart-tip p {
+            color: #856404;
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .smart-tip strong {
+            color: #6c5a0d;
+        }
+
+        /* Booking Summary Sidebar */
+        .modal-booking-summary {
+            background: #f5f5f5;
             padding: 30px;
             border-radius: 12px;
-            border: 1px solid #222;
             height: fit-content;
             position: sticky;
-            top: 100px;
+            top: 20px;
         }
 
-        .summary-section {
+        .summary-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
             padding-bottom: 15px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid #eee;
+            color: #333;
         }
 
         .summary-item {
             display: flex;
             justify-content: space-between;
             margin-bottom: 12px;
-            font-size: 0.95rem;
+            font-size: 15px;
         }
 
-        .summary-item span:first-child {
-            color: #999;
+        .summary-label {
+            color: #666;
         }
 
-        .summary-item span:last-child {
+        .summary-value {
             font-weight: 500;
-            color: #fff;
+            color: #333;
         }
 
         .ev-charging-summary {
-            background: rgba(76, 175, 80, 0.1);
+            background: #e8f5e9;
             padding: 15px;
             border-radius: 8px;
             margin: 20px 0;
-            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .ev-charging-summary .summary-item {
+            margin-bottom: 8px;
         }
 
         .summary-total {
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 2px solid #333;
+            border-top: 2px solid #eee;
         }
 
-        .demo-book-btn {
-            background: #2196F3;
+        .total-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .total-amount {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        .btn-complete-booking {
+            background: #1976d2;
             color: white;
             padding: 14px 28px;
             border: none;
@@ -884,20 +1100,29 @@
             margin-top: 20px;
         }
 
-        .demo-book-btn:hover {
-            background: #1976D2;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        .btn-complete-booking:hover {
+            background: #1565c0;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
         }
 
-        .security-note {
+        .secure-booking {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 1px solid #222;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
         }
         
         .footer-content {
@@ -1010,11 +1235,11 @@
                 grid-template-columns: 1fr 1fr;
             }
 
-            .demo-booking-container {
+            .modal-booking-container {
                 grid-template-columns: 1fr;
             }
 
-            .demo-booking-summary {
+            .modal-booking-summary {
                 position: static;
                 margin-top: 2rem;
             }
@@ -1279,192 +1504,254 @@ electriStay.on('chargingUpdate', (data) => {
                     <h2 style="font-size: 2rem; margin-bottom: 2rem;">Live Booking Timeline Demo</h2>
                     <p style="font-size: 1.1rem; color: #ccc; margin-bottom: 3rem;">Experience how the ElectriStay plugin seamlessly integrates with hotel booking systems to provide smart EV charging scheduling</p>
                     
-                    <!-- Demo Booking Container -->
-                    <div class="demo-booking-container">
-                        <div class="demo-booking-form">
-                            <div class="form-section">
-                                <h3 class="section-title">Your Stay Details</h3>
-                                <div class="form-grid">
-                                    <div class="form-group">
-                                        <label for="demo-checkin">Check-in Date</label>
-                                        <input type="date" id="demo-checkin" min="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="demo-checkout">Check-out Date</label>
-                                        <input type="date" id="demo-checkout" min="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="demo-guests">Number of Guests</label>
-                                        <select id="demo-guests">
-                                            <option>1 Guest</option>
-                                            <option selected>2 Guests</option>
-                                            <option>3 Guests</option>
-                                            <option>4 Guests</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="demo-room">Room Type</label>
-                                        <select id="demo-room">
-                                            <option>Standard Room</option>
-                                            <option selected>Deluxe Room</option>
-                                            <option>Suite</option>
-                                        </select>
+                    <!-- Modal-style Booking Container -->
+                    <div class="booking-modal-content">
+                        <div class="modal-booking-container">
+                            <div class="modal-booking-form">
+                                <div class="form-section">
+                                    <h2 class="section-title">Your Stay Details</h2>
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="modal-checkin">Check-in Date</label>
+                                            <input type="date" id="modal-checkin">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="modal-checkout">Check-out Date</label>
+                                            <input type="date" id="modal-checkout">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="modal-guests">Number of Guests</label>
+                                            <select id="modal-guests">
+                                                <option>1 Guest</option>
+                                                <option selected>2 Guests</option>
+                                                <option>3 Guests</option>
+                                                <option>4 Guests</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="modal-room">Room Type</label>
+                                            <select id="modal-room">
+                                                <option>Standard Room</option>
+                                                <option selected>Deluxe Room</option>
+                                                <option>Suite</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- ElectriStay Plugin Section -->
-                            <div class="electristay-section">
-                                <div class="plugin-header">
-                                    <img src="./images/logo_E.png" alt="ElectriStay" style="height: 30px; width: auto;">
-                                    <span style="font-weight: 600; margin-left: 10px;">EV Charging Integration</span>
+                                <div class="form-section">
+                                    <h2 class="section-title">Guest Information</h2>
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="firstname">First Name</label>
+                                            <input type="text" id="firstname" placeholder="John">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastname">Last Name</label>
+                                            <input type="text" id="lastname" placeholder="Smith">
+                                        </div>
+                                        <div class="form-group full-width">
+                                            <label for="email">Email Address</label>
+                                            <input type="email" id="email" placeholder="john.smith@example.com">
+                                        </div>
+                                        <div class="form-group full-width">
+                                            <label for="phone">Phone Number</label>
+                                            <input type="tel" id="phone" placeholder="+49 176 123 4567">
+                                        </div>
+                                    </div>
                                 </div>
-                                
-                                <div class="ev-options">
-                                    <h4 style="font-size: 1.1rem; margin-bottom: 1rem;">Will you be arriving with an electric vehicle?</h4>
-                                    
-                                    <div class="ev-toggle">
-                                        <label class="toggle-switch">
-                                            <input type="checkbox" id="ev-toggle" onchange="toggleEVOptions()">
-                                            <span class="toggle-slider"></span>
-                                        </label>
-                                        <span style="margin-left: 10px;">Yes, I need EV charging</span>
+
+                                <!-- ElectriStay Plugin Section -->
+                                <div class="electristay-section">
+                                    <div class="plugin-header">
+                                        <div class="plugin-title-wrapper">
+                                            <svg class="plugin-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+                                            </svg>
+                                            <span class="plugin-title">EV Charging Service</span>
+                                        </div>
+                                        <span class="powered-by">Powered by ElectriStay</span>
                                     </div>
                                     
-                                    <div id="ev-details" style="display: none;">
-                                        <div class="form-grid" style="margin-top: 1.5rem;">
-                                            <div class="form-group">
-                                                <label for="demo-vehicle">Vehicle Model</label>
-                                                <select id="demo-vehicle">
-                                                    <option>Tesla Model 3</option>
-                                                    <option>Tesla Model Y</option>
-                                                    <option>BMW iX</option>
-                                                    <option>Mercedes EQS</option>
-                                                    <option>Audi e-tron</option>
-                                                    <option>Other</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="demo-connector">Connector Type</label>
-                                                <select id="demo-connector">
-                                                    <option>Type 2</option>
-                                                    <option>CCS</option>
-                                                    <option>CHAdeMO</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="demo-arrival">Arrival Battery %</label>
-                                                <input type="number" id="demo-arrival" value="30" min="0" max="100">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="demo-target">Target Battery %</label>
-                                                <input type="number" id="demo-target" value="80" min="0" max="100">
+                                    <div class="ev-question-section">
+                                        <div class="ev-question">
+                                            <span>Do you drive an electric vehicle?</span>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="ev-toggle" onchange="toggleEVOptions()">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <p class="ev-subtitle">Add convenient charging to your stay</p>
+                                    </div>
+                                    
+                                    <div id="ev-details" class="ev-details" style="display: none;">
+                                        <div class="success-message">
+                                            <span class="success-icon">✓</span>
+                                            <div>
+                                                <strong>Great choice! Hotel Demo has charging stations available.</strong>
+                                                <p>Our AI recommends the best charging times based on your stay.</p>
                                             </div>
                                         </div>
                                         
-                                        <!-- Charging Timeline -->
-                                        <div class="charging-timeline">
-                                            <h4 style="margin: 2rem 0 1rem;">Smart Charging Schedule</h4>
-                                            <div class="timeline-container">
-                                                <div class="timeline-header">
-                                                    <span>Time</span>
-                                                    <span>Status</span>
-                                                    <span>Price/kWh</span>
-                                                </div>
-                                                <div class="timeline-slot available">
-                                                    <span class="time">18:00 - 22:00</span>
-                                                    <span class="status">🔴 Peak Hours</span>
-                                                    <span class="price">€0.45</span>
-                                                </div>
-                                                <div class="timeline-slot recommended">
-                                                    <span class="time">22:00 - 06:00</span>
-                                                    <span class="status">🟢 Off-Peak (Recommended)</span>
-                                                    <span class="price">€0.28</span>
-                                                </div>
-                                                <div class="timeline-slot">
-                                                    <span class="time">06:00 - 09:00</span>
-                                                    <span class="status">🟡 Standard</span>
-                                                    <span class="price">€0.35</span>
-                                                </div>
+                                        <h4 class="charging-time-title">Select Your Preferred Charging Time</h4>
+                                        
+                                        <div class="charging-options">
+                                            <div class="charging-option recommended">
+                                                <input type="radio" id="night-charging" name="charging-time" checked>
+                                                <label for="night-charging">
+                                                    <div class="option-header">
+                                                        <svg class="time-icon" viewBox="0 0 24 24" fill="#4CAF50">
+                                                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                                        </svg>
+                                                        <div>
+                                                            <strong>Night Charging: 1:00 AM - 5:00 AM</strong>
+                                                            <p>Charge while you sleep - lowest rates!</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="option-details">
+                                                        <span class="charging-info">Level 2</span>
+                                                        <span class="charging-info">22 kW</span>
+                                                        <span class="charging-info green">100% Green Energy</span>
+                                                    </div>
+                                                    <div class="option-price">
+                                                        <span class="price-amount">€18.50</span>
+                                                        <span class="price-details">~44 kWh</span>
+                                                        <span class="savings-badge">Save 25%</span>
+                                                    </div>
+                                                    <span class="best-value-badge">BEST VALUE</span>
+                                                </label>
                                             </div>
                                             
-                                            <div class="charging-recommendation">
-                                                <div style="display: flex; align-items: center; gap: 10px;">
-                                                    <span style="font-size: 24px;">💡</span>
-                                                    <div>
-                                                        <strong>Smart Recommendation</strong>
-                                                        <p style="margin: 5px 0; color: #999;">Schedule charging from 22:00 to 03:00 for optimal pricing. You'll save 38% compared to peak hours!</p>
+                                            <div class="charging-option">
+                                                <input type="radio" id="morning-charging" name="charging-time">
+                                                <label for="morning-charging">
+                                                    <div class="option-header">
+                                                        <svg class="time-icon" viewBox="0 0 24 24" fill="#ff9800">
+                                                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                                        </svg>
+                                                        <div>
+                                                            <strong>Morning Charging: 6:00 AM - 10:00 AM</strong>
+                                                            <p>Start your day with a full battery</p>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    <div class="option-details">
+                                                        <span class="charging-info">Level 2</span>
+                                                        <span class="charging-info">22 kW</span>
+                                                    </div>
+                                                    <div class="option-price">
+                                                        <span class="price-amount">€24.75</span>
+                                                        <span class="price-details">~44 kWh</span>
+                                                    </div>
+                                                </label>
                                             </div>
+                                            
+                                            <div class="charging-option">
+                                                <input type="radio" id="express-charging" name="charging-time">
+                                                <label for="express-charging">
+                                                    <div class="option-header">
+                                                        <svg class="time-icon" viewBox="0 0 24 24" fill="#2196f3">
+                                                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                                        </svg>
+                                                        <div>
+                                                            <strong>Express Charging: 2:00 PM - 3:00 PM</strong>
+                                                            <p>Quick top-up with DC fast charging</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="option-details">
+                                                        <span class="charging-info">DC Fast</span>
+                                                        <span class="charging-info">50 kW</span>
+                                                        <span class="charging-info">80% in 1hr</span>
+                                                    </div>
+                                                    <div class="option-price">
+                                                        <span class="price-amount">€32.50</span>
+                                                        <span class="price-details">~50 kWh</span>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="smart-tip">
+                                            <span class="tip-icon">💡</span>
+                                            <p><strong>Smart Tip:</strong> Our AI recommends overnight charging for maximum savings and grid efficiency. You'll save 25% compared to peak hours!</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Booking Summary -->
-                        <div class="demo-booking-summary">
-                            <h3 style="font-size: 1.4rem; margin-bottom: 1.5rem;">Booking Summary</h3>
-                            
-                            <div class="summary-section">
+                            <!-- Booking Summary Sidebar -->
+                            <div class="modal-booking-summary">
+                                <h3 class="summary-title">Booking Summary</h3>
+                                
                                 <div class="summary-item">
-                                    <span>Check-in</span>
-                                    <span id="summary-checkin">Select date</span>
-                                </div>
-                                <div class="summary-item">
-                                    <span>Check-out</span>
-                                    <span id="summary-checkout">Select date</span>
+                                    <span class="summary-label">Hotel</span>
+                                    <span class="summary-value">Hotel Demo</span>
                                 </div>
                                 <div class="summary-item">
-                                    <span>Nights</span>
-                                    <span id="summary-nights">0</span>
+                                    <span class="summary-label">Check-in</span>
+                                    <span class="summary-value" id="summary-checkin">Select date</span>
                                 </div>
                                 <div class="summary-item">
-                                    <span>Room Type</span>
-                                    <span id="summary-room">Deluxe Room</span>
-                                </div>
-                            </div>
-                            
-                            <div class="summary-section" style="margin-top: 2rem;">
-                                <div class="summary-item">
-                                    <span>Room Rate</span>
-                                    <span id="summary-room-rate">€150/night</span>
+                                    <span class="summary-label">Check-out</span>
+                                    <span class="summary-value" id="summary-checkout">Select date</span>
                                 </div>
                                 <div class="summary-item">
-                                    <span>Room Total</span>
-                                    <span id="summary-room-total">€0</span>
-                                </div>
-                            </div>
-                            
-                            <div class="ev-charging-summary" id="ev-summary" style="display: none;">
-                                <h4 style="margin-bottom: 1rem; font-size: 1.1rem;">EV Charging</h4>
-                                <div class="summary-item">
-                                    <span>Estimated kWh</span>
-                                    <span id="summary-kwh">50 kWh</span>
+                                    <span class="summary-label">Nights</span>
+                                    <span class="summary-value" id="summary-nights">0</span>
                                 </div>
                                 <div class="summary-item">
-                                    <span>Charging Cost</span>
-                                    <span id="summary-charging">€14.00</span>
+                                    <span class="summary-label">Room</span>
+                                    <span class="summary-value" id="summary-room">Deluxe Room</span>
                                 </div>
-                                <div class="summary-item" style="color: #4CAF50;">
-                                    <span>Off-Peak Savings</span>
-                                    <span id="summary-savings">-€8.50</span>
+                                <div class="summary-item">
+                                    <span class="summary-label">Guests</span>
+                                    <span class="summary-value" id="summary-guests">2</span>
                                 </div>
-                            </div>
-                            
-                            <div class="summary-total">
-                                <div class="summary-item" style="font-size: 1.3rem; font-weight: 600;">
-                                    <span>Total</span>
-                                    <span id="summary-total" style="color: #2196F3;">€0</span>
+
+                                <div style="margin: 20px 0; border-top: 1px solid #eee;"></div>
+
+                                <div class="summary-item">
+                                    <span class="summary-label">Room Rate</span>
+                                    <span class="summary-value" id="summary-room-rate">€150/night</span>
                                 </div>
-                            </div>
-                            
-                            <button class="demo-book-btn">Complete Booking</button>
-                            
-                            <div class="security-note">
-                                <span style="color: #4CAF50;">🔒</span>
-                                <span style="font-size: 0.9rem; color: #999;">Secure booking with SSL encryption</span>
+                                <div class="summary-item">
+                                    <span class="summary-label">Room Total</span>
+                                    <span class="summary-value" id="summary-room-total">€0</span>
+                                </div>
+
+                                <div class="ev-charging-summary" id="ev-charging-summary" style="display: none;">
+                                    <div class="summary-item">
+                                        <span class="summary-label">EV Charging</span>
+                                        <span class="summary-value">Enabled</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">Estimated kWh</span>
+                                        <span class="summary-value" id="summary-kwh">50 kWh</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">Charging Cost</span>
+                                        <span class="summary-value" id="summary-charging">€14.00</span>
+                                    </div>
+                                    <div class="summary-item" style="color: #4CAF50;">
+                                        <span class="summary-label">Your Savings</span>
+                                        <span class="summary-value" id="summary-savings">€8.50</span>
+                                    </div>
+                                </div>
+
+                                <div class="summary-total">
+                                    <div class="total-item">
+                                        <span class="total-label">Total Amount</span>
+                                        <span class="total-amount" id="summary-total">€0</span>
+                                    </div>
+                                </div>
+
+                                <button class="btn-complete-booking">Complete Booking</button>
+
+                                <div class="secure-booking">
+                                    <svg class="icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="#4CAF50">
+                                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                                    </svg>
+                                    Secure booking with SSL encryption
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1527,22 +1814,6 @@ electriStay.on('chargingUpdate', (data) => {
                     <!-- Real-time Station Status -->
                     <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Real-time Station Status</h3>
                     <div class="status-grid">
-                        <div class="status-card">
-                            <div class="status-indicator available">✓</div>
-                            <div class="status-info">
-                                <h4>Station 1 - Available</h4>
-                                <p>Type 2 • 22kW • Ready</p>
-                            </div>
-                        </div>
-
-                        <div class="status-card">
-                            <div class="status-indicator charging">⚡</div>
-                            <div class="status-info">
-                                <h4>Station 2 - Charging</h4>
-                                <p>CCS • 50kW • 65% Complete</p>
-                            </div>
-                        </div>
-
                         <div class="status-card">
                             <div class="status-indicator charging">⚡</div>
                             <div class="status-info">
@@ -1902,8 +2173,8 @@ Response:
             const dd = String(today.getDate()).padStart(2, '0');
             const todayString = `${yyyy}-${mm}-${dd}`;
             
-            const checkInInput = document.getElementById('demo-checkin');
-            const checkOutInput = document.getElementById('demo-checkout');
+            const checkInInput = document.getElementById('modal-checkin');
+            const checkOutInput = document.getElementById('modal-checkout');
             
             if (checkInInput) {
                 checkInInput.min = todayString;
@@ -1940,6 +2211,12 @@ Response:
                 input.addEventListener('change', updateBookingSummary);
             });
             
+            // Add event listeners for charging options
+            const chargingOptions = document.querySelectorAll('input[name="charging-time"]');
+            chargingOptions.forEach(option => {
+                option.addEventListener('change', updateBookingSummary);
+            });
+            
             // Initial update
             updateBookingSummary();
         });
@@ -1948,7 +2225,7 @@ Response:
         function toggleEVOptions() {
             const evToggle = document.getElementById('ev-toggle');
             const evDetails = document.getElementById('ev-details');
-            const evSummary = document.getElementById('ev-summary');
+            const evSummary = document.getElementById('ev-charging-summary');
             
             if (evToggle.checked) {
                 evDetails.style.display = 'block';
@@ -1963,15 +2240,17 @@ Response:
 
         // Update Booking Summary
         function updateBookingSummary() {
-            const checkIn = document.getElementById('demo-checkin')?.value;
-            const checkOut = document.getElementById('demo-checkout')?.value;
-            const room = document.getElementById('demo-room')?.value || 'Deluxe Room';
+            const checkIn = document.getElementById('modal-checkin')?.value;
+            const checkOut = document.getElementById('modal-checkout')?.value;
+            const room = document.getElementById('modal-room')?.value || 'Deluxe Room';
+            const guests = document.getElementById('modal-guests')?.value || '2 Guests';
             const evEnabled = document.getElementById('ev-toggle')?.checked;
             
             // Update summary display
             document.getElementById('summary-checkin').textContent = checkIn ? new Date(checkIn).toLocaleDateString() : 'Select date';
             document.getElementById('summary-checkout').textContent = checkOut ? new Date(checkOut).toLocaleDateString() : 'Select date';
             document.getElementById('summary-room').textContent = room;
+            document.getElementById('summary-guests').textContent = guests.replace(' Guest', '').replace('s', '');
             
             // Calculate nights
             let nights = 0;
@@ -1991,20 +2270,25 @@ Response:
             // Calculate charging cost if EV is enabled
             let chargingCost = 0;
             if (evEnabled) {
-                const arrivalBattery = parseInt(document.getElementById('demo-arrival')?.value || 30);
-                const targetBattery = parseInt(document.getElementById('demo-target')?.value || 80);
-                const batteryDiff = targetBattery - arrivalBattery;
-                const estimatedKwh = batteryDiff; // Simplified calculation
-                
-                document.getElementById('summary-kwh').textContent = `${estimatedKwh} kWh`;
-                
-                // Off-peak rate calculation
-                chargingCost = estimatedKwh * 0.28;
-                const peakCost = estimatedKwh * 0.45;
-                const savings = peakCost - chargingCost;
-                
-                document.getElementById('summary-charging').textContent = `€${chargingCost.toFixed(2)}`;
-                document.getElementById('summary-savings').textContent = `-€${savings.toFixed(2)}`;
+                // Get selected charging option
+                const selectedOption = document.querySelector('input[name="charging-time"]:checked');
+                if (selectedOption) {
+                    const optionId = selectedOption.id;
+                    if (optionId === 'night-charging') {
+                        chargingCost = 18.50;
+                        document.getElementById('summary-charging').textContent = '€18.50';
+                        document.getElementById('summary-savings').textContent = '€8.50';
+                    } else if (optionId === 'morning-charging') {
+                        chargingCost = 24.75;
+                        document.getElementById('summary-charging').textContent = '€24.75';
+                        document.getElementById('summary-savings').textContent = '€2.25';
+                    } else if (optionId === 'express-charging') {
+                        chargingCost = 32.50;
+                        document.getElementById('summary-charging').textContent = '€32.50';
+                        document.getElementById('summary-savings').textContent = '€0.00';
+                    }
+                }
+                document.getElementById('summary-kwh').textContent = '44 kWh';
             }
             
             // Update total
